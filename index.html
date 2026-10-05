@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Павел Искринский — Фронтенд-разработчик</title>
+  <meta name="description"
+    content="Фронтенд-разработчик с 14-летним опытом: pixel-perfect вёрстка по макетам Figma, HTML, CSS, JavaScript. Интернет-магазины, корпоративные сайты, лендинги. Удалённо, Новосибирск." />
+  <link rel="icon" href="favicon.ico" sizes="48x48" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="theme-color" content="#0f1117" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+      m[i].l = 1 * new Date();
+      for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+      k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=113365152', 'ym');
+    ym(113365152, 'init', { ssr: true, webvisor: true, clickmap: true, ecommerce: "dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce: true, trackLinks: true });
+  </script>
+  <noscript>
+    <div><img src="https://mc.yandex.ru/watch/113365152" style="position:absolute;left:-9999px;" alt="" /></div>
+  </noscript>
+  <!-- /Yandex.Metrika counter -->
+
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #181c27;
+      --border: #252a38;
+      --accent: #6c63ff;
+      --accent2: #00d9c0;
+      --text: #e8eaf0;
+      --muted: #8890a8;
+      --card-bg: #1a1f2e;
+      --nav-bg: rgba(15, 17, 23, 0.85);
+      --nav-mob: rgba(15, 17, 23, 0.97);
+      --radius: 12px;
+      --accent-soft: rgba(108, 99, 255, .15);
+      --transition: 0.25s ease;
+      --max-w: 1100px;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f5f5f7;
+        --surface: #eaeaef;
+        --border: #d1d1da;
+        --accent: #5046e4;
+        --accent2: #009688;
+        --text: #1d1d1f;
+        --muted: #6e6e73;
+        --card-bg: #ffffff;
+        --nav-bg: rgba(245, 245, 247, 0.88);
+        --nav-mob: rgba(245, 245, 247, 0.98);
+      }
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Raleway', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-weight: 500;
+      line-height: 1.65;
+      font-variant-numeric: lining-nums;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: padding var(--transition);
+    }
+
+    nav.scrolled {
+      padding-block: .6rem;
+    }
+
+    .nav-logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #e53935;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-weight: 600;
+      transition: color var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-burger {
+      display: none;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      padding: 6px;
+    }
+
+    .nav-burger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .nav-burger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-burger.open span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .nav-burger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5rem 2rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 40%, rgba(108, 99, 255, .18) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 80% 60%, rgba(0, 217, 192, .12) 0%, transparent 60%);
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: var(--max-w);
+      width: 100%;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .35rem .9rem;
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      font-size: .8rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-badge .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent2);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: .4;
+      }
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 580px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: .75rem 1.75rem;
+      border-radius: var(--radius);
+      font-family: inherit;
+      font-size: .95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition), color var(--transition), border-color var(--transition);
+      border: none;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 8px 24px rgba(108, 99, 255, .4);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    section {
+      padding: 6rem 2rem;
+    }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: .75rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+      letter-spacing: -0.015em;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      max-width: 580px;
+      margin-bottom: 3.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    #about {
+      background: var(--surface);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 4rem;
+    }
+
+    .about-avatar {
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .about-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 1.1rem;
+    }
+
+    .about-text p:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 1.1rem .5rem;
+    }
+
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 800;
+    }
+
+    .stat-label {
+      font-size: .78rem;
+      color: var(--muted);
+      margin-top: .2rem;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 2rem;
+      position: relative;
+      padding-bottom: 2.5rem;
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 255px;
+      top: 6px;
+      bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .timeline-item:last-child::before {
+      display: none;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 249px;
+      top: 6px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      background: var(--bg);
+    }
+
+    .timeline-date {
+      color: var(--muted);
+      font-size: .85rem;
+      padding-top: 2px;
+      text-align: right;
+    }
+
+    .timeline-date strong {
+      display: block;
+      color: var(--text);
+      font-size: .9rem;
+    }
+
+    .timeline-body {
+      padding-left: 1.5rem;
+    }
+
+    .timeline-company {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: .15rem;
+    }
+
+    .location {
+      color: var(--muted);
+      font-weight: 400;
+      font-size: .85rem;
+    }
+
+    .link-accent {
+      color: var(--accent2);
+    }
+
+    .timeline-role {
+      font-size: .85rem;
+      color: var(--accent2);
+      font-weight: 600;
+      margin-bottom: .6rem;
+    }
+
+    .timeline-intro {
+      color: var(--muted);
+      font-size: .88rem;
+      margin-bottom: .6rem;
+    }
+
+    .timeline-body ul {
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    .timeline-body ul li {
+      padding-left: 1.6rem;
+      position: relative;
+      margin-bottom: .35rem;
+    }
+
+    .timeline-body ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .education {
+      margin-top: 3rem;
+    }
+
+    .edu-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .edu-card {
+      padding: 1.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: .75rem;
+    }
+
+    .edu-icon {
+      font-size: 2.5rem;
+    }
+
+    .edu-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: .2rem;
+    }
+
+    .edu-degree {
+      color: var(--accent2);
+      font-size: .85rem;
+      font-weight: 600;
+      margin-bottom: .35rem;
+    }
+
+    .edu-desc {
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    #skills {
+      background: var(--surface);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-card {
+      padding: 1.5rem;
+    }
+
+    .skill-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .skill-card-icon {
+      font-size: 2rem;
+      margin-bottom: .75rem;
+    }
+
+    .skill-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: .4rem;
+    }
+
+    .skill-card p {
+      color: var(--muted);
+      font-size: .85rem;
+      margin-bottom: .75rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+    }
+
+    .tag {
+      font-size: .75rem;
+      padding: .25rem .65rem;
+      border-radius: 99px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      overflow: hidden;
+    }
+
+    .project-card:hover,
+    .project-card:focus-visible {
+      border-color: var(--accent2);
+      transform: translateY(-4px);
+    }
+
+    .project-img {
+      height: 180px;
+      background: linear-gradient(135deg, #1e2133, #252a3a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+
+    .project-body {
+      padding: 1.5rem;
+    }
+
+    .project-meta {
+      font-size: .75rem;
+      color: var(--muted);
+      margin-bottom: .4rem;
+    }
+
+    .project-body h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: .5rem;
+    }
+
+    .project-body p {
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    #contact {
+      background: var(--surface);
+    }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-info p {
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      color: var(--muted);
+      font-size: .9rem;
+      transition: color var(--transition);
+    }
+
+    .contact-item:hover {
+      color: var(--text);
+    }
+
+    .contact-item-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      transition: border-color var(--transition);
+    }
+
+    .contact-item-icon--text {
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .contact-item:hover .contact-item-icon {
+      border-color: var(--accent);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    label {
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--muted);
+      display: block;
+      margin-bottom: .4rem;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .75rem 1rem;
+      color: var(--text);
+      font-size: .9rem;
+      font-family: inherit;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      outline: none;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 130px;
+    }
+
+    .form-submit {
+      align-self: flex-start;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease, border-color var(--transition);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 900px) {
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: .25rem;
+      }
+
+      .timeline-item::before,
+      .timeline-dot {
+        display: none;
+      }
+
+      .timeline-date {
+        text-align: left;
+      }
+
+      .timeline-body {
+        padding-left: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      #hero {
+        min-height: auto;
+        padding-top: 7rem;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 1.5rem;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--nav-mob);
+        padding: 2rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-burger {
+        display: flex;
+      }
+
+      .about-grid,
+      .contact-wrap {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .about-avatar {
+        aspect-ratio: 3 / 4;
+        max-width: 280px;
+      }
+
+      .form-row,
+      .edu-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .about-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stat:last-child {
+        grid-column: span 2;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav id="nav">
+    <a href="#hero" class="nav-logo" aria-label="В начало">❖</a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about">Обо мне</a></li>
+      <li><a href="#experience">Опыт</a></li>
+      <li><a href="#skills">Навыки</a></li>
+      <li><a href="#projects">Проекты</a></li>
+      <li><a href="#contact">Контакты</a></li>
+    </ul>
+    <button class="nav-burger" id="burger" type="button" aria-label="Меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <main>
+    <section id="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          Открыт к&nbsp;удалённой работе &nbsp;&middot;&nbsp; Новосибирск
+        </div>
+        <h1>
+          Привет, я <span class="gradient-text">Павел</span>.<br>
+          Фронтенд-разработчик<br>
+          с <span class="gradient-text">14-летним</span> опытом.
+        </h1>
+        <p class="hero-sub">
+          Pixel-perfect вёрстка по&nbsp;макетам Figma&nbsp;&mdash; чистый, быстрый, поддерживаемый код.
+          Делаю интернет-магазины, корпоративные сайты и&nbsp;лендинги для&nbsp;агентств, студий и&nbsp;прямых заказчиков.
+          Готов взяться за&nbsp;ваш проект.
+        </p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary">Смотреть работы</a>
+          <a href="#contact" class="btn btn-ghost">Написать мне</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="about-grid reveal">
+          <div class="about-avatar">
+            <img src="avatar.jpg" alt="Павел Искринский" />
+          </div>
+          <div class="about-text">
+            <p class="section-tag">Обо мне</p>
+            <h2 class="section-title">Pixel-perfect вёрстка,<br><span class="gradient-text">готовая к&nbsp;продакшену</span>
+            </h2>
+            <p>
+              Начинал ещё студентом: с&nbsp;2012 года брал заказы на&nbsp;freelance.ru. После университета, в&nbsp;2016-м, пришёл
+              в&nbsp;штат Nisanov Corp&nbsp;&mdash; четыре года верстал интернет-магазины на&nbsp;OpenCart и&nbsp;доводил их до&nbsp;90&ndash;95 баллов
+              Google PageSpeed. Затем три года работал на&nbsp;фрилансе и&nbsp;аутсорсе: лендинги, интернет-магазины,
+              e-mail-рассылки, проекты для&nbsp;агентств и&nbsp;постоянные клиенты, которые приходили по&nbsp;рекомендациям.
+            </p>
+            <p>
+              Сейчас в&nbsp;No Logo Studio верстаю по&nbsp;макетам Figma на&nbsp;Gulp, SCSS и&nbsp;ванильном JS и&nbsp;веду 10+ клиентских
+              сайтов на&nbsp;Битрикс и&nbsp;Laravel. Главное, чем горжусь,&nbsp;&mdash; чистый и&nbsp;лёгкий код, который бэкендеры
+              легко интегрируют. AI-ассистентов использую для&nbsp;рефакторинга и&nbsp;тестирования, результат всегда
+              проверяю сам.
+            </p>
+            <p>
+              Хочу развиваться дальше&nbsp;&mdash; в&nbsp;React и&nbsp;Vue на&nbsp;коммерческих проектах. Прошёл отбор в&nbsp;наставники
+              HTML Academy. Английский B2: читаю документацию и&nbsp;веду переписку без&nbsp;переводчика.
+            </p>
+            <div class="about-stats">
+              <div class="stat card">
+                <div class="stat-num gradient-text">14</div>
+                <div class="stat-label">лет опыта</div>
+              </div>
+              <div class="stat card">
+                <div class="stat-num gradient-text">10+</div>
+                <div class="stat-label">сайтов в&nbsp;продакшене</div>
+              </div>
+              <div class="stat card">
+                <div class="stat-num gradient-text">50+</div>
+                <div class="stat-label">запущенных проектов</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="container">
+        <div class="reveal">
+          <p class="section-tag">Карьера</p>
+          <h2 class="section-title">Опыт работы</h2>
+          <p class="section-desc">
+            14 лет в&nbsp;штате, агентствах и&nbsp;на&nbsp;фрилансе.
+          </p>
+        </div>
+        <div class="timeline">
+
+          <div class="timeline-item reveal">
+            <div class="timeline-date">
+              <strong>Март 2023&nbsp;&mdash; наст. время</strong>
+              3 года 8 мес.
+            </div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-body">
+              <h3 class="timeline-company">No Logo Studio <span class="location">&mdash; Москва (удалённо)</span></h3>
+              <div class="timeline-role">Фронтенд-разработчик</div>
+              <p class="timeline-intro">Студия разрабатывает сайты для&nbsp;клиентов, в&nbsp;том числе крупных: от&nbsp;лендингов
+                до&nbsp;интернет-магазинов. Бэкенд на&nbsp;1С-Битрикс и&nbsp;Laravel.</p>
+              <ul>
+                <li>Верстаю по&nbsp;макетам Figma: Gulp, SCSS (BEM), ванильный JavaScript (ES6+)</li>
+                <li>Веду и&nbsp;развиваю 10+ действующих проектов: правки, обновления, новые разделы</li>
+                <li>Пишу чистый и&nbsp;лёгкий код, который бэкенд-разработчикам удобно интегрировать в&nbsp;Битрикс и&nbsp;Laravel</li>
+                <li>Использую AI-ассистентов (Claude и&nbsp;др.) для&nbsp;рефакторинга и&nbsp;тестирования&nbsp;&mdash; с&nbsp;обязательной проверкой
+                  результата</li>
+                <li>Работа в&nbsp;команде с&nbsp;дизайнером и&nbsp;бэкендом</li>
+                <li>Задачи в&nbsp;Битрикс24</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-date">
+              <strong>Апрель 2020&nbsp;&mdash; Февраль 2023</strong>
+              2 года 11 мес.
+            </div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-body">
+              <h3 class="timeline-company">Фриланс / Аутсорс <span class="location">&mdash; удалённо</span></h3>
+              <div class="timeline-role">Фронтенд-разработчик</div>
+              <ul>
+                <li>Заказы с&nbsp;фриланс-бирж, долгосрочная работа с&nbsp;постоянными клиентами, новые проекты по&nbsp;рекомендациям
+                </li>
+                <li>Лендинги, интернет-магазины и&nbsp;корпоративные сайты под&nbsp;ключ: от&nbsp;обсуждения задачи и&nbsp;оценки сроков до&nbsp;сдачи и&nbsp;правок</li>
+                <li>Проекты для&nbsp;агентств и&nbsp;студий Alente, CASTCOM, АртАльт, DokinLab, MilloriDS&nbsp;&mdash; в&nbsp;том числе
+                  <a href="https://komandor-mebel.com" target="_blank" rel="noopener"
+                    class="link-accent">komandor-mebel.com</a> (Alente) и&nbsp;портал водоканала Кемерово
+                  <a href="https://kemvod.ru" target="_blank" rel="noopener" class="link-accent">kemvod.ru</a>
+                  (АртАльт)
+                </li>
+                <li>Вёрстка на&nbsp;Tilda для&nbsp;аутсорс-проектов: Zero Block и&nbsp;кастомные блоки с&nbsp;собственным HTML/CSS/JS</li>
+                <li>HTML-письма под&nbsp;основные почтовые клиенты</li>
+                <li>Tailwind CSS&nbsp;&mdash; в&nbsp;нескольких проектах по&nbsp;запросу заказчика</li>
+                <li>Прошёл отбор в&nbsp;наставники HTML Academy</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-date">
+              <strong>Февраль 2016&nbsp;&mdash; Март 2020</strong>
+              4 года 2 мес.
+            </div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-body">
+              <h3 class="timeline-company">Nisanov Corp <span class="location">&mdash; Москва (удалённо)</span></h3>
+              <div class="timeline-role">Фронтенд-разработчик</div>
+              <p class="timeline-intro">Компания разрабатывает интернет-магазины на&nbsp;OpenCart.</p>
+              <ul>
+                <li>Адаптивная вёрстка интернет-магазинов по&nbsp;макетам Photoshop: каталоги, карточки товаров, корзина,
+                  оформление заказа</li>
+                <li>Интерактив на&nbsp;jQuery, сетка и&nbsp;компоненты на&nbsp;Bootstrap</li>
+                <li>Вёрстка, готовая к&nbsp;натяжке на&nbsp;OpenCart: чистая структура и&nbsp;предсказуемые классы</li>
+                <li>Оптимизация скорости загрузки до&nbsp;90&ndash;95 баллов Google PageSpeed</li>
+                <li>Полный цикл в&nbsp;паре с&nbsp;бэкендом: макет &rarr; вёрстка &rarr; интеграция &rarr; запуск</li>
+                <li>Задачи в&nbsp;Jira</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-date">
+              <strong>Ноябрь 2012&nbsp;&mdash; Январь 2016</strong>
+              3 года 3 мес.
+            </div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-body">
+              <h3 class="timeline-company">Фриланс&nbsp;&mdash; freelance.ru</h3>
+              <div class="timeline-role">Веб-разработчик</div>
+              <ul>
+                <li>Вёрстка и&nbsp;доработка сайтов для&nbsp;заказчиков&nbsp;&mdash; первый коммерческий опыт и
+                  <a href="https://freelance.ru/reviews/paveliskrinsky/" target="_blank" rel="noopener"
+                    class="link-accent">отзывы клиентов</a>
+                </li>
+                <li>Интегрировал вёрстку на&nbsp;Joomla и&nbsp;WordPress</li>
+                <li>Брал заказы на&nbsp;freelance.ru параллельно с&nbsp;учёбой в&nbsp;университете</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="education reveal">
+          <p class="section-tag">Образование</p>
+          <div class="edu-list">
+            <div class="edu-card card">
+              <div class="edu-icon">🎓</div>
+              <div>
+                <h3 class="edu-title">
+                  Сибирский государственный университет науки и&nbsp;технологий <span class="location">&mdash; Красноярск</span>
+                </h3>
+                <div class="edu-degree">Информационные системы и&nbsp;технологии &middot; Высшее &middot; 2016</div>
+                <div class="edu-desc">
+                  Профильное техническое образование. Сразу после выпуска&nbsp;&mdash; в&nbsp;штат фронтенд-разработчиком.
+                </div>
+              </div>
+            </div>
+            <div class="edu-card card">
+              <div class="edu-icon">📚</div>
+              <div>
+                <h3 class="edu-title">
+                  КЭМТ НИЯУ МИФИ <span class="location">&mdash; Зеленогорск</span>
+                </h3>
+                <div class="edu-degree">Программное обеспечение &middot; Среднее специальное &middot; 2012</div>
+                <div class="edu-desc">Первая профильная база&nbsp;&mdash; основы программирования и&nbsp;разработки ПО.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="reveal">
+          <p class="section-tag">Мой стек</p>
+          <h2 class="section-title">Навыки и&nbsp;технологии</h2>
+          <p class="section-desc">
+            Инструменты, которыми я&nbsp;пользуюсь каждый день для&nbsp;создания быстрых и&nbsp;поддерживаемых сайтов.
+          </p>
+        </div>
+        <div class="skills-grid">
+
+          <div class="skill-card card reveal">
+            <div class="skill-card-icon">🏗️</div>
+            <h3>Вёрстка</h3>
+            <p>Семантический HTML и&nbsp;масштабируемая CSS-архитектура.</p>
+            <div class="skill-tags">
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3</span>
+              <span class="tag">SCSS / SASS</span>
+              <span class="tag">BEM</span>
+            </div>
+          </div>
+
+          <div class="skill-card card reveal">
+            <div class="skill-card-icon">⚡</div>
+            <h3>JavaScript</h3>
+            <p>Современный ванильный JS&nbsp;&mdash; без&nbsp;лишнего фреймворка там, где он не&nbsp;нужен.</p>
+            <div class="skill-tags">
+              <span class="tag">ES6+</span>
+              <span class="tag">async / await</span>
+              <span class="tag">ES-модули</span>
+            </div>
+          </div>
+
+          <div class="skill-card card reveal">
+            <div class="skill-card-icon">🛠️</div>
+            <h3>Сборка проектов</h3>
+            <p>От&nbsp;автоматизации на&nbsp;Gulp до&nbsp;современных Vite-пайплайнов.</p>
+            <div class="skill-tags">
+              <span class="tag">Gulp</span>
+              <span class="tag">Webpack</span>
+              <span class="tag">Vite</span>
+              <span class="tag">npm / npx</span>
+            </div>
+          </div>
+
+          <div class="skill-card card reveal">
+            <div class="skill-card-icon">🎨</div>
+            <h3>Дизайн и&nbsp;макеты</h3>
+            <p>Pixel-perfect реализация по&nbsp;макетам Figma.</p>
+            <div class="skill-tags">
+              <span class="tag">Figma</span>
+              <span class="tag">Pixel Perfect</span>
+              <span class="tag">Tailwind CSS</span>
+              <span class="tag">Bootstrap</span>
+            </div>
+          </div>
+
+          <div class="skill-card card reveal">
+            <div class="skill-card-icon">🔌</div>
+            <h3>CMS и&nbsp;конструкторы</h3>
+            <p>Вёрстка под&nbsp;натяжку на&nbsp;CMS и&nbsp;доработка сайтов в&nbsp;конструкторах.</p>
+            <div class="skill-tags">
+              <span class="tag">OpenCart</span>
+              <span class="tag">WordPress / Joomla</span>
+              <span class="tag">Tilda</span>
+              <span class="tag">Формы и&nbsp;валидация</span>
+            </div>
+          </div>
+
+          <div class="skill-card card reveal">
+            <div class="skill-card-icon">🚀</div>
+            <h3>Оптимизация и&nbsp;инструменты</h3>
+            <p>Ускоряю реальные продакшен-сайты&nbsp;&mdash; до&nbsp;90&ndash;95 баллов Google PageSpeed.</p>
+            <div class="skill-tags">
+              <span class="tag">PageSpeed 90+</span>
+              <span class="tag">Lazy-load</span>
+              <span class="tag">Minification</span>
+              <span class="tag">Code splitting</span>
+              <span class="tag">Git</span>
+              <span class="tag">Битрикс24</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="reveal">
+          <p class="section-tag">Мои работы</p>
+          <h2 class="section-title">Избранные проекты</h2>
+          <p class="section-desc">
+            Реальные продакшен-сайты, которые я&nbsp;разработал или&nbsp;активно развивал&nbsp;&mdash; от&nbsp;Figma до&nbsp;запуска.
+          </p>
+        </div>
+        <div class="projects-grid">
+
+          <a class="project-card card reveal" href="https://kemvod.ru" target="_blank" rel="noopener">
+            <div class="project-img">💧</div>
+            <div class="project-body">
+              <div class="project-meta">АртАльт &middot; 2022</div>
+              <h3>kemvod.ru</h3>
+              <p>Корпоративный портал АО &laquo;КемВод&raquo;&nbsp;&mdash; сервисный сайт водоканала Кемерово для&nbsp;горожан и&nbsp;организаций.
+                Кроссбраузерная адаптивная вёрстка, JavaScript, работа с&nbsp;чужой кодовой базой без&nbsp;поломок.</p>
+            </div>
+          </a>
+
+          <a class="project-card card reveal" href="https://komandor-mebel.com" target="_blank" rel="noopener">
+            <div class="project-img">🛋️</div>
+            <div class="project-body">
+              <div class="project-meta">Alente &middot; 2020</div>
+              <h3>komandor-mebel.com</h3>
+              <p>Сайт мебельного центра &laquo;Командор&raquo; (Красноярск)&nbsp;&mdash; разработал фронтенд-часть в&nbsp;digital-агентстве Alente.
+                Адаптивная вёрстка под&nbsp;CMS.</p>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-wrap">
+          <div class="reveal">
+            <p class="section-tag">Связаться</p>
+            <h2 class="section-title">Давайте<br><span class="gradient-text">работать вместе</span></h2>
+            <div class="contact-info">
+              <p>Ищу удалённую позицию фронтенд-разработчика или&nbsp;верстальщика. Рассматриваю полную занятость, частичную
+                или&nbsp;проектную работу&nbsp;&mdash; главное, чтобы задачи были интересными.</p>
+              <div class="contact-links">
+                <a href="mailto:paveliskrinsky@ya.ru" class="contact-item">
+                  <div class="contact-item-icon">✉️</div>
+                  paveliskrinsky@ya.ru
+                </a>
+                <a href="https://github.com/paveliskrinsky" target="_blank" rel="noopener" class="contact-item">
+                  <div class="contact-item-icon">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                      <path
+                        d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                    </svg>
+                  </div>
+                  github.com/paveliskrinsky
+                </a>
+                <a href="https://novosibirsk.hh.ru/resume/5fbd71fcff112b6d4a0039ed1f4979586a6947" target="_blank"
+                  rel="noopener" class="contact-item">
+                  <div class="contact-item-icon contact-item-icon--text">hh</div>
+                  Резюме на&nbsp;hh.ru
+                </a>
+                <a href="https://t.me/paveliskrinsky" target="_blank" rel="noopener" class="contact-item">
+                  <div class="contact-item-icon">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                      <path
+                        d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+                    </svg>
+                  </div>
+                  @paveliskrinsky
+                </a>
+                <div class="contact-item">
+                  <div class="contact-item-icon">📍</div>
+                  Новосибирск &middot; Удалённо
+                </div>
+              </div>
+            </div>
+          </div>
+          <form class="reveal" id="contact-form" action="https://formspree.io/f/mqparwza" method="POST">
+            <div class="form-row">
+              <div>
+                <label for="name">Имя</label>
+                <input id="name" type="text" name="name" placeholder="Ваше имя" autocomplete="name" required />
+              </div>
+              <div>
+                <label for="email">E-mail</label>
+                <input id="email" type="email" name="email" placeholder="Ваш e-mail" autocomplete="email" required />
+              </div>
+            </div>
+            <div>
+              <label for="subject">Тема</label>
+              <input id="subject" type="text" name="subject" placeholder="Оффер, проект, фриланс" />
+            </div>
+            <div>
+              <label for="message">Сообщение</label>
+              <textarea id="message" name="message" placeholder="Расскажите о проекте или вакансии" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary form-submit">Отправить</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Павел Искринский &middot; Фронтенд-разработчик &middot; Новосибирск &copy; 2026
+    </p>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    const burger = document.getElementById('burger');
+    const navLinks = document.getElementById('nav-links');
+
+    function setMenuOpen(open) {
+      navLinks.classList.toggle('open', open);
+      burger.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', open);
+    }
+
+    burger.addEventListener('click', () => setMenuOpen(!navLinks.classList.contains('open')));
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenuOpen(false)));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    document.getElementById('contact-form').addEventListener('submit', function () {
+      const btn = this.querySelector('button[type=submit]');
+      btn.textContent = 'Отправляю…';
+      btn.disabled = true;
+    });
+  </script>
+</body>
+
+</html>
