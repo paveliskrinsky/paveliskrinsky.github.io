@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Павел Искринский — Фронтенд-разработчик</title>
   <meta name="description"
-    content="Фронтенд-разработчик с 14-летним опытом: pixel-perfect вёрстка по макетам Figma, HTML, CSS, JavaScript. Интернет-магазины, корпоративные сайты, лендинги. Удалённо, Новосибирск." />
+    content="Фронтенд-разработчик с 14-летним опытом: pixel-perfect вёрстка по макетам Figma, HTML, CSS, JavaScript, Astro. Корпоративные сайты, сервисы, интернет-магазины. Удалённо, Новосибирск." />
   <link rel="icon" href="favicon.ico" sizes="48x48" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -14,7 +14,7 @@
   <meta name="theme-color" content="#0f1117" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Yandex.Metrika counter -->
   <script type="text/javascript">
@@ -34,33 +34,51 @@
   <style>
     :root {
       --bg: #0f1117;
-      --surface: #181c27;
-      --border: #252a38;
-      --accent: #6c63ff;
-      --accent2: #00d9c0;
-      --text: #e8eaf0;
-      --muted: #8890a8;
-      --card-bg: #1a1f2e;
-      --nav-bg: rgba(15, 17, 23, 0.85);
-      --nav-mob: rgba(15, 17, 23, 0.97);
-      --radius: 12px;
-      --accent-soft: rgba(108, 99, 255, .15);
-      --transition: 0.25s ease;
-      --max-w: 1100px;
+      --bg-soft: #13161f;
+      --surface: rgba(255, 255, 255, .035);
+      --surface-strong: #171b26;
+      --border: rgba(255, 255, 255, .08);
+      --border-strong: rgba(255, 255, 255, .16);
+      --text: #eef0f6;
+      --muted: #9097ab;
+      --faint: #5d647a;
+      --accent: #8b7bff;
+      --accent2: #2fe0c0;
+      --accent3: #ff8a5c;
+      --accent-soft: rgba(139, 123, 255, .14);
+      --accent2-soft: rgba(47, 224, 192, .12);
+      --glow: rgba(139, 123, 255, .35);
+      --nav-bg: rgba(19, 22, 31, .72);
+      --grid-line: rgba(255, 255, 255, .045);
+      --shadow: 0 30px 60px -30px rgba(0, 0, 0, .6);
+      --on-accent: #ffffff;
+      --radius: 24px;
+      --radius-sm: 14px;
+      --ease: cubic-bezier(.2, .7, .2, 1);
+      --max-w: 1180px;
+      --font-head: 'Unbounded', 'Manrope', system-ui, sans-serif;
     }
 
     @media (prefers-color-scheme: light) {
       :root {
-        --bg: #f5f5f7;
-        --surface: #eaeaef;
-        --border: #d1d1da;
-        --accent: #5046e4;
-        --accent2: #009688;
-        --text: #1d1d1f;
-        --muted: #6e6e73;
-        --card-bg: #ffffff;
-        --nav-bg: rgba(245, 245, 247, 0.88);
-        --nav-mob: rgba(245, 245, 247, 0.98);
+        --bg: #f6f6f9;
+        --bg-soft: #eeeef4;
+        --surface: rgba(255, 255, 255, .75);
+        --surface-strong: #ffffff;
+        --border: rgba(20, 22, 40, .08);
+        --border-strong: rgba(20, 22, 40, .16);
+        --text: #14161f;
+        --muted: #5b6075;
+        --faint: #9a9eb0;
+        --accent: #5b4bf0;
+        --accent2: #0aa98d;
+        --accent3: #f0642f;
+        --accent-soft: rgba(91, 75, 240, .1);
+        --accent2-soft: rgba(10, 169, 141, .1);
+        --glow: rgba(91, 75, 240, .22);
+        --nav-bg: rgba(255, 255, 255, .72);
+        --grid-line: rgba(20, 22, 40, .05);
+        --shadow: 0 30px 60px -30px rgba(30, 30, 70, .25);
       }
     }
 
@@ -74,15 +92,17 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 6rem;
     }
 
     body {
-      font-family: 'Raleway', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
       background: var(--bg);
       color: var(--text);
       font-weight: 500;
-      line-height: 1.65;
-      font-variant-numeric: lining-nums;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     a {
@@ -93,594 +113,1074 @@
     img {
       display: block;
       max-width: 100%;
+      height: auto;
     }
 
     ul {
       list-style: none;
     }
 
+    ::selection {
+      background: var(--accent);
+      color: var(--on-accent);
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 8px;
+    }
+
+    .page-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+    }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding-inline: 1.5rem;
+    }
+
     nav {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
       z-index: 100;
+      width: min(calc(100% - 2rem), 980px);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1rem 2rem;
+      gap: 1rem;
+      padding: .55rem .55rem .55rem 1.1rem;
       background: var(--nav-bg);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      transition: padding var(--transition);
+      backdrop-filter: blur(18px) saturate(1.4);
+      -webkit-backdrop-filter: blur(18px) saturate(1.4);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      transition: box-shadow .3s var(--ease), border-color .3s var(--ease), top .3s var(--ease);
     }
 
     nav.scrolled {
-      padding-block: .6rem;
+      top: .6rem;
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow);
     }
 
     .nav-logo {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #e53935;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-weight: 800;
+      font-size: .95rem;
+      white-space: nowrap;
+    }
+
+    .nav-logo-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      padding: 2px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+    }
+
+    .nav-logo-mark img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--surface-strong);
     }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: .25rem;
     }
 
     .nav-links a {
-      font-size: 0.9rem;
-      color: var(--muted);
+      display: block;
+      padding: .5rem .9rem;
+      border-radius: 999px;
+      font-size: .88rem;
       font-weight: 600;
-      transition: color var(--transition);
+      color: var(--muted);
+      transition: color .2s, background .2s;
     }
 
     .nav-links a:hover {
       color: var(--text);
+      background: var(--surface);
+    }
+
+    .nav-cta {
+      padding: .6rem 1.15rem;
+      font-size: .85rem;
     }
 
     .nav-burger {
       display: none;
-      background: none;
-      border: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 50%;
       cursor: pointer;
       flex-direction: column;
       justify-content: center;
-      gap: 5px;
-      width: 36px;
-      height: 36px;
-      padding: 6px;
+      align-items: center;
+      gap: 4px;
+      width: 42px;
+      height: 42px;
     }
 
     .nav-burger span {
       display: block;
-      width: 24px;
+      width: 18px;
       height: 2px;
       background: var(--text);
       border-radius: 2px;
-      transition: transform 0.3s ease, opacity 0.3s ease;
+      transition: transform .3s ease, opacity .3s ease;
     }
 
     .nav-burger.open span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
+      transform: translateY(6px) rotate(45deg);
     }
 
     .nav-burger.open span:nth-child(2) {
       opacity: 0;
-      transform: scaleX(0);
     }
 
     .nav-burger.open span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
-
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 5rem 2rem 3rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(ellipse 60% 50% at 20% 40%, rgba(108, 99, 255, .18) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 40% at 80% 60%, rgba(0, 217, 192, .12) 0%, transparent 60%);
-    }
-
-    .hero-content {
-      position: relative;
-      max-width: var(--max-w);
-      width: 100%;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      padding: .35rem .9rem;
-      border: 1px solid var(--border);
-      border-radius: 99px;
-      font-size: .8rem;
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-badge .dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent2);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-
-      0%,
-      100% {
-        opacity: 1;
-      }
-
-      50% {
-        opacity: .4;
-      }
-    }
-
-    h1 {
-      font-size: clamp(2.4rem, 6vw, 4.5rem);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 1.5rem;
-    }
-
-    .gradient-text {
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-sub {
-      font-size: 1.15rem;
-      color: var(--muted);
-      max-width: 580px;
-      margin-bottom: 2.5rem;
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
+      transform: translateY(-6px) rotate(-45deg);
     }
 
     .btn {
-      padding: .75rem 1.75rem;
-      border-radius: var(--radius);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .55rem;
+      padding: .9rem 1.6rem;
+      border-radius: 999px;
       font-family: inherit;
       font-size: .95rem;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
-      transition: transform var(--transition), box-shadow var(--transition), color var(--transition), border-color var(--transition);
-      border: none;
-      display: inline-block;
+      border: 1px solid transparent;
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .25s, border-color .25s, color .25s;
+      white-space: nowrap;
+    }
+
+    .btn svg {
+      width: 18px;
+      height: 18px;
+      transition: transform .25s var(--ease);
     }
 
     .btn:hover {
       transform: translateY(-2px);
     }
 
+    .btn:hover svg {
+      transform: translateX(3px);
+    }
+
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #fff;
+      background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 55%, var(--accent2)));
+      color: var(--on-accent);
+      box-shadow: 0 10px 30px -10px var(--glow);
     }
 
     .btn-primary:hover {
-      box-shadow: 0 8px 24px rgba(108, 99, 255, .4);
+      box-shadow: 0 16px 40px -10px var(--glow);
     }
 
     .btn-ghost {
-      background: transparent;
-      border: 1px solid var(--border);
+      background: var(--surface);
+      border-color: var(--border-strong);
       color: var(--text);
     }
 
     .btn-ghost:hover {
       border-color: var(--accent);
-      color: var(--accent);
     }
 
-    section {
-      padding: 6rem 2rem;
-    }
-
-    .container {
-      max-width: var(--max-w);
-      margin: 0 auto;
-    }
-
-    .section-tag {
-      display: inline-block;
-      font-size: .78rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: .75rem;
-    }
-
-    .section-title {
-      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-      font-weight: 800;
-      margin-bottom: 1rem;
-      line-height: 1.2;
-      letter-spacing: -0.015em;
-    }
-
-    .section-desc {
-      color: var(--muted);
-      max-width: 580px;
-      margin-bottom: 3.5rem;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-    }
-
-    #about,
-    #skills,
-    #contact {
-      background: var(--surface);
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 4rem;
-    }
-
-    .about-avatar {
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
+    #hero {
+      position: relative;
+      padding: 9.5rem 0 4rem;
       overflow: hidden;
     }
 
-    .about-avatar img {
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+      opacity: .55;
+      animation: float 18s ease-in-out infinite;
+    }
+
+    .orb-1 {
+      width: 520px;
+      height: 520px;
+      background: var(--accent);
+      top: -160px;
+      left: -120px;
+      opacity: .28;
+    }
+
+    .orb-2 {
+      width: 420px;
+      height: 420px;
+      background: var(--accent2);
+      top: 120px;
+      right: -140px;
+      opacity: .18;
+      animation-delay: -6s;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
+
+      50% {
+        transform: translate(40px, 30px);
+      }
+    }
+
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      padding: .45rem 1rem .45rem .75rem;
+      border: 1px solid var(--border-strong);
+      background: var(--surface);
+      border-radius: 999px;
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .badge .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent2);
+      box-shadow: 0 0 0 0 var(--accent2);
+      animation: ping 2s infinite;
+    }
+
+    @keyframes ping {
+      0% {
+        box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent2) 60%, transparent);
+      }
+
+      100% {
+        box-shadow: 0 0 0 10px transparent;
+      }
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--font-head);
+      letter-spacing: -0.02em;
+      line-height: 1.12;
+    }
+
+    h1 {
+      font-size: clamp(2.1rem, 4.4vw, 3.7rem);
+      font-weight: 700;
+      margin: 1.5rem 0 1.5rem;
+    }
+
+    .gradient-text {
+      background: linear-gradient(110deg, var(--accent) 0%, var(--accent2) 60%, var(--accent3) 120%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 2.25rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: .75rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-visual {
+      position: relative;
+      justify-self: end;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .hero-photo {
+      position: relative;
+      border-radius: 32px;
+      overflow: hidden;
+      border: 1px solid var(--border-strong);
+      aspect-ratio: 4 / 5;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 55%, rgba(10, 12, 20, .55));
+    }
+
+    .hero-photo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center top;
     }
 
-    .about-text p {
+    .chip {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .7rem 1rem;
+      border-radius: 18px;
+      background: var(--nav-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-strong);
+      box-shadow: var(--shadow);
+      font-size: .82rem;
+      font-weight: 700;
+      z-index: 2;
+      animation: bob 6s ease-in-out infinite;
+    }
+
+    .chip small {
+      display: block;
+      font-weight: 500;
       color: var(--muted);
-      line-height: 1.75;
-      margin-bottom: 1.1rem;
+      font-size: .72rem;
     }
 
-    .about-text p:last-of-type {
-      margin-bottom: 0;
-    }
-
-    .about-stats {
+    .chip-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      place-items: center;
+      background: var(--accent-soft);
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .chip-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .chip-1 {
+      top: 12%;
+      left: -18%;
+    }
+
+    .chip-2 {
+      bottom: 14%;
+      right: -12%;
+      animation-delay: -3s;
+    }
+
+    .chip-2 .chip-icon {
+      background: var(--accent2-soft);
+      color: var(--accent2);
+    }
+
+    @keyframes bob {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
       gap: 1rem;
-      margin-top: 2.5rem;
+      margin-top: 4.5rem;
+      position: relative;
     }
 
     .stat {
-      text-align: center;
-      padding: 1.1rem .5rem;
+      padding: 1.4rem 1.5rem;
     }
 
     .stat-num {
-      font-size: 2rem;
-      font-weight: 800;
+      font-family: var(--font-head);
+      font-size: clamp(1.7rem, 3vw, 2.3rem);
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: .5rem;
     }
 
     .stat-label {
-      font-size: .78rem;
+      font-size: .85rem;
       color: var(--muted);
-      margin-top: .2rem;
+    }
+
+    .marquee {
+      margin-top: 3.5rem;
+      overflow: hidden;
+      border-block: 1px solid var(--border);
+      padding: 1.1rem 0;
+      mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 3rem;
+      width: max-content;
+      animation: marquee 40s linear infinite;
+    }
+
+    .marquee-track span {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--faint);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .marquee-track span::after {
+      content: '✦';
+      color: var(--accent);
+      font-size: .7rem;
+    }
+
+    @keyframes marquee {
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    section {
+      padding: 6.5rem 0;
+      position: relative;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-tag::before {
+      content: '';
+      width: 24px;
+      height: 2px;
+      border-radius: 2px;
+      background: currentColor;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.8vw, 2.9rem);
+      font-weight: 700;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      max-width: 420px;
+    }
+
+    .card {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      transition: border-color .3s var(--ease), translate .4s var(--ease), box-shadow .4s var(--ease);
+    }
+
+    .card.spot::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), var(--accent-soft), transparent 45%);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+
+    .card.spot:hover::before {
+      opacity: 1;
+    }
+
+    .card:hover {
+      border-color: var(--border-strong);
+    }
+
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1rem;
+    }
+
+    .bento-text {
+      grid-column: span 4;
+      padding: 2.25rem;
+    }
+
+    .bento-text p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .bento-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .bento-text strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .bento-side {
+      grid-column: span 2;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .bento-mini {
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+
+    .bento-mini h3 {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .bento-mini p {
+      font-size: .88rem;
+      color: var(--muted);
+    }
+
+    .icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-bottom: .5rem;
+      flex-shrink: 0;
+    }
+
+    .icon-box svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .icon-box--teal {
+      background: var(--accent2-soft);
+      color: var(--accent2);
+    }
+
+    .icon-box--warm {
+      background: color-mix(in srgb, var(--accent3) 14%, transparent);
+      color: var(--accent3);
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 1rem;
     }
 
     .timeline-item {
       display: grid;
-      grid-template-columns: 240px 1fr;
+      grid-template-columns: 220px 1fr;
       gap: 2rem;
-      position: relative;
-      padding-bottom: 2.5rem;
-    }
-
-    .timeline-item:last-child {
-      padding-bottom: 0;
-    }
-
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: 255px;
-      top: 6px;
-      bottom: 0;
-      width: 1px;
-      background: var(--border);
-    }
-
-    .timeline-item:last-child::before {
-      display: none;
-    }
-
-    .timeline-dot {
-      position: absolute;
-      left: 249px;
-      top: 6px;
-      width: 13px;
-      height: 13px;
-      border-radius: 50%;
-      border: 2px solid var(--accent);
-      background: var(--bg);
+      padding: 2rem 2.25rem;
     }
 
     .timeline-date {
-      color: var(--muted);
       font-size: .85rem;
-      padding-top: 2px;
-      text-align: right;
+      color: var(--muted);
     }
 
     .timeline-date strong {
       display: block;
       color: var(--text);
-      font-size: .9rem;
+      font-size: .95rem;
+      font-weight: 700;
+      margin-bottom: .2rem;
     }
 
-    .timeline-body {
-      padding-left: 1.5rem;
+    .timeline-now {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      margin-top: .75rem;
+      padding: .25rem .7rem;
+      border-radius: 999px;
+      background: var(--accent2-soft);
+      color: var(--accent2);
+      font-size: .75rem;
+      font-weight: 700;
     }
 
     .timeline-company {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: .15rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: .3rem;
     }
 
     .location {
+      font-family: 'Manrope', sans-serif;
+      letter-spacing: 0;
       color: var(--muted);
-      font-weight: 400;
+      font-weight: 500;
       font-size: .85rem;
-    }
-
-    .link-accent {
-      color: var(--accent2);
     }
 
     .timeline-role {
-      font-size: .85rem;
-      color: var(--accent2);
-      font-weight: 600;
-      margin-bottom: .6rem;
+      font-size: .88rem;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: .9rem;
     }
 
     .timeline-intro,
     .timeline-body ul {
       color: var(--muted);
-      font-size: .88rem;
+      font-size: .92rem;
     }
 
     .timeline-intro {
-      margin-bottom: .6rem;
+      margin-bottom: .75rem;
     }
 
-    .timeline-body ul li {
-      padding-left: 1.6rem;
+    .timeline-body ul li,
+    .project-points li {
+      padding-left: 1.4rem;
       position: relative;
-      margin-bottom: .35rem;
+      margin-bottom: .45rem;
     }
 
-    .timeline-body ul li::before {
-      content: '—';
+    .timeline-body ul li::before,
+    .project-points li::before {
+      content: '';
       position: absolute;
       left: 0;
-      color: var(--accent);
+      top: .62em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
     }
 
-    .education {
-      margin-top: 3rem;
+    .link-accent {
+      color: var(--accent2);
+      font-weight: 700;
+      border-bottom: 1px solid color-mix(in srgb, var(--accent2) 40%, transparent);
+      transition: border-color .2s;
+    }
+
+    .link-accent:hover {
+      border-color: var(--accent2);
     }
 
     .edu-list {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 1rem;
+      margin-top: 1rem;
     }
 
     .edu-card {
-      padding: 1.5rem 2rem;
+      padding: 1.75rem;
       display: flex;
-      flex-direction: column;
+      gap: 1.1rem;
       align-items: flex-start;
-      gap: .75rem;
-    }
-
-    .edu-icon {
-      font-size: 2.5rem;
     }
 
     .edu-title {
       font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: .2rem;
+      font-weight: 600;
+      margin-bottom: .35rem;
     }
 
     .edu-degree {
       color: var(--accent2);
       font-size: .85rem;
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: .35rem;
     }
 
     .edu-desc {
       color: var(--muted);
-      font-size: .85rem;
+      font-size: .88rem;
+    }
+
+    .subhead {
+      margin-top: 3.5rem;
     }
 
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
     }
 
     .skill-card {
-      padding: 1.5rem;
+      padding: 1.9rem;
     }
 
-    .skill-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-3px);
-    }
-
-    .skill-card-icon {
-      font-size: 2rem;
-      margin-bottom: .75rem;
+    .skill-card:hover,
+    .bento-mini:hover,
+    .stat:hover {
+      translate: 0 -4px;
     }
 
     .skill-card h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: .4rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: .5rem 0 .5rem;
     }
 
     .skill-card p {
       color: var(--muted);
-      font-size: .85rem;
-      margin-bottom: .75rem;
+      font-size: .9rem;
+      margin-bottom: 1.1rem;
     }
 
-    .skill-tags {
+    .tags {
       display: flex;
       flex-wrap: wrap;
       gap: .4rem;
     }
 
     .tag {
-      font-size: .75rem;
-      padding: .25rem .65rem;
-      border-radius: 99px;
-      background: var(--accent-soft);
-      color: var(--accent);
+      font-size: .76rem;
+      padding: .32rem .75rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
       font-weight: 600;
     }
 
-    .projects-grid {
+    .projects {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
       gap: 1.5rem;
     }
 
-    .project-card {
+    .project {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+      padding: 1.25rem;
       overflow: hidden;
     }
 
-    .project-card:hover,
-    .project-card:focus-visible {
-      border-color: var(--accent2);
-      transform: translateY(-4px);
+    .project--flip .project-media {
+      order: 2;
     }
 
-    .project-img {
-      height: 180px;
-      background: linear-gradient(135deg, #1e2133, #252a3a);
+    .project-media {
+      position: relative;
+      display: block;
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      isolation: isolate;
+    }
+
+    .project-media::before {
+      content: '';
+      position: absolute;
+      inset: -40%;
+      z-index: -1;
+      background: radial-gradient(circle at 30% 30%, var(--p-glow, var(--accent)) 0%, transparent 55%);
+      opacity: .35;
+    }
+
+    .browser-bar {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 3rem;
+      gap: .4rem;
+      padding: .65rem .9rem;
+      background: var(--surface-strong);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .browser-bar i {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--border-strong);
+    }
+
+    .browser-url {
+      flex: 1;
+      margin-left: .6rem;
+      padding: .25rem .8rem;
+      border-radius: 999px;
+      background: var(--bg-soft);
+      font-size: .74rem;
+      color: var(--muted);
+      font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .project-shot {
+      overflow: hidden;
+      aspect-ratio: 15 / 8;
+    }
+
+    .project-shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      transition: transform .8s var(--ease);
+    }
+
+    .project:hover .project-shot img {
+      transform: scale(1.035);
     }
 
     .project-body {
-      padding: 1.5rem;
+      padding: 1rem 1.25rem 1rem 0;
     }
 
-    .project-meta {
-      font-size: .75rem;
-      color: var(--muted);
-      margin-bottom: .4rem;
+    .project--flip .project-body {
+      padding: 1rem 0 1rem 1.25rem;
+    }
+
+    .project-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .project-num {
+      font-family: var(--font-head);
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--faint);
+    }
+
+    .project-status {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .3rem .75rem;
+      border-radius: 999px;
+      font-size: .74rem;
+      font-weight: 700;
+      background: var(--accent2-soft);
+      color: var(--accent2);
+    }
+
+    .project-status::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .project-status--beta {
+      background: color-mix(in srgb, var(--accent3) 14%, transparent);
+      color: var(--accent3);
     }
 
     .project-body h3 {
-      font-size: 1.1rem;
+      font-size: clamp(1.35rem, 2.4vw, 1.75rem);
       font-weight: 700;
-      margin-bottom: .5rem;
+      margin-bottom: .35rem;
     }
 
-    .project-body p {
+    .project-type {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: .9rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-desc {
       color: var(--muted);
+      font-size: .95rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .project-points {
+      font-size: .9rem;
+      color: var(--muted);
+      margin-bottom: 1.4rem;
+    }
+
+    .project-points strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .project-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    .project-link {
+      padding: .7rem 1.25rem;
       font-size: .88rem;
     }
 
-    .contact-wrap {
+    .contact-card {
       display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 4rem;
-      align-items: start;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3rem;
+      padding: 3rem;
+      overflow: hidden;
+    }
+
+    .contact-card::after {
+      content: '';
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: var(--accent);
+      filter: blur(120px);
+      opacity: .16;
+      top: -180px;
+      left: -120px;
+      pointer-events: none;
     }
 
     .contact-info p {
       color: var(--muted);
-      margin-bottom: 2rem;
+      margin: 1.25rem 0 2rem;
     }
 
     .contact-links {
-      display: flex;
-      flex-direction: column;
-      gap: .75rem;
+      display: grid;
+      gap: .6rem;
     }
 
     .contact-item {
       display: flex;
       align-items: center;
-      gap: .75rem;
+      gap: .85rem;
+      padding: .55rem .6rem;
+      margin-inline: -.6rem;
+      border-radius: var(--radius-sm);
       color: var(--muted);
-      font-size: .9rem;
-      transition: color var(--transition);
+      font-size: .92rem;
+      font-weight: 600;
+      transition: color .2s, background .2s;
     }
 
-    .contact-item:hover {
+    a.contact-item:hover {
       color: var(--text);
+      background: var(--surface);
     }
 
     .contact-item-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
       border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
+      background: var(--surface);
+      display: grid;
+      place-items: center;
       flex-shrink: 0;
-      transition: border-color var(--transition);
+      color: var(--text);
+      transition: border-color .2s, color .2s;
+    }
+
+    .contact-item-icon svg {
+      width: 18px;
+      height: 18px;
     }
 
     .contact-item-icon--text {
-      font-size: .85rem;
-      font-weight: 700;
+      font-size: .82rem;
+      font-weight: 800;
       color: var(--accent);
     }
 
-    .contact-item:hover .contact-item-icon {
+    a.contact-item:hover .contact-item-icon {
       border-color: var(--accent);
+      color: var(--accent);
     }
 
     form {
+      position: relative;
+      z-index: 1;
       display: flex;
       flex-direction: column;
       gap: 1rem;
@@ -693,36 +1193,42 @@
     }
 
     label {
-      font-size: .82rem;
-      font-weight: 600;
+      font-size: .8rem;
+      font-weight: 700;
       color: var(--muted);
       display: block;
-      margin-bottom: .4rem;
+      margin-bottom: .45rem;
     }
 
     input,
     textarea {
       width: 100%;
-      background: var(--card-bg);
+      background: var(--bg-soft);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: .75rem 1rem;
+      border-radius: var(--radius-sm);
+      padding: .9rem 1.1rem;
       color: var(--text);
-      font-size: .9rem;
+      font-size: .95rem;
       font-family: inherit;
-      transition: border-color var(--transition), box-shadow var(--transition);
+      font-weight: 500;
+      transition: border-color .2s, box-shadow .2s;
       outline: none;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--faint);
     }
 
     input:focus,
     textarea:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px var(--accent-soft);
+      box-shadow: 0 0 0 4px var(--accent-soft);
     }
 
     textarea {
       resize: vertical;
-      min-height: 130px;
+      min-height: 140px;
     }
 
     .form-submit {
@@ -730,17 +1236,28 @@
     }
 
     footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem;
-      text-align: center;
-      color: var(--muted);
+      padding: 2.5rem 0 3rem;
+      color: var(--faint);
       font-size: .85rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+    }
+
+    .footer-inner a:hover {
+      color: var(--text);
     }
 
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity .6s ease, transform .6s ease, border-color var(--transition);
+      transform: translateY(28px);
+      transition: opacity .8s var(--ease), transform .8s var(--ease), translate .4s var(--ease), border-color .3s var(--ease), box-shadow .4s var(--ease);
     }
 
     .reveal.visible {
@@ -748,43 +1265,82 @@
       transform: none;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 1000px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        justify-self: start;
+        max-width: 340px;
+      }
+
+      .chip-1 {
+        left: auto;
+        right: -40%;
+        top: 10%;
+      }
+
+      .chip-2 {
+        right: -40%;
+      }
+
+      .bento-text,
+      .bento-side {
+        grid-column: span 6;
+      }
+
+      .bento-side {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .project,
+      .contact-card {
+        grid-template-columns: 1fr;
+      }
+
+      .project--flip .project-media {
+        order: 0;
+      }
+
+      .project-body,
+      .project--flip .project-body {
+        padding: .5rem .75rem .75rem;
+      }
+
+      .contact-card {
+        padding: 2rem;
+      }
+
       .timeline-item {
         grid-template-columns: 1fr;
-        gap: .25rem;
-      }
-
-      .timeline-item::before,
-      .timeline-dot {
-        display: none;
-      }
-
-      .timeline-date {
-        text-align: left;
-      }
-
-      .timeline-body {
-        padding-left: 0;
+        gap: 1rem;
       }
     }
 
-    @media (max-width: 768px) {
-      #hero {
-        min-height: auto;
-        padding-top: 7rem;
-      }
-
+    @media (max-width: 860px) {
       .nav-links {
         display: none;
-        flex-direction: column;
-        gap: 1.5rem;
         position: absolute;
-        top: 100%;
+        top: calc(100% + .5rem);
         left: 0;
         right: 0;
-        background: var(--nav-mob);
-        padding: 2rem;
-        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        gap: .25rem;
+        padding: .75rem;
+        background: var(--surface-strong);
+        border: 1px solid var(--border-strong);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links a {
+        padding: .85rem 1rem;
+        font-size: 1rem;
       }
 
       .nav-links.open {
@@ -795,38 +1351,91 @@
         display: flex;
       }
 
-      .about-grid,
-      .contact-wrap {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-      }
-
-      .about-avatar {
-        aspect-ratio: 3 / 4;
-        max-width: 280px;
-      }
-
-      .form-row,
-      .edu-list {
-        grid-template-columns: 1fr;
+      .nav-cta {
+        display: none;
       }
     }
 
-    @media (max-width: 480px) {
-      .about-stats {
-        grid-template-columns: 1fr 1fr;
+    @media (max-width: 640px) {
+      #hero {
+        padding-top: 7.5rem;
       }
 
-      .stat:last-child {
-        grid-column: span 2;
+      section {
+        padding: 4.5rem 0;
+      }
+
+      .hero-visual {
+        max-width: 260px;
+      }
+
+      .chip {
+        display: none;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr 1fr;
+        margin-top: 3rem;
+      }
+
+      .bento-side,
+      .skills-grid,
+      .edu-list,
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .bento-text,
+      .timeline-item {
+        padding: 1.6rem;
+      }
+
+      .project {
+        padding: .75rem;
+      }
+
+      .contact-card {
+        padding: 1.5rem;
+      }
+
+      .btn {
+        white-space: normal;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      html {
+        scroll-behavior: auto;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
       }
     }
   </style>
 </head>
 
 <body>
+  <div class="page-bg" aria-hidden="true"></div>
+
   <nav id="nav">
-    <a href="#hero" class="nav-logo" aria-label="В начало">❖</a>
+    <a href="#hero" class="nav-logo" aria-label="В начало">
+      <picture class="nav-logo-mark">
+        <source srcset="img/logo-96.avif" type="image/avif" />
+        <source srcset="img/logo-96.webp" type="image/webp" />
+        <img src="img/logo-96.jpg" alt="" width="96" height="96" />
+      </picture>
+      <span>Павел Искринский</span>
+    </a>
     <ul class="nav-links" id="nav-links">
       <li><a href="#about">Обо мне</a></li>
       <li><a href="#experience">Опыт</a></li>
@@ -834,75 +1443,139 @@
       <li><a href="#projects">Проекты</a></li>
       <li><a href="#contact">Контакты</a></li>
     </ul>
-    <button class="nav-burger" id="burger" type="button" aria-label="Меню" aria-expanded="false">
+    <a href="#contact" class="btn btn-primary nav-cta">Связаться</a>
+    <button class="nav-burger" id="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="nav-links">
       <span></span><span></span><span></span>
     </button>
   </nav>
 
   <main>
     <section id="hero">
-      <div class="hero-bg" aria-hidden="true"></div>
-      <div class="hero-content">
-        <div class="hero-badge">
-          <span class="dot"></span>
-          Открыт к&nbsp;удалённой работе &nbsp;&middot;&nbsp; Новосибирск
+      <div class="orb orb-1" aria-hidden="true"></div>
+      <div class="orb orb-2" aria-hidden="true"></div>
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <div class="badge">
+              <span class="dot" aria-hidden="true"></span>
+              Открыт к&nbsp;удалённой работе &middot; Новосибирск
+            </div>
+            <h1>
+              Делаю сайты, которые <span class="gradient-text">быстро грузятся</span> и&nbsp;красиво выглядят
+            </h1>
+            <p class="hero-sub">
+              Привет, я&nbsp;Павел&nbsp;&mdash; фронтенд-разработчик с&nbsp;14-летним опытом. Pixel-perfect вёрстка по&nbsp;макетам Figma,
+              чистый и&nbsp;поддерживаемый код, сайты на&nbsp;Astro и&nbsp;ванильном JS для&nbsp;студий, агентств и&nbsp;прямых заказчиков.
+            </p>
+            <div class="hero-cta">
+              <a href="#projects" class="btn btn-primary">
+                Смотреть работы
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+              </a>
+              <a href="#contact" class="btn btn-ghost">Написать мне</a>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="hero-photo">
+              <picture>
+                <source srcset="img/avatar-480.avif 480w, img/avatar-800.avif 800w" sizes="(max-width: 640px) 260px, (max-width: 1000px) 340px, 400px" type="image/avif" />
+                <source srcset="img/avatar-480.webp 480w, img/avatar-800.webp 800w" sizes="(max-width: 640px) 260px, (max-width: 1000px) 340px, 400px" type="image/webp" />
+                <img src="img/avatar-800.jpg" srcset="img/avatar-480.jpg 480w, img/avatar-800.jpg 800w" sizes="(max-width: 640px) 260px, (max-width: 1000px) 340px, 400px" alt="Павел Искринский" width="800" height="1067" fetchpriority="high" />
+              </picture>
+            </div>
+            <div class="chip chip-1" aria-hidden="true">
+              <span class="chip-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z" /><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" /><path d="M2 2l7.586 7.586" /><circle cx="11" cy="11" r="2" /></svg>
+              </span>
+              <span>Figma → код<small>pixel-perfect</small></span>
+            </div>
+            <div class="chip chip-2" aria-hidden="true">
+              <span class="chip-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" /></svg>
+              </span>
+              <span>PageSpeed 90+<small>быстрые сайты</small></span>
+            </div>
+          </div>
         </div>
-        <h1>
-          Привет, я <span class="gradient-text">Павел</span>.<br>
-          Фронтенд-разработчик<br>
-          с <span class="gradient-text">14-летним</span> опытом.
-        </h1>
-        <p class="hero-sub">
-          Pixel-perfect вёрстка по&nbsp;макетам Figma&nbsp;&mdash; чистый, быстрый, поддерживаемый код.
-          Делаю интернет-магазины, корпоративные сайты и&nbsp;лендинги для&nbsp;агентств, студий и&nbsp;прямых заказчиков.
-          Готов взяться за&nbsp;ваш проект.
-        </p>
-        <div class="hero-cta">
-          <a href="#projects" class="btn btn-primary">Смотреть работы</a>
-          <a href="#contact" class="btn btn-ghost">Написать мне</a>
+
+        <div class="hero-stats">
+          <div class="stat card spot reveal">
+            <div class="stat-num gradient-text">14</div>
+            <div class="stat-label">лет в&nbsp;разработке</div>
+          </div>
+          <div class="stat card spot reveal">
+            <div class="stat-num gradient-text">50+</div>
+            <div class="stat-label">запущенных проектов</div>
+          </div>
+          <div class="stat card spot reveal">
+            <div class="stat-num gradient-text">10+</div>
+            <div class="stat-label">сайтов на&nbsp;поддержке</div>
+          </div>
+          <div class="stat card spot reveal">
+            <div class="stat-num gradient-text">90+</div>
+            <div class="stat-label">баллов PageSpeed</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span>HTML5</span><span>CSS3</span><span>SCSS</span><span>JavaScript ES6+</span><span>Astro</span><span>Figma</span><span>Gulp</span><span>Vite</span><span>BEM</span><span>Tailwind</span><span>1С-Битрикс</span><span>Laravel</span><span>Git</span>
+          <span>HTML5</span><span>CSS3</span><span>SCSS</span><span>JavaScript ES6+</span><span>Astro</span><span>Figma</span><span>Gulp</span><span>Vite</span><span>BEM</span><span>Tailwind</span><span>1С-Битрикс</span><span>Laravel</span><span>Git</span>
         </div>
       </div>
     </section>
 
     <section id="about">
       <div class="container">
-        <div class="about-grid reveal">
-          <div class="about-avatar">
-            <img src="avatar.jpg" alt="Павел Искринский" />
-          </div>
-          <div class="about-text">
+        <div class="section-head reveal">
+          <div>
             <p class="section-tag">Обо мне</p>
-            <h2 class="section-title">Pixel-perfect вёрстка,<br><span class="gradient-text">готовая к&nbsp;продакшену</span>
-            </h2>
+            <h2 class="section-title">Вёрстка, готовая<br><span class="gradient-text">к&nbsp;продакшену</span></h2>
+          </div>
+          <p class="section-desc">От&nbsp;первых заказов на&nbsp;фрилансе до&nbsp;поддержки десятка клиентских сайтов в&nbsp;студии.</p>
+        </div>
+
+        <div class="bento">
+          <div class="bento-text card spot reveal">
             <p>
-              Начинал ещё студентом: с&nbsp;2012 года брал заказы на&nbsp;freelance.ru. После университета, в&nbsp;2016-м, пришёл
-              в&nbsp;штат Nisanov Corp&nbsp;&mdash; четыре года верстал интернет-магазины на&nbsp;OpenCart и&nbsp;доводил их до&nbsp;90&ndash;95 баллов
-              Google PageSpeed. Затем три года работал на&nbsp;фрилансе и&nbsp;аутсорсе: лендинги, интернет-магазины,
-              e-mail-рассылки, проекты для&nbsp;агентств и&nbsp;постоянные клиенты, которые приходили по&nbsp;рекомендациям.
+              Начинал ещё студентом: с&nbsp;2012 года брал заказы на&nbsp;freelance.ru. После университета, в&nbsp;2016-м, пришёл в&nbsp;штат
+              <strong>Nisanov Corp</strong>&nbsp;&mdash; четыре года верстал интернет-магазины на&nbsp;OpenCart и&nbsp;доводил их
+              до&nbsp;<strong>90&ndash;95 баллов Google PageSpeed</strong>. Затем три года работал на&nbsp;фрилансе и&nbsp;аутсорсе: лендинги,
+              интернет-магазины, e-mail-рассылки, проекты для&nbsp;агентств и&nbsp;постоянные клиенты по&nbsp;рекомендациям.
             </p>
             <p>
-              Сейчас в&nbsp;No Logo Studio верстаю по&nbsp;макетам Figma на&nbsp;Gulp, SCSS и&nbsp;ванильном JS и&nbsp;веду 10+ клиентских
-              сайтов на&nbsp;Битрикс и&nbsp;Laravel. Главное, чем горжусь,&nbsp;&mdash; чистый и&nbsp;лёгкий код, который бэкендеры
-              легко интегрируют. AI-ассистентов использую для&nbsp;рефакторинга и&nbsp;тестирования, результат всегда
-              проверяю сам.
+              Сейчас в&nbsp;<strong>No Logo Studio</strong> верстаю по&nbsp;макетам Figma на&nbsp;Gulp, SCSS и&nbsp;ванильном JS и&nbsp;веду
+              10+ клиентских сайтов на&nbsp;Битрикс и&nbsp;Laravel. Главное, чем горжусь,&nbsp;&mdash; чистый и&nbsp;лёгкий код, который
+              бэкендеры легко интегрируют. AI-ассистентов использую для&nbsp;рефакторинга и&nbsp;тестирования, результат всегда проверяю сам.
             </p>
             <p>
-              Хочу развиваться дальше&nbsp;&mdash; в&nbsp;React и&nbsp;Vue на&nbsp;коммерческих проектах. Прошёл отбор в&nbsp;наставники
-              HTML Academy. Английский B2: читаю документацию и&nbsp;веду переписку без&nbsp;переводчика.
+              Хочу развиваться дальше&nbsp;&mdash; в&nbsp;React и&nbsp;Vue на&nbsp;коммерческих проектах.
             </p>
-            <div class="about-stats">
-              <div class="stat card">
-                <div class="stat-num gradient-text">14</div>
-                <div class="stat-label">лет опыта</div>
+          </div>
+
+          <div class="bento-side">
+            <div class="bento-mini card spot reveal">
+              <div class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z" /><path d="M6 12v5c3 2 9 2 12 0v-5" /></svg>
               </div>
-              <div class="stat card">
-                <div class="stat-num gradient-text">10+</div>
-                <div class="stat-label">сайтов в&nbsp;продакшене</div>
+              <h3>Наставник</h3>
+              <p>Прошёл отбор в&nbsp;наставники HTML Academy.</p>
+            </div>
+            <div class="bento-mini card spot reveal">
+              <div class="icon-box icon-box--teal" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20" /></svg>
               </div>
-              <div class="stat card">
-                <div class="stat-num gradient-text">50+</div>
-                <div class="stat-label">запущенных проектов</div>
+              <h3>Английский B2</h3>
+              <p>Читаю документацию и&nbsp;веду переписку без&nbsp;переводчика.</p>
+            </div>
+            <div class="bento-mini card spot reveal">
+              <div class="icon-box icon-box--warm" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
               </div>
+              <h3>Удалённо</h3>
+              <p>Новосибирск, работаю с&nbsp;командами из&nbsp;любого часового пояса.</p>
             </div>
           </div>
         </div>
@@ -911,21 +1584,21 @@
 
     <section id="experience">
       <div class="container">
-        <div class="reveal">
-          <p class="section-tag">Карьера</p>
-          <h2 class="section-title">Опыт работы</h2>
-          <p class="section-desc">
-            14 лет в&nbsp;штате, агентствах и&nbsp;на&nbsp;фрилансе.
-          </p>
+        <div class="section-head reveal">
+          <div>
+            <p class="section-tag">Карьера</p>
+            <h2 class="section-title">Опыт работы</h2>
+          </div>
+          <p class="section-desc">14 лет в&nbsp;штате, агентствах и&nbsp;на&nbsp;фрилансе.</p>
         </div>
-        <div class="timeline">
 
-          <div class="timeline-item reveal">
+        <div class="timeline">
+          <div class="timeline-item card spot reveal">
             <div class="timeline-date">
               <strong>Март 2023&nbsp;&mdash; наст. время</strong>
               3 года 8 мес.
+              <div><span class="timeline-now">Сейчас</span></div>
             </div>
-            <div class="timeline-dot"></div>
             <div class="timeline-body">
               <h3 class="timeline-company">No Logo Studio <span class="location">&mdash; Москва (удалённо)</span></h3>
               <div class="timeline-role">Фронтенд-разработчик</div>
@@ -935,132 +1608,116 @@
                 <li>Верстаю по&nbsp;макетам Figma: Gulp, SCSS (BEM), ванильный JavaScript (ES6+)</li>
                 <li>Веду и&nbsp;развиваю 10+ действующих проектов: правки, обновления, новые разделы</li>
                 <li>Пишу чистый и&nbsp;лёгкий код, который бэкенд-разработчикам удобно интегрировать в&nbsp;Битрикс и&nbsp;Laravel</li>
-                <li>Использую AI-ассистентов (Claude и&nbsp;др.) для&nbsp;рефакторинга и&nbsp;тестирования&nbsp;&mdash; с&nbsp;обязательной проверкой
-                  результата</li>
-                <li>Работа в&nbsp;команде с&nbsp;дизайнером и&nbsp;бэкендом</li>
-                <li>Задачи в&nbsp;Битрикс24</li>
+                <li>Использую AI-ассистентов (Claude и&nbsp;др.) для&nbsp;рефакторинга и&nbsp;тестирования&nbsp;&mdash; с&nbsp;обязательной проверкой результата</li>
+                <li>Работа в&nbsp;команде с&nbsp;дизайнером и&nbsp;бэкендом, задачи в&nbsp;Битрикс24</li>
               </ul>
             </div>
           </div>
 
-          <div class="timeline-item reveal">
+          <div class="timeline-item card spot reveal">
             <div class="timeline-date">
               <strong>Апрель 2020&nbsp;&mdash; Февраль 2023</strong>
               2 года 11 мес.
             </div>
-            <div class="timeline-dot"></div>
             <div class="timeline-body">
               <h3 class="timeline-company">Фриланс / Аутсорс <span class="location">&mdash; удалённо</span></h3>
               <div class="timeline-role">Фронтенд-разработчик</div>
               <ul>
-                <li>Заказы с&nbsp;фриланс-бирж, долгосрочная работа с&nbsp;постоянными клиентами, новые проекты по&nbsp;рекомендациям
-                </li>
+                <li>Заказы с&nbsp;фриланс-бирж, долгосрочная работа с&nbsp;постоянными клиентами, новые проекты по&nbsp;рекомендациям</li>
                 <li>Лендинги, интернет-магазины и&nbsp;корпоративные сайты под&nbsp;ключ: от&nbsp;обсуждения задачи и&nbsp;оценки сроков до&nbsp;сдачи и&nbsp;правок</li>
-                <li>Проекты для&nbsp;агентств и&nbsp;студий Alente, CASTCOM, АртАльт, DokinLab, MilloriDS&nbsp;&mdash; в&nbsp;том числе
-                  <a href="https://komandor-mebel.com" target="_blank" rel="noopener"
-                    class="link-accent">komandor-mebel.com</a> (Alente) и&nbsp;портал водоканала Кемерово
-                  <a href="https://kemvod.ru" target="_blank" rel="noopener" class="link-accent">kemvod.ru</a>
-                  (АртАльт)
+                <li>Проекты для&nbsp;агентств и&nbsp;студий Alente, CASTCOM, АртАльт, DokinLab, MilloriDS&nbsp;&mdash; в&nbsp;том числе портал водоканала Кемерово
+                  <a href="https://kemvod.ru" target="_blank" rel="noopener" class="link-accent">kemvod.ru</a> (АртАльт)
                 </li>
                 <li>Вёрстка на&nbsp;Tilda для&nbsp;аутсорс-проектов: Zero Block и&nbsp;кастомные блоки с&nbsp;собственным HTML/CSS/JS</li>
-                <li>HTML-письма под&nbsp;основные почтовые клиенты</li>
-                <li>Tailwind CSS&nbsp;&mdash; в&nbsp;нескольких проектах по&nbsp;запросу заказчика</li>
-                <li>Прошёл отбор в&nbsp;наставники HTML Academy</li>
+                <li>HTML-письма под&nbsp;основные почтовые клиенты, Tailwind CSS&nbsp;&mdash; по&nbsp;запросу заказчика</li>
               </ul>
             </div>
           </div>
 
-          <div class="timeline-item reveal">
+          <div class="timeline-item card spot reveal">
             <div class="timeline-date">
               <strong>Февраль 2016&nbsp;&mdash; Март 2020</strong>
               4 года 2 мес.
             </div>
-            <div class="timeline-dot"></div>
             <div class="timeline-body">
               <h3 class="timeline-company">Nisanov Corp <span class="location">&mdash; Москва (удалённо)</span></h3>
               <div class="timeline-role">Фронтенд-разработчик</div>
               <p class="timeline-intro">Компания разрабатывает интернет-магазины на&nbsp;OpenCart.</p>
               <ul>
-                <li>Адаптивная вёрстка интернет-магазинов по&nbsp;макетам Photoshop: каталоги, карточки товаров, корзина,
-                  оформление заказа</li>
+                <li>Адаптивная вёрстка интернет-магазинов по&nbsp;макетам Photoshop: каталоги, карточки товаров, корзина, оформление заказа</li>
                 <li>Интерактив на&nbsp;jQuery, сетка и&nbsp;компоненты на&nbsp;Bootstrap</li>
                 <li>Вёрстка, готовая к&nbsp;натяжке на&nbsp;OpenCart: чистая структура и&nbsp;предсказуемые классы</li>
                 <li>Оптимизация скорости загрузки до&nbsp;90&ndash;95 баллов Google PageSpeed</li>
-                <li>Полный цикл в&nbsp;паре с&nbsp;бэкендом: макет &rarr; вёрстка &rarr; интеграция &rarr; запуск</li>
-                <li>Задачи в&nbsp;Jira</li>
+                <li>Полный цикл в&nbsp;паре с&nbsp;бэкендом: макет &rarr; вёрстка &rarr; интеграция &rarr; запуск, задачи в&nbsp;Jira</li>
               </ul>
             </div>
           </div>
 
-          <div class="timeline-item reveal">
+          <div class="timeline-item card spot reveal">
             <div class="timeline-date">
               <strong>Ноябрь 2012&nbsp;&mdash; Январь 2016</strong>
               3 года 3 мес.
             </div>
-            <div class="timeline-dot"></div>
             <div class="timeline-body">
               <h3 class="timeline-company">Фриланс&nbsp;&mdash; freelance.ru</h3>
               <div class="timeline-role">Веб-разработчик</div>
               <ul>
                 <li>Вёрстка и&nbsp;доработка сайтов для&nbsp;заказчиков&nbsp;&mdash; первый коммерческий опыт и
-                  <a href="https://freelance.ru/reviews/paveliskrinsky/" target="_blank" rel="noopener"
-                    class="link-accent">отзывы клиентов</a>
+                  <a href="https://freelance.ru/reviews/paveliskrinsky/" target="_blank" rel="noopener" class="link-accent">отзывы клиентов</a>
                 </li>
                 <li>Интегрировал вёрстку на&nbsp;Joomla и&nbsp;WordPress</li>
                 <li>Брал заказы на&nbsp;freelance.ru параллельно с&nbsp;учёбой в&nbsp;университете</li>
               </ul>
             </div>
           </div>
-
         </div>
 
-        <div class="education reveal">
+        <div class="subhead reveal">
           <p class="section-tag">Образование</p>
           <div class="edu-list">
-            <div class="edu-card card">
-              <div class="edu-icon" aria-hidden="true">🎓</div>
+            <div class="edu-card card spot">
+              <div class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z" /><path d="M6 12v5c3 2 9 2 12 0v-5" /></svg>
+              </div>
               <div>
-                <h3 class="edu-title">
-                  Сибирский государственный университет науки и&nbsp;технологий <span class="location">&mdash; Красноярск</span>
-                </h3>
+                <h3 class="edu-title">Сибирский государственный университет науки и&nbsp;технологий <span class="location">&mdash; Красноярск</span></h3>
                 <div class="edu-degree">Информационные системы и&nbsp;технологии &middot; Высшее &middot; 2016</div>
-                <div class="edu-desc">
-                  Профильное техническое образование. Сразу после выпуска&nbsp;&mdash; в&nbsp;штат фронтенд-разработчиком.
-                </div>
+                <div class="edu-desc">Профильное техническое образование. Сразу после выпуска&nbsp;&mdash; в&nbsp;штат фронтенд-разработчиком.</div>
               </div>
             </div>
-            <div class="edu-card card">
-              <div class="edu-icon" aria-hidden="true">📚</div>
+            <div class="edu-card card spot">
+              <div class="icon-box icon-box--teal" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" /></svg>
+              </div>
               <div>
-                <h3 class="edu-title">
-                  КЭМТ НИЯУ МИФИ <span class="location">&mdash; Зеленогорск</span>
-                </h3>
+                <h3 class="edu-title">КЭМТ НИЯУ МИФИ <span class="location">&mdash; Зеленогорск</span></h3>
                 <div class="edu-degree">Программное обеспечение &middot; Среднее специальное &middot; 2012</div>
                 <div class="edu-desc">Первая профильная база&nbsp;&mdash; основы программирования и&nbsp;разработки ПО.</div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
     <section id="skills">
       <div class="container">
-        <div class="reveal">
-          <p class="section-tag">Мой стек</p>
-          <h2 class="section-title">Навыки и&nbsp;технологии</h2>
-          <p class="section-desc">
-            Инструменты, которыми я&nbsp;пользуюсь каждый день для&nbsp;создания быстрых и&nbsp;поддерживаемых сайтов.
-          </p>
+        <div class="section-head reveal">
+          <div>
+            <p class="section-tag">Мой стек</p>
+            <h2 class="section-title">Навыки и&nbsp;технологии</h2>
+          </div>
+          <p class="section-desc">Инструменты, которыми я&nbsp;пользуюсь каждый день для&nbsp;быстрых и&nbsp;поддерживаемых сайтов.</p>
         </div>
-        <div class="skills-grid">
 
-          <div class="skill-card card reveal">
-            <div class="skill-card-icon" aria-hidden="true">🏗️</div>
+        <div class="skills-grid">
+          <div class="skill-card card spot reveal">
+            <div class="icon-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6" /></svg>
+            </div>
             <h3>Вёрстка</h3>
             <p>Семантический HTML и&nbsp;масштабируемая CSS-архитектура.</p>
-            <div class="skill-tags">
+            <div class="tags">
               <span class="tag">HTML5</span>
               <span class="tag">CSS3</span>
               <span class="tag">SCSS / SASS</span>
@@ -1068,34 +1725,40 @@
             </div>
           </div>
 
-          <div class="skill-card card reveal">
-            <div class="skill-card-icon" aria-hidden="true">⚡</div>
+          <div class="skill-card card spot reveal">
+            <div class="icon-box icon-box--warm" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" /></svg>
+            </div>
             <h3>JavaScript</h3>
             <p>Современный ванильный JS&nbsp;&mdash; без&nbsp;лишнего фреймворка там, где он не&nbsp;нужен.</p>
-            <div class="skill-tags">
+            <div class="tags">
               <span class="tag">ES6+</span>
               <span class="tag">async / await</span>
               <span class="tag">ES-модули</span>
             </div>
           </div>
 
-          <div class="skill-card card reveal">
-            <div class="skill-card-icon" aria-hidden="true">🛠️</div>
-            <h3>Сборка проектов</h3>
-            <p>От&nbsp;автоматизации на&nbsp;Gulp до&nbsp;современных Vite-пайплайнов.</p>
-            <div class="skill-tags">
+          <div class="skill-card card spot reveal">
+            <div class="icon-box icon-box--teal" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" /><path d="M3.3 7L12 12l8.7-5M12 22V12" /></svg>
+            </div>
+            <h3>Сборка и&nbsp;фреймворки</h3>
+            <p>От&nbsp;автоматизации на&nbsp;Gulp до&nbsp;Vite и&nbsp;статических сайтов на&nbsp;Astro.</p>
+            <div class="tags">
+              <span class="tag">Astro</span>
               <span class="tag">Gulp</span>
-              <span class="tag">Webpack</span>
               <span class="tag">Vite</span>
-              <span class="tag">npm / npx</span>
+              <span class="tag">Webpack</span>
             </div>
           </div>
 
-          <div class="skill-card card reveal">
-            <div class="skill-card-icon" aria-hidden="true">🎨</div>
+          <div class="skill-card card spot reveal">
+            <div class="icon-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z" /><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" /><path d="M2 2l7.586 7.586" /><circle cx="11" cy="11" r="2" /></svg>
+            </div>
             <h3>Дизайн и&nbsp;макеты</h3>
-            <p>Pixel-perfect реализация по&nbsp;макетам Figma.</p>
-            <div class="skill-tags">
+            <p>Pixel-perfect реализация по&nbsp;макетам Figma, адаптив под&nbsp;любые экраны.</p>
+            <div class="tags">
               <span class="tag">Figma</span>
               <span class="tag">Pixel Perfect</span>
               <span class="tag">Tailwind CSS</span>
@@ -1103,116 +1766,221 @@
             </div>
           </div>
 
-          <div class="skill-card card reveal">
-            <div class="skill-card-icon" aria-hidden="true">🔌</div>
+          <div class="skill-card card spot reveal">
+            <div class="icon-box icon-box--teal" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" /></svg>
+            </div>
             <h3>CMS и&nbsp;конструкторы</h3>
             <p>Вёрстка под&nbsp;натяжку на&nbsp;CMS и&nbsp;доработка сайтов в&nbsp;конструкторах.</p>
-            <div class="skill-tags">
+            <div class="tags">
+              <span class="tag">1С-Битрикс</span>
               <span class="tag">OpenCart</span>
               <span class="tag">WordPress / Joomla</span>
               <span class="tag">Tilda</span>
-              <span class="tag">Формы и&nbsp;валидация</span>
             </div>
           </div>
 
-          <div class="skill-card card reveal">
-            <div class="skill-card-icon" aria-hidden="true">🚀</div>
-            <h3>Оптимизация и&nbsp;инструменты</h3>
-            <p>Ускоряю реальные продакшен-сайты&nbsp;&mdash; до&nbsp;90&ndash;95 баллов Google PageSpeed.</p>
-            <div class="skill-tags">
+          <div class="skill-card card spot reveal">
+            <div class="icon-box icon-box--warm" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10" /><path d="M12 12l6-6" /><circle cx="12" cy="12" r="1.5" /></svg>
+            </div>
+            <h3>Скорость и&nbsp;доступность</h3>
+            <p>Ускоряю продакшен-сайты до&nbsp;90&ndash;95 баллов PageSpeed и&nbsp;делаю их удобными для&nbsp;всех.</p>
+            <div class="tags">
               <span class="tag">PageSpeed 90+</span>
+              <span class="tag">AVIF / WebP</span>
               <span class="tag">Lazy-load</span>
-              <span class="tag">Minification</span>
-              <span class="tag">Code splitting</span>
+              <span class="tag">a11y</span>
               <span class="tag">Git</span>
-              <span class="tag">Битрикс24</span>
             </div>
           </div>
-
         </div>
       </div>
     </section>
 
     <section id="projects">
       <div class="container">
-        <div class="reveal">
-          <p class="section-tag">Мои работы</p>
-          <h2 class="section-title">Избранные проекты</h2>
-          <p class="section-desc">
-            Реальные продакшен-сайты, которые я&nbsp;разработал или&nbsp;активно развивал&nbsp;&mdash; от&nbsp;Figma до&nbsp;запуска.
-          </p>
+        <div class="section-head reveal">
+          <div>
+            <p class="section-tag">Мои работы</p>
+            <h2 class="section-title">Избранные проекты</h2>
+          </div>
+          <p class="section-desc">Реальные сайты, которые я&nbsp;разработал или&nbsp;активно развивал&nbsp;&mdash; от&nbsp;макета до&nbsp;запуска.</p>
         </div>
-        <div class="projects-grid">
 
-          <a class="project-card card reveal" href="https://kemvod.ru" target="_blank" rel="noopener">
-            <div class="project-img" aria-hidden="true">💧</div>
+        <div class="projects">
+          <article class="project card reveal" style="--p-glow: #f07c1e">
+            <a class="project-media" href="https://test.zelzoo.ru" target="_blank" rel="noopener" aria-label="Открыть сайт Зеленогорского зоопарка">
+              <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">zelzoo.ru</span></div>
+              <div class="project-shot">
+                <picture>
+                  <source srcset="img/projects/zelzoo-640.avif 640w, img/projects/zelzoo-1200.avif 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/avif" />
+                  <source srcset="img/projects/zelzoo-640.webp 640w, img/projects/zelzoo-1200.webp 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/webp" />
+                  <img src="img/projects/zelzoo-1200.jpg" srcset="img/projects/zelzoo-640.jpg 640w, img/projects/zelzoo-1200.jpg 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" alt="Главная страница сайта Зеленогорского зоопарка" width="1200" height="640" loading="lazy" decoding="async" />
+                </picture>
+              </div>
+            </a>
             <div class="project-body">
-              <div class="project-meta">АртАльт &middot; 2022</div>
-              <h3>kemvod.ru</h3>
-              <p>Корпоративный портал АО &laquo;КемВод&raquo;&nbsp;&mdash; сервисный сайт водоканала Кемерово для&nbsp;горожан и&nbsp;организаций.
-                Кроссбраузерная адаптивная вёрстка, JavaScript, работа с&nbsp;чужой кодовой базой без&nbsp;поломок.</p>
+              <div class="project-top">
+                <span class="project-num">01</span>
+                <span class="project-status project-status--beta">Скоро запуск</span>
+              </div>
+              <h3>Зеленогорский зоопарк</h3>
+              <div class="project-type">Сайт муниципального учреждения &middot; 2026</div>
+              <p class="project-desc">
+                Новый сайт Природного зоологического парка Зеленогорска: 340 видов животных, от&nbsp;амурского тигра до&nbsp;кудрявого пеликана.
+                Посетитель с&nbsp;первого экрана видит, открыт ли&nbsp;зоопарк, сколько стоят билеты и&nbsp;как добраться.
+              </p>
+              <ul class="project-points">
+                <li><strong>Живой статус</strong> &laquo;открыто / закроемся в&nbsp;…&raquo; по&nbsp;летнему и&nbsp;зимнему расписанию</li>
+                <li><strong>Версия для&nbsp;слабовидящих</strong>: размер шрифта, цветовые схемы, интервалы, отключение картинок</li>
+                <li>Каталог животных, новости, экскурсии, гостевая книга и&nbsp;виджет оценки качества услуг Госуслуг</li>
+                <li>Адаптивные изображения AVIF/WebP, микроразметка Schema.org</li>
+              </ul>
+              <div class="tags">
+                <span class="tag">Astro</span>
+                <span class="tag">SCSS</span>
+                <span class="tag">Vanilla JS</span>
+                <span class="tag">a11y</span>
+              </div>
+              <div class="project-foot">
+                <a class="btn btn-ghost project-link" href="https://test.zelzoo.ru" target="_blank" rel="noopener">
+                  Открыть сайт
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9" /></svg>
+                </a>
+              </div>
             </div>
-          </a>
+          </article>
 
-          <a class="project-card card reveal" href="https://komandor-mebel.com" target="_blank" rel="noopener">
-            <div class="project-img" aria-hidden="true">🛋️</div>
+          <article class="project project--flip card reveal" style="--p-glow: #c8f53a">
+            <a class="project-media" href="https://vvezi.ru" target="_blank" rel="noopener" aria-label="Открыть сайт Ввези.ru">
+              <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">vvezi.ru</span></div>
+              <div class="project-shot">
+                <picture>
+                  <source srcset="img/projects/vvezi-640.avif 640w, img/projects/vvezi-1200.avif 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/avif" />
+                  <source srcset="img/projects/vvezi-640.webp 640w, img/projects/vvezi-1200.webp 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/webp" />
+                  <img src="img/projects/vvezi-1200.jpg" srcset="img/projects/vvezi-640.jpg 640w, img/projects/vvezi-1200.jpg 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" alt="Главная страница сервиса Ввези.ru с калькуляторами растаможки и утильсбора" width="1200" height="640" loading="lazy" decoding="async" />
+                </picture>
+              </div>
+            </a>
             <div class="project-body">
-              <div class="project-meta">Alente &middot; 2020</div>
-              <h3>komandor-mebel.com</h3>
-              <p>Сайт мебельного центра &laquo;Командор&raquo; (Красноярск)&nbsp;&mdash; разработал фронтенд-часть в&nbsp;digital-агентстве Alente.
-                Адаптивная вёрстка под&nbsp;CMS.</p>
+              <div class="project-top">
+                <span class="project-num">02</span>
+                <span class="project-status">Работает</span>
+              </div>
+              <h3>Ввези.ru</h3>
+              <div class="project-type">Сервис авто-калькуляторов &middot; 2026</div>
+              <p class="project-desc">
+                Онлайн-калькуляторы для&nbsp;автовладельцев: сколько стоит растаможить машину, какой утильсбор заплатить и&nbsp;во&nbsp;что обойдётся поездка.
+                Расчёты по&nbsp;действующим ставкам и&nbsp;курсу ЦБ на&nbsp;сегодня.
+              </p>
+              <ul class="project-points">
+                <li><strong>4 калькулятора</strong>: растаможка, утильсбор, расход топлива, смесь масла и&nbsp;бензина</li>
+                <li>Актуальные курсы валют ЦБ и&nbsp;цены на&nbsp;топливо прямо на&nbsp;главной</li>
+                <li><strong>Bento-интерфейс</strong> с&nbsp;живыми примерами расчётов, светлая и&nbsp;тёмная тема</li>
+                <li>Форма заявки, SEO-разметка и&nbsp;быстрая статическая сборка</li>
+              </ul>
+              <div class="tags">
+                <span class="tag">Astro</span>
+                <span class="tag">TypeScript</span>
+                <span class="tag">CSS</span>
+                <span class="tag">SEO</span>
+              </div>
+              <div class="project-foot">
+                <a class="btn btn-ghost project-link" href="https://vvezi.ru" target="_blank" rel="noopener">
+                  Открыть сайт
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9" /></svg>
+                </a>
+              </div>
             </div>
-          </a>
+          </article>
 
+          <article class="project card reveal" style="--p-glow: #3b82f6">
+            <a class="project-media" href="https://kemvod.ru" target="_blank" rel="noopener" aria-label="Открыть сайт АО «КемВод»">
+              <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">kemvod.ru</span></div>
+              <div class="project-shot">
+                <picture>
+                  <source srcset="img/projects/kemvod-640.avif 640w, img/projects/kemvod-1200.avif 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/avif" />
+                  <source srcset="img/projects/kemvod-640.webp 640w, img/projects/kemvod-1200.webp 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/webp" />
+                  <img src="img/projects/kemvod-1200.jpg" srcset="img/projects/kemvod-640.jpg 640w, img/projects/kemvod-1200.jpg 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" alt="Главная страница сайта АО «КемВод»" width="1200" height="640" loading="lazy" decoding="async" />
+                </picture>
+              </div>
+            </a>
+            <div class="project-body">
+              <div class="project-top">
+                <span class="project-num">03</span>
+                <span class="project-status">Работает</span>
+              </div>
+              <h3>АО &laquo;КемВод&raquo;</h3>
+              <div class="project-type">Корпоративный портал &middot; АртАльт &middot; 2022</div>
+              <p class="project-desc">
+                Сервисный сайт водоканала Кемерово для&nbsp;горожан и&nbsp;организаций: услуги, информация для&nbsp;потребителей, вакансии
+                и&nbsp;новости компании, которая 90&nbsp;лет обеспечивает город водой.
+              </p>
+              <ul class="project-points">
+                <li>Кроссбраузерная <strong>адаптивная вёрстка</strong> разделов портала по&nbsp;макетам агентства</li>
+                <li>Интерактивные блоки и&nbsp;анимации на&nbsp;JavaScript</li>
+                <li>Работа с&nbsp;чужой кодовой базой без&nbsp;поломок существующих страниц</li>
+              </ul>
+              <div class="tags">
+                <span class="tag">HTML5</span>
+                <span class="tag">SCSS</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">Адаптив</span>
+              </div>
+              <div class="project-foot">
+                <a class="btn btn-ghost project-link" href="https://kemvod.ru" target="_blank" rel="noopener">
+                  Открыть сайт
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9" /></svg>
+                </a>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
     <section id="contact">
       <div class="container">
-        <div class="contact-wrap">
-          <div class="reveal">
+        <div class="contact-card card reveal">
+          <div class="contact-info">
             <p class="section-tag">Связаться</p>
             <h2 class="section-title">Давайте<br><span class="gradient-text">работать вместе</span></h2>
-            <div class="contact-info">
-              <p>Ищу удалённую позицию фронтенд-разработчика или&nbsp;верстальщика. Рассматриваю полную занятость, частичную
-                или&nbsp;проектную работу&nbsp;&mdash; главное, чтобы задачи были интересными.</p>
-              <div class="contact-links">
-                <a href="mailto:paveliskrinsky@ya.ru" class="contact-item">
-                  <div class="contact-item-icon" aria-hidden="true">✉️</div>
-                  paveliskrinsky@ya.ru
-                </a>
-                <a href="https://github.com/paveliskrinsky" target="_blank" rel="noopener" class="contact-item">
-                  <div class="contact-item-icon" aria-hidden="true">
-                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-                      <path
-                        d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                    </svg>
-                  </div>
-                  github.com/paveliskrinsky
-                </a>
-                <a href="https://novosibirsk.hh.ru/resume/5fbd71fcff112b6d4a0039ed1f4979586a6947" target="_blank"
-                  rel="noopener" class="contact-item">
-                  <div class="contact-item-icon contact-item-icon--text" aria-hidden="true">hh</div>
-                  Резюме на&nbsp;hh.ru
-                </a>
-                <a href="https://t.me/paveliskrinsky" target="_blank" rel="noopener" class="contact-item">
-                  <div class="contact-item-icon" aria-hidden="true">
-                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-                      <path
-                        d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
-                    </svg>
-                  </div>
-                  @paveliskrinsky
-                </a>
-                <div class="contact-item">
-                  <div class="contact-item-icon" aria-hidden="true">📍</div>
-                  Новосибирск &middot; Удалённо
-                </div>
+            <p>Ищу удалённую позицию фронтенд-разработчика или&nbsp;верстальщика. Рассматриваю полную занятость, частичную
+              или&nbsp;проектную работу&nbsp;&mdash; главное, чтобы задачи были интересными.</p>
+            <div class="contact-links">
+              <a href="mailto:paveliskrinsky@ya.ru" class="contact-item">
+                <span class="contact-item-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M22 7l-10 6L2 7" /></svg>
+                </span>
+                paveliskrinsky@ya.ru
+              </a>
+              <a href="https://t.me/paveliskrinsky" target="_blank" rel="noopener" class="contact-item">
+                <span class="contact-item-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" /></svg>
+                </span>
+                @paveliskrinsky
+              </a>
+              <a href="https://github.com/paveliskrinsky" target="_blank" rel="noopener" class="contact-item">
+                <span class="contact-item-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" /></svg>
+                </span>
+                github.com/paveliskrinsky
+              </a>
+              <a href="https://novosibirsk.hh.ru/resume/5fbd71fcff112b6d4a0039ed1f4979586a6947" target="_blank" rel="noopener" class="contact-item">
+                <span class="contact-item-icon contact-item-icon--text" aria-hidden="true">hh</span>
+                Резюме на&nbsp;hh.ru
+              </a>
+              <div class="contact-item">
+                <span class="contact-item-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
+                </span>
+                Новосибирск &middot; Удалённо
               </div>
             </div>
           </div>
-          <form class="reveal" id="contact-form" action="https://formspree.io/f/mqparwza" method="POST">
+
+          <form id="contact-form" action="https://formspree.io/f/mqparwza" method="POST">
             <div class="form-row">
               <div>
                 <label for="name">Имя</label>
@@ -1220,7 +1988,7 @@
               </div>
               <div>
                 <label for="email">E-mail</label>
-                <input id="email" type="email" name="email" placeholder="Ваш e-mail" autocomplete="email" required />
+                <input id="email" type="email" name="email" placeholder="you@example.com" autocomplete="email" required />
               </div>
             </div>
             <div>
@@ -1231,7 +1999,10 @@
               <label for="message">Сообщение</label>
               <textarea id="message" name="message" placeholder="Расскажите о проекте или вакансии" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary form-submit">Отправить</button>
+            <button type="submit" class="btn btn-primary form-submit">
+              Отправить
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" /></svg>
+            </button>
           </form>
         </div>
       </div>
@@ -1239,9 +2010,12 @@
   </main>
 
   <footer>
-    <p>
-      Павел Искринский &middot; Фронтенд-разработчик &middot; Новосибирск &copy; 2026
-    </p>
+    <div class="container">
+      <div class="footer-inner">
+        <p>Павел Искринский &middot; Фронтенд-разработчик &middot; Новосибирск &copy; 2026</p>
+        <a href="#hero">Наверх &uarr;</a>
+      </div>
+    </div>
   </footer>
 
   <script>
@@ -1269,6 +2043,14 @@
 
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    document.addEventListener('pointermove', (e) => {
+      const card = e.target.closest('.spot');
+      if (!card) return;
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      card.style.setProperty('--my', `${e.clientY - r.top}px`);
     }, { passive: true });
 
     document.getElementById('contact-form').addEventListener('submit', function () {
