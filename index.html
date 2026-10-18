@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Павел Искринский — Фронтенд-разработчик</title>
   <meta name="description"
-    content="Фронтенд-разработчик с 14-летним опытом и AI-ускоренной разработкой: pixel-perfect вёрстка по макетам Figma, HTML, CSS, JavaScript, Astro, PageSpeed 90+. Корпоративные сайты, сервисы, интернет-магазины. Удалённо, Новосибирск." />
+    content="Фронтенд-разработчик с 14-летним опытом и AI-ускоренной разработкой: разработка быстрых сайтов и интерфейсов по макетам Figma на HTML, CSS, JavaScript и Astro, PageSpeed 90+. Корпоративные сайты, сервисы, интернет-магазины. Удалённо, Новосибирск." />
   <link rel="icon" href="favicon.ico" sizes="48x48" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -31,26 +31,34 @@
   </noscript>
   <!-- /Yandex.Metrika counter -->
 
+  <script>
+    try {
+      const t = localStorage.getItem('theme');
+      if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  </script>
+
   <style>
     :root {
-      --bg: #0f1117;
-      --bg-soft: #13161f;
-      --surface: rgba(255, 255, 255, .035);
-      --surface-strong: #171b26;
-      --border: rgba(255, 255, 255, .08);
-      --border-strong: rgba(255, 255, 255, .16);
-      --text: #eef0f6;
-      --muted: #9097ab;
-      --faint: #5d647a;
-      --accent: #8b7bff;
-      --accent2: #2fe0c0;
-      --accent3: #ff8a5c;
-      --accent-soft: rgba(139, 123, 255, .14);
-      --accent2-soft: rgba(47, 224, 192, .12);
-      --glow: rgba(139, 123, 255, .35);
-      --nav-bg: rgba(19, 22, 31, .72);
-      --grid-line: rgba(255, 255, 255, .045);
-      --shadow: 0 30px 60px -30px rgba(0, 0, 0, .6);
+      color-scheme: dark;
+      --bg: light-dark(#f6f6f9, #0f1117);
+      --bg-soft: light-dark(#eeeef4, #13161f);
+      --surface: light-dark(rgba(255, 255, 255, .75), rgba(255, 255, 255, .035));
+      --surface-strong: light-dark(#ffffff, #171b26);
+      --border: light-dark(rgba(20, 22, 40, .08), rgba(255, 255, 255, .08));
+      --border-strong: light-dark(rgba(20, 22, 40, .16), rgba(255, 255, 255, .16));
+      --text: light-dark(#14161f, #eef0f6);
+      --muted: light-dark(#5b6075, #9097ab);
+      --faint: light-dark(#9a9eb0, #5d647a);
+      --accent: light-dark(#5b4bf0, #8b7bff);
+      --accent2: light-dark(#0aa98d, #2fe0c0);
+      --accent3: light-dark(#f0642f, #ff8a5c);
+      --accent-soft: light-dark(rgba(91, 75, 240, .1), rgba(139, 123, 255, .14));
+      --accent2-soft: light-dark(rgba(10, 169, 141, .1), rgba(47, 224, 192, .12));
+      --glow: light-dark(rgba(91, 75, 240, .22), rgba(139, 123, 255, .35));
+      --nav-bg: light-dark(rgba(255, 255, 255, .72), rgba(19, 22, 31, .72));
+      --grid-line: light-dark(rgba(20, 22, 40, .05), rgba(255, 255, 255, .045));
+      --shadow: 0 30px 60px -30px light-dark(rgba(30, 30, 70, .25), rgba(0, 0, 0, .6));
       --on-accent: #ffffff;
       --radius: 24px;
       --radius-sm: 14px;
@@ -60,26 +68,13 @@
     }
 
     @media (prefers-color-scheme: light) {
-      :root {
-        --bg: #f6f6f9;
-        --bg-soft: #eeeef4;
-        --surface: rgba(255, 255, 255, .75);
-        --surface-strong: #ffffff;
-        --border: rgba(20, 22, 40, .08);
-        --border-strong: rgba(20, 22, 40, .16);
-        --text: #14161f;
-        --muted: #5b6075;
-        --faint: #9a9eb0;
-        --accent: #5b4bf0;
-        --accent2: #0aa98d;
-        --accent3: #f0642f;
-        --accent-soft: rgba(91, 75, 240, .1);
-        --accent2-soft: rgba(10, 169, 141, .1);
-        --glow: rgba(91, 75, 240, .22);
-        --nav-bg: rgba(255, 255, 255, .72);
-        --grid-line: rgba(20, 22, 40, .05);
-        --shadow: 0 30px 60px -30px rgba(30, 30, 70, .25);
+      :root:not([data-theme="dark"]) {
+        color-scheme: light;
       }
+    }
+
+    :root[data-theme="light"] {
+      color-scheme: light;
     }
 
     *,
@@ -93,6 +88,36 @@
     html {
       scroll-behavior: smooth;
       scroll-padding-top: 6rem;
+    }
+
+    @supports not selector(::-webkit-scrollbar) {
+      * {
+        scrollbar-width: thin;
+        scrollbar-color: color-mix(in srgb, var(--accent) 60%, var(--bg)) var(--bg);
+      }
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--accent), var(--accent2));
+      border: 2px solid var(--bg);
+      border-radius: 999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 80%, var(--text)), color-mix(in srgb, var(--accent2) 80%, var(--text)));
+    }
+
+    ::-webkit-scrollbar-corner {
+      background: var(--bg);
     }
 
     body {
@@ -156,7 +181,7 @@
       left: 50%;
       transform: translateX(-50%);
       z-index: 100;
-      width: min(calc(100% - 2rem), 980px);
+      width: min(calc(100% - 3rem), 1060px);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -225,6 +250,59 @@
     .nav-cta {
       padding: .6rem 1.15rem;
       font-size: .85rem;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      flex-shrink: 0;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: border-color .2s, background .2s, color .2s;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--border-strong);
+      color: var(--accent);
+    }
+
+    .theme-toggle svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .theme-toggle .i-moon {
+      display: none;
+    }
+
+    :root[data-theme="light"] .theme-toggle .i-sun {
+      display: none;
+    }
+
+    :root[data-theme="light"] .theme-toggle .i-moon {
+      display: block;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme="dark"]) .theme-toggle .i-sun {
+        display: none;
+      }
+
+      :root:not([data-theme="dark"]) .theme-toggle .i-moon {
+        display: block;
+      }
     }
 
     .nav-burger {
@@ -596,7 +674,7 @@
     }
 
     section {
-      padding: 6.5rem 0;
+      padding: 3.2rem 0;
       position: relative;
     }
 
@@ -936,9 +1014,13 @@
       display: grid;
       grid-template-columns: 1.15fr 1fr;
       gap: 2.5rem;
-      align-items: center;
+      align-items: start;
       padding: 1.25rem;
-      overflow: hidden;
+      overflow: clip;
+    }
+
+    .project--flip {
+      grid-template-columns: 1fr 1.15fr;
     }
 
     .project--flip .project-media {
@@ -946,7 +1028,8 @@
     }
 
     .project-media {
-      position: relative;
+      position: sticky;
+      top: 6rem;
       display: block;
       border-radius: 18px;
       overflow: hidden;
@@ -1094,8 +1177,9 @@
     .metric {
       display: flex;
       flex-direction: column;
-      min-width: 6.5rem;
-      padding: .6rem .9rem;
+      flex: 1 1 0;
+      min-width: 0;
+      padding: .6rem .8rem;
       border: 1px solid var(--border);
       border-radius: 14px;
     }
@@ -1117,6 +1201,17 @@
       flex-basis: 100%;
       font-size: .74rem;
       color: var(--muted);
+    }
+
+    .metric-note a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      transition: color .2s;
+    }
+
+    .metric-note a:hover {
+      color: var(--text);
     }
 
     .ai-steps {
@@ -1200,8 +1295,14 @@
       display: grid;
       grid-template-columns: 1fr 1.2fr;
       gap: 3rem;
+      align-items: start;
       padding: 3rem;
-      overflow: hidden;
+      overflow: clip;
+    }
+
+    #contact-form {
+      position: sticky;
+      top: 6rem;
     }
 
     .contact-card::after {
@@ -1347,6 +1448,10 @@
       padding-top: 2rem;
     }
 
+    .footer-inner a {
+      transition: color .2s;
+    }
+
     .footer-inner a:hover {
       color: var(--text);
     }
@@ -1409,6 +1514,15 @@
         order: 0;
       }
 
+      .project-media {
+        position: relative;
+        top: auto;
+      }
+
+      #contact-form {
+        position: static;
+      }
+
       .project-body,
       .project--flip .project-body {
         padding: .5rem .75rem .75rem;
@@ -1464,7 +1578,7 @@
       }
 
       section {
-        padding: 4.5rem 0;
+        padding: 2.4rem 0;
       }
 
       .hero-visual {
@@ -1506,13 +1620,18 @@
       }
     }
 
+    @media (max-width: 480px) {
+      .metric {
+        flex-basis: calc(50% - .3rem);
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
 
       *,
       *::before,
       *::after {
         animation: none !important;
-        transition: none !important;
       }
 
       html {
@@ -1522,6 +1641,7 @@
       .reveal {
         opacity: 1;
         transform: none;
+        transition: translate .4s var(--ease), border-color .3s var(--ease), box-shadow .4s var(--ease);
       }
     }
   </style>
@@ -1547,10 +1667,16 @@
       <li><a href="#reviews">Отзывы</a></li>
       <li><a href="#contact">Контакты</a></li>
     </ul>
-    <a href="#contact" class="btn btn-primary nav-cta">Связаться</a>
-    <button class="nav-burger" id="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="nav-links">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Переключить тему">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" /></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg>
+      </button>
+      <a href="#contact" class="btn btn-primary nav-cta">Связаться</a>
+      <button class="nav-burger" id="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 
   <main>
@@ -1568,7 +1694,7 @@
               Быстрые сайты по&nbsp;Figma&nbsp;&mdash; с&nbsp;<span class="gradient-text">AI&#8209;ускоренной</span> разработкой
             </h1>
             <p class="hero-sub">
-              Привет, я&nbsp;Павел&nbsp;&mdash; фронтенд-разработчик с&nbsp;14-летним опытом. Pixel-perfect вёрстка, чистый код и&nbsp;PageSpeed 90+.
+              Привет, я&nbsp;Павел&nbsp;&mdash; фронтенд-разработчик с&nbsp;14-летним опытом. Разрабатываю быстрые сайты и&nbsp;интерфейсы: точно по&nbsp;макету, с&nbsp;чистым кодом и&nbsp;PageSpeed 90+.
               Работаю в&nbsp;связке с&nbsp;AI-ассистентами: рутину, рефакторинг и&nbsp;тесты закрываю быстрее, а&nbsp;качество и&nbsp;архитектуру контролирую сам.
             </p>
             <div class="hero-cta">
@@ -1636,7 +1762,7 @@
         <div class="section-head reveal">
           <div>
             <p class="section-tag">Обо мне</p>
-            <h2 class="section-title">Вёрстка, готовая<br><span class="gradient-text">к&nbsp;продакшену</span></h2>
+            <h2 class="section-title">Фронтенд, готовый<br><span class="gradient-text">к&nbsp;продакшену</span></h2>
           </div>
           <p class="section-desc">От&nbsp;первых заказов на&nbsp;фрилансе до&nbsp;поддержки десятка клиентских сайтов в&nbsp;студии.</p>
         </div>
@@ -1645,12 +1771,12 @@
           <div class="bento-text card spot reveal">
             <p>
               Начинал ещё студентом: с&nbsp;2012 года брал заказы на&nbsp;freelance.ru. После университета, в&nbsp;2016-м, пришёл в&nbsp;штат
-              <strong>Nisanov Corp</strong>&nbsp;&mdash; четыре года верстал интернет-магазины на&nbsp;OpenCart и&nbsp;доводил их
+              <strong>Nisanov Corp</strong>&nbsp;&mdash; четыре года разрабатывал фронтенд интернет-магазинов на&nbsp;OpenCart и&nbsp;доводил их
               до&nbsp;<strong>90&ndash;95 баллов Google PageSpeed</strong>. Затем три года работал на&nbsp;фрилансе и&nbsp;аутсорсе: лендинги,
               интернет-магазины, e-mail-рассылки, проекты для&nbsp;агентств и&nbsp;постоянные клиенты по&nbsp;рекомендациям.
             </p>
             <p>
-              Сейчас в&nbsp;<strong>No Logo Studio</strong> верстаю по&nbsp;макетам Figma на&nbsp;Gulp, SCSS и&nbsp;ванильном JS и&nbsp;веду
+              Сейчас в&nbsp;<strong>No Logo Studio</strong> разрабатываю фронтенд сайтов по&nbsp;макетам Figma на&nbsp;Gulp, SCSS и&nbsp;ванильном JS и&nbsp;веду
               10+ клиентских сайтов на&nbsp;Битрикс и&nbsp;Laravel. Главное, чем горжусь,&nbsp;&mdash; чистый и&nbsp;лёгкий код, который
               бэкендеры легко интегрируют.
             </p>
@@ -1714,7 +1840,7 @@
               <p class="timeline-intro">Студия разрабатывает сайты для&nbsp;клиентов, в&nbsp;том числе крупных: от&nbsp;лендингов
                 до&nbsp;интернет-магазинов. Бэкенд на&nbsp;1С-Битрикс и&nbsp;Laravel.</p>
               <ul>
-                <li>Верстаю по&nbsp;макетам Figma: Gulp, SCSS (BEM), ванильный JavaScript (ES6+)</li>
+                <li>Разрабатываю интерфейсы сайтов по&nbsp;макетам Figma: Gulp, SCSS (BEM), ванильный JavaScript (ES6+)</li>
                 <li>Веду и&nbsp;развиваю 10+ действующих проектов: правки, обновления, новые разделы</li>
                 <li>Пишу чистый и&nbsp;лёгкий код, который бэкенд-разработчикам удобно интегрировать в&nbsp;Битрикс и&nbsp;Laravel</li>
                 <li>Ускоряю разработку с&nbsp;AI-ассистентами (Claude Code): рефакторинг, тесты, рутинные правки&nbsp;&mdash; с&nbsp;обязательным ревью результата</li>
@@ -1737,7 +1863,7 @@
                 <li>Проекты для&nbsp;агентств и&nbsp;студий Alente, CASTCOM, АртАльт, DokinLab, MilloriDS&nbsp;&mdash; в&nbsp;том числе портал водоканала Кемерово
                   <a href="https://kemvod.ru" target="_blank" rel="noopener" class="link-accent">kemvod.ru</a> (АртАльт)
                 </li>
-                <li>Вёрстка на&nbsp;Tilda для&nbsp;аутсорс-проектов: Zero Block и&nbsp;кастомные блоки с&nbsp;собственным HTML/CSS/JS</li>
+                <li>Сайты на&nbsp;Tilda для&nbsp;аутсорс-проектов: Zero Block и&nbsp;кастомные блоки с&nbsp;собственным HTML/CSS/JS</li>
                 <li>HTML-письма под&nbsp;основные почтовые клиенты, Tailwind CSS&nbsp;&mdash; по&nbsp;запросу заказчика</li>
               </ul>
             </div>
@@ -1753,11 +1879,11 @@
               <div class="timeline-role">Фронтенд-разработчик</div>
               <p class="timeline-intro">Компания разрабатывает интернет-магазины на&nbsp;OpenCart.</p>
               <ul>
-                <li>Адаптивная вёрстка интернет-магазинов по&nbsp;макетам Photoshop: каталоги, карточки товаров, корзина, оформление заказа</li>
+                <li>Адаптивный фронтенд интернет-магазинов по&nbsp;макетам Photoshop: каталоги, карточки товаров, корзина, оформление заказа</li>
                 <li>Интерактив на&nbsp;jQuery, сетка и&nbsp;компоненты на&nbsp;Bootstrap</li>
-                <li>Вёрстка, готовая к&nbsp;натяжке на&nbsp;OpenCart: чистая структура и&nbsp;предсказуемые классы</li>
+                <li>Шаблоны, готовые к&nbsp;интеграции с&nbsp;OpenCart: чистая структура и&nbsp;предсказуемые классы</li>
                 <li>Оптимизация скорости загрузки до&nbsp;90&ndash;95 баллов Google PageSpeed</li>
-                <li>Полный цикл в&nbsp;паре с&nbsp;бэкендом: макет &rarr; вёрстка &rarr; интеграция &rarr; запуск, задачи в&nbsp;Jira</li>
+                <li>Полный цикл в&nbsp;паре с&nbsp;бэкендом: макет &rarr; фронтенд &rarr; интеграция &rarr; запуск, задачи в&nbsp;Jira</li>
               </ul>
             </div>
           </div>
@@ -1768,13 +1894,13 @@
               3 года 3 мес.
             </div>
             <div class="timeline-body">
-              <h3 class="timeline-company">Фриланс&nbsp;&mdash; freelance.ru</h3>
+              <h3 class="timeline-company">Фриланс / freelance.ru <span class="location">&mdash; удалённо</span></h3>
               <div class="timeline-role">Веб-разработчик</div>
               <ul>
-                <li>Вёрстка и&nbsp;доработка сайтов для&nbsp;заказчиков&nbsp;&mdash; первый коммерческий опыт и
+                <li>Разработка и&nbsp;доработка сайтов для&nbsp;заказчиков&nbsp;&mdash; первый коммерческий опыт и
                   <a href="https://freelance.ru/reviews/paveliskrinsky/" target="_blank" rel="noopener" class="link-accent">отзывы клиентов</a>
                 </li>
-                <li>Интегрировал вёрстку на&nbsp;Joomla и&nbsp;WordPress</li>
+                <li>Собирал сайты на&nbsp;Joomla и&nbsp;WordPress</li>
                 <li>Брал заказы на&nbsp;freelance.ru параллельно с&nbsp;учёбой в&nbsp;университете</li>
               </ul>
             </div>
@@ -1895,7 +2021,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" /></svg>
             </div>
             <h3>CMS и&nbsp;конструкторы</h3>
-            <p>Вёрстка под&nbsp;натяжку на&nbsp;CMS и&nbsp;доработка сайтов в&nbsp;конструкторах.</p>
+            <p>Фронтенд под&nbsp;интеграцию с&nbsp;CMS и&nbsp;доработка сайтов в&nbsp;конструкторах.</p>
             <div class="tags">
               <span class="tag">1С-Битрикс</span>
               <span class="tag">OpenCart</span>
@@ -1941,8 +2067,7 @@
             <div class="ai-step card spot">
               <span class="ai-step-num">04</span>
               <h3>Автоматизация</h3>
-              <p>Повторяющееся выношу в&nbsp;скрипты. Пример&nbsp;&mdash;
-                <a href="https://github.com/paveliskrinsky/paveliskrinsky.github.io/tree/main/tools" target="_blank" rel="noopener" class="link-accent">инструменты этого сайта</a>.</p>
+              <p>Повторяющееся выношу в&nbsp;скрипты.</p>
             </div>
           </div>
         </div>
@@ -1956,7 +2081,7 @@
             <p class="section-tag">Мои работы</p>
             <h2 class="section-title">Избранные проекты</h2>
           </div>
-          <p class="section-desc">Реальные сайты, которые я&nbsp;разработал или&nbsp;активно развивал&nbsp;&mdash; от&nbsp;макета до&nbsp;запуска.</p>
+          <p class="section-desc">Живые сайты: клиентские проекты и&nbsp;мои личные проекты, сделанные в&nbsp;связке с&nbsp;AI.</p>
         </div>
 
         <div class="projects">
@@ -1989,10 +2114,10 @@
                 <li>Адаптивные изображения AVIF/WebP, микроразметка Schema.org</li>
               </ul>
               <div class="project-metrics">
-                <div class="metric"><span class="metric-num">99</span><span class="metric-label">Скорость, мобильные</span></div>
-                <div class="metric"><span class="metric-num">97</span><span class="metric-label">Скорость, десктоп</span></div>
+                <div class="metric"><span class="metric-num">98</span><span class="metric-label">Скорость, мобильные</span></div>
+                <div class="metric"><span class="metric-num">99</span><span class="metric-label">Скорость, десктоп</span></div>
                 <div class="metric"><span class="metric-num">100</span><span class="metric-label">Доступность, десктоп</span></div>
-                <span class="metric-note">Lighthouse, октябрь 2026</span>
+                <span class="metric-note"><a href="https://pagespeed.web.dev/analysis/https-test-zelzoo-ru/0hz5fwgkko" target="_blank" rel="noopener">Отчёт PageSpeed Insights</a>, октябрь 2026</span>
               </div>
               <div class="tags">
                 <span class="tag">Astro</span>
@@ -2029,21 +2154,22 @@
               <div class="project-type">Личный проект &middot; сервис авто-калькуляторов &middot; 2026</div>
               <p class="project-desc">
                 Онлайн-калькуляторы для&nbsp;автовладельцев: сколько стоит растаможить машину, какой утильсбор заплатить и&nbsp;во&nbsp;что обойдётся поездка.
-                Расчёты по&nbsp;действующим ставкам и&nbsp;курсу ЦБ на&nbsp;сегодня.
+                Ставки&nbsp;&mdash; из&nbsp;постановлений Правительства, решений ЕЭК и&nbsp;Налогового кодекса, курс&nbsp;&mdash; ЦБ на&nbsp;сегодня.
               </p>
               <ul class="project-points">
                 <li><strong>4 калькулятора</strong>: растаможка, утильсбор, расход топлива, смесь масла и&nbsp;бензина</li>
+                <li>Растаможка из&nbsp;<strong>11 стран</strong>, включая ЕАЭС, и&nbsp;8 разборов утильсбора: электромобили, гибриды, юрлица</li>
                 <li>Актуальные курсы валют ЦБ и&nbsp;цены на&nbsp;топливо прямо на&nbsp;главной</li>
                 <li><strong>Bento-интерфейс</strong> с&nbsp;живыми примерами расчётов, светлая и&nbsp;тёмная тема</li>
                 <li>Форма заявки, SEO-разметка и&nbsp;быстрая статическая сборка</li>
                 <li>Развиваю сам, от&nbsp;идеи до&nbsp;продакшена</li>
               </ul>
               <div class="project-metrics">
-                <div class="metric"><span class="metric-num">99</span><span class="metric-label">Скорость, мобильные</span></div>
+                <div class="metric"><span class="metric-num">98</span><span class="metric-label">Скорость, мобильные</span></div>
                 <div class="metric"><span class="metric-num">100</span><span class="metric-label">Скорость, десктоп</span></div>
-                <div class="metric"><span class="metric-num">100</span><span class="metric-label">Доступность</span></div>
+                <div class="metric"><span class="metric-num">96</span><span class="metric-label">Доступность</span></div>
                 <div class="metric"><span class="metric-num">100</span><span class="metric-label">SEO</span></div>
-                <span class="metric-note">PageSpeed Insights, октябрь 2026</span>
+                <span class="metric-note"><a href="https://pagespeed.web.dev/analysis/https-vvezi-ru/rj1v1r7g3v" target="_blank" rel="noopener">Отчёт PageSpeed Insights</a>, октябрь 2026</span>
               </div>
               <div class="tags">
                 <span class="tag">Astro</span>
@@ -2055,6 +2181,106 @@
                 <a class="btn btn-ghost project-link" href="https://vvezi.ru" target="_blank" rel="noopener">
                   Открыть сайт
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9" /></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project card reveal" style="--p-glow: #14b8a6">
+            <a class="project-media" href="https://kodrazbor.ru" target="_blank" rel="noopener" aria-label="Открыть сайт КодРазбор">
+              <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">kodrazbor.ru</span></div>
+              <div class="project-shot">
+                <picture>
+                  <source srcset="img/projects/kodrazbor-640.avif 640w, img/projects/kodrazbor-1200.avif 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/avif" />
+                  <source srcset="img/projects/kodrazbor-640.webp 640w, img/projects/kodrazbor-1200.webp 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/webp" />
+                  <img src="img/projects/kodrazbor-1200.jpg" srcset="img/projects/kodrazbor-640.jpg 640w, img/projects/kodrazbor-1200.jpg 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" alt="Главная страница справочника кодов ошибок газовых котлов КодРазбор" width="1200" height="640" loading="lazy" decoding="async" />
+                </picture>
+              </div>
+            </a>
+            <div class="project-body">
+              <div class="project-top">
+                <span class="project-num">03</span>
+                <span class="project-status">Работает</span>
+              </div>
+              <h3>КодРазбор</h3>
+              <div class="project-type">Личный проект &middot; AI-разработка &middot; справочник &middot; 2026</div>
+              <p class="project-desc">
+                Справочник кодов ошибок газовых котлов: что значит код на&nbsp;дисплее, что проверить самому и&nbsp;когда звать мастера.
+                Расшифровки&nbsp;&mdash; по&nbsp;инструкциям производителей с&nbsp;учётом серии котла.
+              </p>
+              <ul class="project-points">
+                <li><strong>465 кодов</strong>, 10 брендов, 63 серии котлов: Baxi, Navien, Protherm, Ariston и&nbsp;другие</li>
+                <li>Поиск по&nbsp;коду прямо на&nbsp;главной</li>
+                <li>Пометки у&nbsp;каждого кода: «можно самому», «мастер» или «опасно»</li>
+                <li>Микроразметка Schema.org, светлая и&nbsp;тёмная тема</li>
+                <li>Сделан в&nbsp;связке с&nbsp;AI (Claude Code): <strong>идея, постановка задач, ревью и&nbsp;запуск&nbsp;&mdash; мои</strong></li>
+              </ul>
+              <div class="project-metrics">
+                <div class="metric"><span class="metric-num">100</span><span class="metric-label">Скорость, мобильные</span></div>
+                <div class="metric"><span class="metric-num">100</span><span class="metric-label">Скорость, десктоп</span></div>
+                <div class="metric"><span class="metric-num">100</span><span class="metric-label">Доступность</span></div>
+                <div class="metric"><span class="metric-num">100</span><span class="metric-label">SEO</span></div>
+                <span class="metric-note"><a href="https://pagespeed.web.dev/analysis/https-kodrazbor-ru/6ejpzauez7" target="_blank" rel="noopener">Отчёт PageSpeed Insights</a>, октябрь 2026</span>
+              </div>
+              <div class="tags">
+                <span class="tag">Astro</span>
+                <span class="tag">AI-разработка</span>
+                <span class="tag">Schema.org</span>
+                <span class="tag">SEO</span>
+              </div>
+              <div class="project-foot">
+                <a class="btn btn-ghost project-link" href="https://kodrazbor.ru" target="_blank" rel="noopener">
+                  Открыть сайт
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project project--flip card reveal" style="--p-glow: #2563eb">
+            <a class="project-media" href="https://autoparam.ru" target="_blank" rel="noopener" aria-label="Открыть сайт АвтоПарам">
+              <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">autoparam.ru</span></div>
+              <div class="project-shot">
+                <picture>
+                  <source srcset="img/projects/autoparam-640.avif 640w, img/projects/autoparam-1200.avif 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/avif" />
+                  <source srcset="img/projects/autoparam-640.webp 640w, img/projects/autoparam-1200.webp 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/webp" />
+                  <img src="img/projects/autoparam-1200.jpg" srcset="img/projects/autoparam-640.jpg 640w, img/projects/autoparam-1200.jpg 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" alt="Главная страница справочника автовладельца АвтоПарам" width="1200" height="640" loading="lazy" decoding="async" />
+                </picture>
+              </div>
+            </a>
+            <div class="project-body">
+              <div class="project-top">
+                <span class="project-num">04</span>
+                <span class="project-status">Работает</span>
+              </div>
+              <h3>АвтоПарам</h3>
+              <div class="project-type">Личный проект &middot; AI-разработка &middot; справочник автовладельца &middot; 2026</div>
+              <p class="project-desc">
+                Справочник по&nbsp;обслуживанию китайских автомобилей: какое масло заливать, объёмы масла в&nbsp;двигателе и&nbsp;КПП,
+                размер шин и&nbsp;дворников под&nbsp;конкретный двигатель и&nbsp;год выпуска&nbsp;&mdash; со&nbsp;ссылкой на&nbsp;руководство.
+              </p>
+              <ul class="project-points">
+                <li><strong>7 марок, 25 моделей</strong>: Changan, Chery, Exeed, Geely, Haval, Omoda, Tenet</li>
+                <li>Главное&nbsp;&mdash; масло, объём и&nbsp;шины&nbsp;&mdash; сразу на&nbsp;карточке модели, поиск по&nbsp;названию</li>
+                <li>Данные из&nbsp;официальных руководств производителей</li>
+                <li>Лёгкая статическая сборка без&nbsp;внешних CSS и&nbsp;JS, микроразметка Schema.org</li>
+                <li>Сделан в&nbsp;связке с&nbsp;AI (Claude Code): <strong>идея, постановка задач, ревью и&nbsp;запуск&nbsp;&mdash; мои</strong></li>
+              </ul>
+              <div class="project-metrics">
+                <div class="metric"><span class="metric-num">92</span><span class="metric-label">Скорость, мобильные</span></div>
+                <div class="metric"><span class="metric-num">100</span><span class="metric-label">Скорость, десктоп</span></div>
+                <div class="metric"><span class="metric-num">100</span><span class="metric-label">Доступность</span></div>
+                <div class="metric"><span class="metric-num">100</span><span class="metric-label">SEO</span></div>
+                <span class="metric-note"><a href="https://pagespeed.web.dev/analysis/https-autoparam-ru/aualnn1767" target="_blank" rel="noopener">Отчёт PageSpeed Insights</a>, октябрь 2026</span>
+              </div>
+              <div class="tags">
+                <span class="tag">AI-разработка</span>
+                <span class="tag">Статический сайт</span>
+                <span class="tag">Schema.org</span>
+                <span class="tag">SEO</span>
+              </div>
+              <div class="project-foot">
+                <a class="btn btn-ghost project-link" href="https://autoparam.ru" target="_blank" rel="noopener">
+                  Открыть сайт
                 </a>
               </div>
             </div>
@@ -2073,7 +2299,7 @@
             </a>
             <div class="project-body">
               <div class="project-top">
-                <span class="project-num">03</span>
+                <span class="project-num">05</span>
                 <span class="project-status">Работает</span>
               </div>
               <h3>АО &laquo;КемВод&raquo;</h3>
@@ -2083,7 +2309,7 @@
                 и&nbsp;новости компании, которая 90&nbsp;лет обеспечивает город водой.
               </p>
               <ul class="project-points">
-                <li>Кроссбраузерная <strong>адаптивная вёрстка</strong> разделов портала по&nbsp;макетам агентства</li>
+                <li>Кроссбраузерный <strong>адаптивный фронтенд</strong> разделов портала по&nbsp;макетам агентства</li>
                 <li>Интерактивные блоки и&nbsp;анимации на&nbsp;JavaScript</li>
                 <li>Работа с&nbsp;чужой кодовой базой без&nbsp;поломок существующих страниц</li>
               </ul>
@@ -2112,7 +2338,7 @@
             <p class="section-tag">Отзывы</p>
             <h2 class="section-title">56 отзывов <span class="gradient-text">на&nbsp;freelance.ru</span></h2>
           </div>
-          <p class="section-desc">Заказчики отмечают сроки, качество вёрстки и&nbsp;то, что я&nbsp;всегда на&nbsp;связи.</p>
+          <p class="section-desc">Заказчики отмечают сроки, качество работы и&nbsp;то, что я&nbsp;всегда на&nbsp;связи.</p>
         </div>
 
         <div class="reviews">
@@ -2142,7 +2368,7 @@
           <div class="contact-info">
             <p class="section-tag">Связаться</p>
             <h2 class="section-title">Давайте<br><span class="gradient-text">работать вместе</span></h2>
-            <p>Ищу удалённую позицию фронтенд-разработчика или&nbsp;верстальщика. Рассматриваю полную занятость, частичную
+            <p>Ищу удалённую позицию фронтенд-разработчика или&nbsp;разработчика сайтов. Рассматриваю полную занятость, частичную
               или&nbsp;проектную работу&nbsp;&mdash; главное, чтобы задачи были интересными.</p>
             <div class="contact-links">
               <a href="mailto:paveliskrinsky@ya.ru" class="contact-item">
@@ -2167,12 +2393,6 @@
                 <span class="contact-item-icon contact-item-icon--text" aria-hidden="true">hh</span>
                 Резюме на&nbsp;hh.ru
               </a>
-              <div class="contact-item">
-                <span class="contact-item-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
-                </span>
-                Новосибирск &middot; Удалённо
-              </div>
             </div>
           </div>
 
@@ -2215,9 +2435,32 @@
   </footer>
 
   <script>
+    const root = document.documentElement;
     const nav = document.getElementById('nav');
     const burger = document.getElementById('burger');
     const navLinks = document.getElementById('nav-links');
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    const lightQuery = matchMedia('(prefers-color-scheme: light)');
+
+    function currentTheme() {
+      return root.dataset.theme || (lightQuery.matches ? 'light' : 'dark');
+    }
+
+    function syncTheme() {
+      const light = currentTheme() === 'light';
+      themeMeta.content = light ? '#f6f6f9' : '#0f1117';
+      themeToggle.setAttribute('aria-label', light ? 'Включить тёмную тему' : 'Включить светлую тему');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const next = currentTheme() === 'light' ? 'dark' : 'light';
+      root.dataset.theme = next;
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      syncTheme();
+    });
+    lightQuery.addEventListener('change', syncTheme);
+    syncTheme();
 
     function setMenuOpen(open) {
       navLinks.classList.toggle('open', open);
@@ -2226,7 +2469,16 @@
     }
 
     burger.addEventListener('click', () => setMenuOpen(!navLinks.classList.contains('open')));
-    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenuOpen(false)));
+    navLinks.addEventListener('click', (e) => {
+      if (e.target.closest('a')) setMenuOpen(false);
+    });
+
+    function syncNav() {
+      nav.classList.toggle('scrolled', scrollY > 60);
+    }
+
+    addEventListener('scroll', syncNav, { passive: true });
+    syncNav();
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -2237,10 +2489,6 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 60);
-    }, { passive: true });
-
     document.addEventListener('pointermove', (e) => {
       const card = e.target.closest('.spot');
       if (!card) return;
@@ -2249,8 +2497,8 @@
       card.style.setProperty('--my', `${e.clientY - r.top}px`);
     }, { passive: true });
 
-    document.getElementById('contact-form').addEventListener('submit', function () {
-      const btn = this.querySelector('button[type=submit]');
+    document.getElementById('contact-form').addEventListener('submit', (e) => {
+      const btn = e.currentTarget.querySelector('button[type=submit]');
       btn.textContent = 'Отправляю…';
       btn.disabled = true;
     });
