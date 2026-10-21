@@ -9,7 +9,7 @@ from images import SRC, PROJECT_WIDTHS, build
 
 SITES = {
     "kemvod": "https://kemvod.ru",
-    "zelzoo": "https://test.zelzoo.ru",
+    "zelzoo": "https://zelzoo.ru",
     "vvezi": "https://vvezi.ru",
     "autoparam": "https://autoparam.ru",
     "kodrazbor": "https://kodrazbor.ru",

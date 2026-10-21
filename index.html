@@ -1133,11 +1133,6 @@
       background: currentColor;
     }
 
-    .project-status--beta {
-      background: color-mix(in srgb, var(--accent3) 14%, transparent);
-      color: var(--accent3);
-    }
-
     .project-body h3 {
       font-size: clamp(1.35rem, 2.4vw, 1.75rem);
       font-weight: 700;
@@ -1166,53 +1161,6 @@
     .project-points strong {
       color: var(--text);
       font-weight: 700;
-    }
-
-    .project-metrics {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .6rem;
-      margin-bottom: 1.4rem;
-    }
-
-    .metric {
-      display: flex;
-      flex-direction: column;
-      flex: 1 1 0;
-      min-width: 0;
-      padding: .6rem .8rem;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-    }
-
-    .metric-num {
-      font-family: var(--font-head);
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--accent2);
-      line-height: 1.2;
-    }
-
-    .metric-label {
-      font-size: .74rem;
-      color: var(--muted);
-    }
-
-    .metric-note {
-      flex-basis: 100%;
-      font-size: .74rem;
-      color: var(--muted);
-    }
-
-    .metric-note a {
-      color: inherit;
-      text-decoration: underline;
-      text-underline-offset: 2px;
-      transition: color .2s;
-    }
-
-    .metric-note a:hover {
-      color: var(--text);
     }
 
     .ai-steps {
@@ -1618,12 +1566,6 @@
 
       .btn {
         white-space: normal;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .metric {
-        flex-basis: calc(50% - .3rem);
       }
     }
 
@@ -2087,7 +2029,7 @@
 
         <div class="projects">
           <article class="project card reveal" style="--p-glow: #f07c1e">
-            <a class="project-media" href="https://test.zelzoo.ru" target="_blank" rel="noopener" aria-label="Открыть сайт Зеленогорского зоопарка">
+            <a class="project-media" href="https://zelzoo.ru" target="_blank" rel="noopener" aria-label="Открыть сайт Зеленогорского зоопарка">
               <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">zelzoo.ru</span></div>
               <div class="project-shot">
                 <picture>
@@ -2100,7 +2042,7 @@
             <div class="project-body">
               <div class="project-top">
                 <span class="project-num">01</span>
-                <span class="project-status project-status--beta">Скоро запуск</span>
+                <span class="project-status">Работает</span>
               </div>
               <h3>Зеленогорский зоопарк</h3>
               <div class="project-type">Сайт муниципального учреждения &middot; 2026</div>
@@ -2114,12 +2056,6 @@
                 <li>Каталог животных, новости, экскурсии, гостевая книга и&nbsp;виджет оценки качества услуг Госуслуг</li>
                 <li>Адаптивные изображения AVIF/WebP, микроразметка Schema.org</li>
               </ul>
-              <div class="project-metrics">
-                <div class="metric"><span class="metric-num">98</span><span class="metric-label">Скорость, мобильные</span></div>
-                <div class="metric"><span class="metric-num">99</span><span class="metric-label">Скорость, десктоп</span></div>
-                <div class="metric"><span class="metric-num">100</span><span class="metric-label">Доступность, десктоп</span></div>
-                <span class="metric-note"><a href="https://pagespeed.web.dev/analysis/https-test-zelzoo-ru/0hz5fwgkko" target="_blank" rel="noopener">Отчёт PageSpeed Insights</a>, октябрь 2026</span>
-              </div>
               <div class="tags">
                 <span class="tag">Astro</span>
                 <span class="tag">SCSS</span>
@@ -2127,7 +2063,7 @@
                 <span class="tag">a11y</span>
               </div>
               <div class="project-foot">
-                <a class="btn btn-ghost project-link" href="https://test.zelzoo.ru" target="_blank" rel="noopener">
+                <a class="btn btn-ghost project-link" href="https://zelzoo.ru" target="_blank" rel="noopener">
                   Открыть сайт
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9" /></svg>
                 </a>
@@ -2165,13 +2101,6 @@
                 <li>Форма заявки, SEO-разметка и&nbsp;быстрая статическая сборка</li>
                 <li>Развиваю сам, от&nbsp;идеи до&nbsp;продакшена</li>
               </ul>
-              <div class="project-metrics">
-                <div class="metric"><span class="metric-num">98</span><span class="metric-label">Скорость, мобильные</span></div>
-                <div class="metric"><span class="metric-num">100</span><span class="metric-label">Скорость, десктоп</span></div>
-                <div class="metric"><span class="metric-num">96</span><span class="metric-label">Доступность</span></div>
-                <div class="metric"><span class="metric-num">100</span><span class="metric-label">SEO</span></div>
-                <span class="metric-note"><a href="https://pagespeed.web.dev/analysis/https-vvezi-ru/rj1v1r7g3v" target="_blank" rel="noopener">Отчёт PageSpeed Insights</a>, октябрь 2026</span>
-              </div>
               <div class="tags">
                 <span class="tag">Astro</span>
                 <span class="tag">TypeScript</span>
@@ -2216,13 +2145,6 @@
                 <li>Микроразметка Schema.org, светлая и&nbsp;тёмная тема</li>
                 <li>Сделан в&nbsp;связке с&nbsp;AI (Claude Code): <strong>идея, постановка задач, ревью и&nbsp;запуск&nbsp;&mdash; мои</strong></li>
               </ul>
-              <div class="project-metrics">
-                <div class="metric"><span class="metric-num">100</span><span class="metric-label">Скорость, мобильные</span></div>
-                <div class="metric"><span class="metric-num">100</span><span class="metric-label">Скорость, десктоп</span></div>
-                <div class="metric"><span class="metric-num">100</span><span class="metric-label">Доступность</span></div>
-                <div class="metric"><span class="metric-num">100</span><span class="metric-label">SEO</span></div>
-                <span class="metric-note"><a href="https://pagespeed.web.dev/analysis/https-kodrazbor-ru/6ejpzauez7" target="_blank" rel="noopener">Отчёт PageSpeed Insights</a>, октябрь 2026</span>
-              </div>
               <div class="tags">
                 <span class="tag">Astro</span>
                 <span class="tag">AI-разработка</span>
@@ -2266,13 +2188,6 @@
                 <li>Лёгкая статическая сборка без&nbsp;внешних CSS и&nbsp;JS, микроразметка Schema.org</li>
                 <li>Сделан в&nbsp;связке с&nbsp;AI (Claude Code): <strong>идея, постановка задач, ревью и&nbsp;запуск&nbsp;&mdash; мои</strong></li>
               </ul>
-              <div class="project-metrics">
-                <div class="metric"><span class="metric-num">92</span><span class="metric-label">Скорость, мобильные</span></div>
-                <div class="metric"><span class="metric-num">100</span><span class="metric-label">Скорость, десктоп</span></div>
-                <div class="metric"><span class="metric-num">100</span><span class="metric-label">Доступность</span></div>
-                <div class="metric"><span class="metric-num">100</span><span class="metric-label">SEO</span></div>
-                <span class="metric-note"><a href="https://pagespeed.web.dev/analysis/https-autoparam-ru/aualnn1767" target="_blank" rel="noopener">Отчёт PageSpeed Insights</a>, октябрь 2026</span>
-              </div>
               <div class="tags">
                 <span class="tag">AI-разработка</span>
                 <span class="tag">Статический сайт</span>
