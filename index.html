@@ -7,7 +7,38 @@
   <meta name="yandex-verification" content="9e1ea6bf9543cc54" />
   <title>Павел Искринский — Фронтенд-разработчик</title>
   <meta name="description"
-    content="Фронтенд-разработчик с 14-летним опытом и AI-ускоренной разработкой: разработка быстрых сайтов и интерфейсов по макетам Figma на HTML, CSS, JavaScript и Astro, PageSpeed 90+. Корпоративные сайты, сервисы, интернет-магазины. Удалённо, Новосибирск." />
+    content="Фронтенд-разработчик с 14-летним опытом: разработка быстрых сайтов и интерфейсов по макетам Figma на HTML, CSS, JavaScript и Astro, PageSpeed 90+. Корпоративные сайты, сервисы, интернет-магазины. Удалённо, Новосибирск." />
+  <link rel="canonical" href="https://paveliskrinsky.github.io/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ru_RU" />
+  <meta property="og:site_name" content="Павел Искринский" />
+  <meta property="og:url" content="https://paveliskrinsky.github.io/" />
+  <meta property="og:title" content="Павел Искринский — фронтенд-разработчик" />
+  <meta property="og:description" content="Быстрые сайты по макетам Figma на HTML, CSS, JavaScript и Astro. 14 лет опыта, живые проекты и отзывы заказчиков." />
+  <meta property="og:image" content="https://paveliskrinsky.github.io/img/og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Павел Искринский — фронтенд-разработчик" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Павел Искринский",
+      "jobTitle": "Фронтенд-разработчик",
+      "url": "https://paveliskrinsky.github.io/",
+      "image": "https://paveliskrinsky.github.io/img/avatar-800.jpg",
+      "email": "mailto:paveliskrinsky@ya.ru",
+      "address": { "@type": "PostalAddress", "addressLocality": "Новосибирск", "addressCountry": "RU" },
+      "knowsAbout": ["HTML", "CSS", "SCSS", "JavaScript", "Astro", "Figma", "1С-Битрикс"],
+      "sameAs": [
+        "https://github.com/paveliskrinsky",
+        "https://t.me/paveliskrinsky",
+        "https://career.habr.com/paveliskrinsky",
+        "https://novosibirsk.hh.ru/resume/5fbd71fcff112b6d4a0039ed1f4979586a6947"
+      ]
+    }
+  </script>
   <link rel="icon" href="favicon.ico" sizes="48x48" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -1015,9 +1046,13 @@
       display: grid;
       grid-template-columns: 1.15fr 1fr;
       gap: 2.5rem;
-      align-items: start;
+      align-items: stretch;
       padding: 1.25rem;
       overflow: clip;
+    }
+
+    .project:has(.more[open]) {
+      align-items: start;
     }
 
     .project--flip {
@@ -1037,6 +1072,8 @@
       background: var(--bg-soft);
       border: 1px solid var(--border);
       isolation: isolate;
+      display: flex;
+      flex-direction: column;
     }
 
     .project-media::before {
@@ -1080,7 +1117,13 @@
 
     .project-shot {
       overflow: hidden;
-      aspect-ratio: 15 / 8;
+      aspect-ratio: 4 / 3;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .project:has(.more[open]) .project-shot {
+      flex: none;
     }
 
     .project-shot img {
@@ -1163,31 +1206,76 @@
       font-weight: 700;
     }
 
-    .ai-steps {
+    .project-points:has(+ .more) {
+      margin-bottom: .6rem;
+    }
+
+    .more summary {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      min-height: 44px;
+      color: var(--accent);
+      font-size: .88rem;
+      font-weight: 700;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .more summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .more summary::after {
+      content: '';
+      width: .45rem;
+      height: .45rem;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      rotate: 45deg;
+      translate: 0 -.15rem;
+      transition: rotate .2s var(--ease), translate .2s var(--ease);
+    }
+
+    .more[open] summary::after {
+      rotate: 225deg;
+      translate: 0 .1rem;
+    }
+
+    .more[open] summary {
+      margin-bottom: .5rem;
+    }
+
+    .timeline-body .more {
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .work-steps {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 1rem;
       margin-top: 1rem;
     }
 
-    .ai-step {
+    .work-step {
       padding: 1.6rem;
     }
 
-    .ai-step-num {
+    .work-step-num {
       font-family: var(--font-head);
       font-size: .85rem;
       font-weight: 700;
       color: var(--accent);
     }
 
-    .ai-step h3 {
+    .work-step h3 {
       font-size: 1rem;
       font-weight: 600;
       margin: .5rem 0 .4rem;
     }
 
-    .ai-step p {
+    .work-step p {
       color: var(--muted);
       font-size: .88rem;
     }
@@ -1446,7 +1534,7 @@
       }
 
       .skills-grid,
-      .ai-steps {
+      .work-steps {
         grid-template-columns: repeat(2, 1fr);
       }
 
@@ -1545,7 +1633,7 @@
 
       .bento-side,
       .skills-grid,
-      .ai-steps,
+      .work-steps,
       .edu-list,
       .form-row {
         grid-template-columns: 1fr;
@@ -1603,11 +1691,11 @@
       <span>Павел Искринский</span>
     </a>
     <ul class="nav-links" id="nav-links">
+      <li><a href="#projects">Проекты</a></li>
+      <li><a href="#reviews">Отзывы</a></li>
       <li><a href="#about">Обо мне</a></li>
       <li><a href="#experience">Опыт</a></li>
       <li><a href="#skills">Навыки</a></li>
-      <li><a href="#projects">Проекты</a></li>
-      <li><a href="#reviews">Отзывы</a></li>
       <li><a href="#contact">Контакты</a></li>
     </ul>
     <div class="nav-actions">
@@ -1634,18 +1722,18 @@
               Открыт к&nbsp;удалённой работе &middot; Новосибирск
             </div>
             <h1>
-              Быстрые сайты по&nbsp;Figma&nbsp;&mdash; с&nbsp;<span class="gradient-text">AI&#8209;ускоренной</span> разработкой
+              Быстрые сайты <span class="gradient-text">от&nbsp;макета до&nbsp;продакшена</span>
             </h1>
             <p class="hero-sub">
-              Привет, я&nbsp;Павел&nbsp;&mdash; фронтенд-разработчик с&nbsp;14-летним опытом. Разрабатываю быстрые сайты и&nbsp;интерфейсы: точно по&nbsp;макету, с&nbsp;чистым кодом и&nbsp;PageSpeed 90+.
-              Работаю в&nbsp;связке с&nbsp;AI-ассистентами: рутину, рефакторинг и&nbsp;тесты закрываю быстрее, а&nbsp;качество и&nbsp;архитектуру контролирую сам.
+              Привет, я&nbsp;Павел&nbsp;&mdash; фронтенд-разработчик с&nbsp;14-летним опытом. Разрабатываю фронтенд по&nbsp;Figma на&nbsp;HTML, SCSS
+              и&nbsp;ванильном JS&nbsp;&mdash; с&nbsp;чистым кодом, который легко интегрировать.
             </p>
             <div class="hero-cta">
               <a href="#projects" class="btn btn-primary">
                 Смотреть работы
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
               </a>
-              <a href="#contact" class="btn btn-ghost">Написать мне</a>
+              <a href="https://t.me/paveliskrinsky" target="_blank" rel="noopener" class="btn btn-ghost">Написать в&nbsp;Telegram</a>
             </div>
           </div>
 
@@ -1663,12 +1751,12 @@
               </span>
               <span>Figma → код<small>pixel-perfect</small></span>
             </div>
-            <div class="chip chip-2" aria-hidden="true">
-              <span class="chip-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" /></svg>
+            <a class="chip chip-2" href="#projects">
+              <span class="chip-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5M2 12l10 5 10-5" /></svg>
               </span>
-              <span>PageSpeed 90+<small>быстрые сайты</small></span>
-            </div>
+              <span>6 живых проектов<small>смотреть &darr;</small></span>
+            </a>
           </div>
         </div>
 
@@ -1694,8 +1782,337 @@
 
       <div class="marquee" aria-hidden="true">
         <div class="marquee-track">
-          <span>HTML5</span><span>CSS3</span><span>SCSS</span><span>JavaScript ES6+</span><span>Astro</span><span>Figma</span><span>Claude Code</span><span>Gulp</span><span>Vite</span><span>BEM</span><span>Tailwind</span><span>1С-Битрикс</span><span>Laravel</span><span>Python</span><span>Git</span>
-          <span>HTML5</span><span>CSS3</span><span>SCSS</span><span>JavaScript ES6+</span><span>Astro</span><span>Figma</span><span>Claude Code</span><span>Gulp</span><span>Vite</span><span>BEM</span><span>Tailwind</span><span>1С-Битрикс</span><span>Laravel</span><span>Python</span><span>Git</span>
+          <span>HTML5</span><span>CSS3</span><span>SCSS</span><span>JavaScript ES6+</span><span>Astro</span><span>Figma</span><span>Gulp</span><span>Vite</span><span>BEM</span><span>Tailwind</span><span>1С-Битрикс</span><span>Laravel</span><span>Python</span><span>Git</span>
+          <span>HTML5</span><span>CSS3</span><span>SCSS</span><span>JavaScript ES6+</span><span>Astro</span><span>Figma</span><span>Gulp</span><span>Vite</span><span>BEM</span><span>Tailwind</span><span>1С-Битрикс</span><span>Laravel</span><span>Python</span><span>Git</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="section-tag">Мои работы</p>
+            <h2 class="section-title">Избранные проекты</h2>
+          </div>
+          <p class="section-desc">Живые сайты: клиентские проекты и&nbsp;мои личные проекты.</p>
+        </div>
+
+        <div class="projects">
+          <article class="project card reveal" style="--p-glow: #f07c1e">
+            <a class="project-media" href="https://zelzoo.ru" target="_blank" rel="noopener" aria-label="Открыть сайт Зеленогорского зоопарка">
+              <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">zelzoo.ru</span></div>
+              <div class="project-shot">
+                <picture>
+                  <source srcset="img/projects/zelzoo-640.avif 640w, img/projects/zelzoo-1200.avif 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/avif" />
+                  <source srcset="img/projects/zelzoo-640.webp 640w, img/projects/zelzoo-1200.webp 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/webp" />
+                  <img src="img/projects/zelzoo-1200.jpg" srcset="img/projects/zelzoo-640.jpg 640w, img/projects/zelzoo-1200.jpg 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" alt="Главная страница сайта Зеленогорского зоопарка" width="1200" height="1500" loading="lazy" decoding="async" />
+                </picture>
+              </div>
+            </a>
+            <div class="project-body">
+              <div class="project-top">
+                <span class="project-num">01</span>
+                <span class="project-status">Работает</span>
+              </div>
+              <h3>Зеленогорский зоопарк</h3>
+              <div class="project-type">Сайт муниципального учреждения &middot; 2026</div>
+              <p class="project-desc">
+                Новый сайт Природного зоологического парка Зеленогорска: 340 видов животных, от&nbsp;амурского тигра до&nbsp;кудрявого пеликана.
+                Посетитель с&nbsp;первого экрана видит, открыт ли&nbsp;зоопарк, сколько стоят билеты и&nbsp;как добраться.
+              </p>
+              <ul class="project-points">
+                <li><strong>Живой статус</strong> &laquo;открыто / закроемся в&nbsp;…&raquo; по&nbsp;летнему и&nbsp;зимнему расписанию</li>
+                <li><strong>Версия для&nbsp;слабовидящих</strong>: размер шрифта, цветовые схемы, интервалы, отключение картинок</li>
+                <li>Каталог животных, новости, экскурсии, гостевая книга и&nbsp;виджет оценки качества услуг Госуслуг</li>
+              </ul>
+              <details class="more">
+                <summary>Ещё 1 пункт</summary>
+                <ul class="project-points">
+                  <li>Адаптивные изображения AVIF/WebP, микроразметка Schema.org</li>
+                </ul>
+              </details>
+              <div class="tags">
+                <span class="tag">Astro</span>
+                <span class="tag">SCSS</span>
+                <span class="tag">Vanilla JS</span>
+                <span class="tag">a11y</span>
+              </div>
+              <div class="project-foot">
+                <a class="btn btn-ghost project-link" href="https://zelzoo.ru" target="_blank" rel="noopener">
+                  Открыть сайт
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9" /></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project project--flip card reveal" style="--p-glow: #c8f53a">
+            <a class="project-media" href="https://vvezi.ru" target="_blank" rel="noopener" aria-label="Открыть сайт Ввези.ru">
+              <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">vvezi.ru</span></div>
+              <div class="project-shot">
+                <picture>
+                  <source srcset="img/projects/vvezi-640.avif 640w, img/projects/vvezi-1200.avif 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/avif" />
+                  <source srcset="img/projects/vvezi-640.webp 640w, img/projects/vvezi-1200.webp 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/webp" />
+                  <img src="img/projects/vvezi-1200.jpg" srcset="img/projects/vvezi-640.jpg 640w, img/projects/vvezi-1200.jpg 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" alt="Главная страница сервиса Ввези.ru с калькуляторами растаможки и утильсбора" width="1200" height="1500" loading="lazy" decoding="async" />
+                </picture>
+              </div>
+            </a>
+            <div class="project-body">
+              <div class="project-top">
+                <span class="project-num">02</span>
+                <span class="project-status">Работает</span>
+              </div>
+              <h3>Ввези.ru</h3>
+              <div class="project-type">Личный проект &middot; сервис авто-калькуляторов &middot; 2026</div>
+              <p class="project-desc">
+                Онлайн-калькуляторы для&nbsp;автовладельцев: сколько стоит растаможить машину, какой утильсбор заплатить и&nbsp;во&nbsp;что обойдётся поездка.
+                Ставки&nbsp;&mdash; из&nbsp;постановлений Правительства, решений ЕЭК и&nbsp;Налогового кодекса, курс&nbsp;&mdash; ЦБ на&nbsp;сегодня.
+              </p>
+              <ul class="project-points">
+                <li><strong>4 калькулятора</strong>: растаможка, утильсбор, расход топлива, смесь масла и&nbsp;бензина</li>
+                <li>Растаможка из&nbsp;<strong>11 стран</strong>, включая ЕАЭС, и&nbsp;8 разборов утильсбора: электромобили, гибриды, юрлица</li>
+                <li>Актуальные курсы валют ЦБ и&nbsp;цены на&nbsp;топливо прямо на&nbsp;главной</li>
+              </ul>
+              <details class="more">
+                <summary>Ещё 3 пункта</summary>
+                <ul class="project-points">
+                  <li><strong>Bento-интерфейс</strong> с&nbsp;живыми примерами расчётов, светлая и&nbsp;тёмная тема</li>
+                  <li>Форма заявки, SEO-разметка и&nbsp;быстрая статическая сборка</li>
+                  <li>Развиваю сам, от&nbsp;идеи до&nbsp;продакшена</li>
+                </ul>
+              </details>
+              <div class="tags">
+                <span class="tag">Astro</span>
+                <span class="tag">TypeScript</span>
+                <span class="tag">CSS</span>
+                <span class="tag">SEO</span>
+              </div>
+              <div class="project-foot">
+                <a class="btn btn-ghost project-link" href="https://vvezi.ru" target="_blank" rel="noopener">
+                  Открыть сайт
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9" /></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project card reveal" style="--p-glow: #14b8a6">
+            <a class="project-media" href="https://kodrazbor.ru" target="_blank" rel="noopener" aria-label="Открыть сайт КодРазбор">
+              <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">kodrazbor.ru</span></div>
+              <div class="project-shot">
+                <picture>
+                  <source srcset="img/projects/kodrazbor-640.avif 640w, img/projects/kodrazbor-1200.avif 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/avif" />
+                  <source srcset="img/projects/kodrazbor-640.webp 640w, img/projects/kodrazbor-1200.webp 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/webp" />
+                  <img src="img/projects/kodrazbor-1200.jpg" srcset="img/projects/kodrazbor-640.jpg 640w, img/projects/kodrazbor-1200.jpg 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" alt="Главная страница справочника кодов ошибок газовых котлов КодРазбор" width="1200" height="1500" loading="lazy" decoding="async" />
+                </picture>
+              </div>
+            </a>
+            <div class="project-body">
+              <div class="project-top">
+                <span class="project-num">03</span>
+                <span class="project-status">Работает</span>
+              </div>
+              <h3>КодРазбор</h3>
+              <div class="project-type">Личный проект &middot; справочник &middot; 2026</div>
+              <p class="project-desc">
+                Справочник кодов ошибок газовых котлов: что значит код на&nbsp;дисплее, что проверить самому и&nbsp;когда звать мастера.
+                Расшифровки&nbsp;&mdash; по&nbsp;инструкциям производителей с&nbsp;учётом серии котла.
+              </p>
+              <ul class="project-points">
+                <li><strong>465 кодов</strong>, 10 брендов, 63 серии котлов: Baxi, Navien, Protherm, Ariston и&nbsp;другие</li>
+                <li>Поиск по&nbsp;коду прямо на&nbsp;главной</li>
+                <li>Пометки у&nbsp;каждого кода: «можно самому», «мастер» или «опасно»</li>
+              </ul>
+              <details class="more">
+                <summary>Ещё 2 пункта</summary>
+                <ul class="project-points">
+                  <li>Микроразметка Schema.org, светлая и&nbsp;тёмная тема</li>
+                  <li><strong>От&nbsp;идеи до&nbsp;запуска</strong>&nbsp;&mdash; мой проект</li>
+                </ul>
+              </details>
+              <div class="tags">
+                <span class="tag">Astro</span>
+                <span class="tag">Schema.org</span>
+                <span class="tag">SEO</span>
+              </div>
+              <div class="project-foot">
+                <a class="btn btn-ghost project-link" href="https://kodrazbor.ru" target="_blank" rel="noopener">
+                  Открыть сайт
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9" /></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project project--flip card reveal" style="--p-glow: #2563eb">
+            <a class="project-media" href="https://autoparam.ru" target="_blank" rel="noopener" aria-label="Открыть сайт АвтоПарам">
+              <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">autoparam.ru</span></div>
+              <div class="project-shot">
+                <picture>
+                  <source srcset="img/projects/autoparam-640.avif 640w, img/projects/autoparam-1200.avif 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/avif" />
+                  <source srcset="img/projects/autoparam-640.webp 640w, img/projects/autoparam-1200.webp 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/webp" />
+                  <img src="img/projects/autoparam-1200.jpg" srcset="img/projects/autoparam-640.jpg 640w, img/projects/autoparam-1200.jpg 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" alt="Главная страница справочника автовладельца АвтоПарам" width="1200" height="1500" loading="lazy" decoding="async" />
+                </picture>
+              </div>
+            </a>
+            <div class="project-body">
+              <div class="project-top">
+                <span class="project-num">04</span>
+                <span class="project-status">Работает</span>
+              </div>
+              <h3>АвтоПарам</h3>
+              <div class="project-type">Личный проект &middot; справочник автовладельца &middot; 2026</div>
+              <p class="project-desc">
+                Справочник по&nbsp;обслуживанию китайских автомобилей: какое масло заливать, объёмы масла в&nbsp;двигателе и&nbsp;КПП,
+                размер шин и&nbsp;дворников под&nbsp;конкретный двигатель и&nbsp;год выпуска&nbsp;&mdash; со&nbsp;ссылкой на&nbsp;руководство.
+              </p>
+              <ul class="project-points">
+                <li><strong>7 марок, 25 моделей</strong>: Changan, Chery, Exeed, Geely, Haval, Omoda, Tenet</li>
+                <li>Главное&nbsp;&mdash; масло, объём и&nbsp;шины&nbsp;&mdash; сразу на&nbsp;карточке модели, поиск по&nbsp;названию</li>
+                <li>Данные из&nbsp;официальных руководств производителей</li>
+              </ul>
+              <details class="more">
+                <summary>Ещё 2 пункта</summary>
+                <ul class="project-points">
+                  <li>Лёгкая статическая сборка без&nbsp;внешних CSS и&nbsp;JS, микроразметка Schema.org</li>
+                  <li><strong>От&nbsp;идеи до&nbsp;запуска</strong>&nbsp;&mdash; мой проект</li>
+                </ul>
+              </details>
+              <div class="tags">
+                <span class="tag">Статический сайт</span>
+                <span class="tag">Schema.org</span>
+                <span class="tag">SEO</span>
+              </div>
+              <div class="project-foot">
+                <a class="btn btn-ghost project-link" href="https://autoparam.ru" target="_blank" rel="noopener">
+                  Открыть сайт
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9" /></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project card reveal" style="--p-glow: #dc2626">
+            <a class="project-media" href="https://kombos.ru" target="_blank" rel="noopener" aria-label="Открыть сайт KOMBOS.RU">
+              <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">kombos.ru</span></div>
+              <div class="project-shot">
+                <picture>
+                  <source srcset="img/projects/kombos-640.avif 640w, img/projects/kombos-1200.avif 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/avif" />
+                  <source srcset="img/projects/kombos-640.webp 640w, img/projects/kombos-1200.webp 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/webp" />
+                  <img src="img/projects/kombos-1200.jpg" srcset="img/projects/kombos-640.jpg 640w, img/projects/kombos-1200.jpg 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" alt="Главная страница русского справочника по файтингам KOMBOS.RU" width="1200" height="1500" loading="lazy" decoding="async" />
+                </picture>
+              </div>
+            </a>
+            <div class="project-body">
+              <div class="project-top">
+                <span class="project-num">05</span>
+                <span class="project-status">Работает</span>
+              </div>
+              <h3>KOMBOS.RU</h3>
+              <div class="project-type">Личный проект &middot; справочник по&nbsp;файтингам &middot; 2026</div>
+              <p class="project-desc">
+                Русский справочник по&nbsp;Mortal Kombat: фаталити, бруталити, комбо и&nbsp;фреймдата.
+                Комбинации показаны кнопками нужного геймпада&nbsp;&mdash; платформу посетитель выбирает сам.
+              </p>
+              <ul class="project-points">
+                <li><strong>10&nbsp;763 приёма</strong>, 81 персонаж, 4 игры: Mortal Kombat 1, MK11, MKX и&nbsp;Ultimate MK3</li>
+                <li><strong>Переключатель платформы</strong>: PS, Xbox, Switch и&nbsp;ПК&nbsp;&mdash; кнопки в&nbsp;комбо меняются под&nbsp;выбранную</li>
+                <li>Разделы по&nbsp;добиваниям: фаталити, бруталити, анималити, бэйбалити, а&nbsp;также термины и&nbsp;коды</li>
+              </ul>
+              <details class="more">
+                <summary>Ещё 1 пункт</summary>
+                <ul class="project-points">
+                  <li>Статическая сборка, микроразметка Schema.org</li>
+                </ul>
+              </details>
+              <div class="tags">
+                <span class="tag">Astro</span>
+                <span class="tag">Статический сайт</span>
+                <span class="tag">Schema.org</span>
+                <span class="tag">SEO</span>
+              </div>
+              <div class="project-foot">
+                <a class="btn btn-ghost project-link" href="https://kombos.ru" target="_blank" rel="noopener">
+                  Открыть сайт
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9" /></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project project--flip card reveal" style="--p-glow: #3b82f6">
+            <a class="project-media" href="https://kemvod.ru" target="_blank" rel="noopener" aria-label="Открыть сайт АО «КемВод»">
+              <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">kemvod.ru</span></div>
+              <div class="project-shot">
+                <picture>
+                  <source srcset="img/projects/kemvod-640.avif 640w, img/projects/kemvod-1200.avif 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/avif" />
+                  <source srcset="img/projects/kemvod-640.webp 640w, img/projects/kemvod-1200.webp 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/webp" />
+                  <img src="img/projects/kemvod-1200.jpg" srcset="img/projects/kemvod-640.jpg 640w, img/projects/kemvod-1200.jpg 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" alt="Главная страница сайта АО «КемВод»" width="1200" height="1500" loading="lazy" decoding="async" />
+                </picture>
+              </div>
+            </a>
+            <div class="project-body">
+              <div class="project-top">
+                <span class="project-num">06</span>
+                <span class="project-status">Работает</span>
+              </div>
+              <h3>АО &laquo;КемВод&raquo;</h3>
+              <div class="project-type">Корпоративный портал &middot; АртАльт &middot; 2022</div>
+              <p class="project-desc">
+                Сервисный сайт водоканала Кемерово для&nbsp;горожан и&nbsp;организаций: услуги, информация для&nbsp;потребителей, вакансии
+                и&nbsp;новости компании, которая 90&nbsp;лет обеспечивает город водой.
+              </p>
+              <ul class="project-points">
+                <li>Кроссбраузерный <strong>адаптивный фронтенд</strong> разделов портала по&nbsp;макетам агентства</li>
+                <li>Интерактивные блоки и&nbsp;анимации на&nbsp;JavaScript</li>
+                <li>Работа с&nbsp;чужой кодовой базой без&nbsp;поломок существующих страниц</li>
+              </ul>
+              <div class="tags">
+                <span class="tag">HTML5</span>
+                <span class="tag">SCSS</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">Адаптив</span>
+              </div>
+              <div class="project-foot">
+                <a class="btn btn-ghost project-link" href="https://kemvod.ru" target="_blank" rel="noopener">
+                  Открыть сайт
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9" /></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="reviews">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="section-tag">Отзывы</p>
+            <h2 class="section-title">56 отзывов <span class="gradient-text">на&nbsp;freelance.ru</span></h2>
+          </div>
+          <p class="section-desc">Заказчики отмечают сроки, качество работы и&nbsp;то, что я&nbsp;всегда на&nbsp;связи.</p>
+        </div>
+
+        <div class="reviews">
+          <figure class="review card spot reveal">
+            <blockquote>&laquo;Внимательный, аккуратный, быстрый и&nbsp;высококвалифицированный. На&nbsp;все пожелания реагирует адекватно, даёт полезные рекомендации. Теперь сотрудничаю только с&nbsp;ним.&raquo;</blockquote>
+            <figcaption><strong>Дмитрий Ткаченко</strong>Вёрстка PSD для&nbsp;Joomla</figcaption>
+          </figure>
+          <figure class="review card spot reveal">
+            <blockquote>&laquo;Всегда был на&nbsp;связи, грамотно и&nbsp;быстро отвечал понятным мне языком. Сайт сделали в&nbsp;срок, всё чётко так, как и&nbsp;требовалось.&raquo;</blockquote>
+            <figcaption><strong>German Burmistrov</strong>Сайт под&nbsp;ключ</figcaption>
+          </figure>
+          <figure class="review card spot reveal">
+            <blockquote>&laquo;После нескольких неудачных попыток остановился на&nbsp;Павле. Заказчик я&nbsp;довольно требовательный, но&nbsp;всё было исполнено чётко в&nbsp;соответствии с&nbsp;требованиями.&raquo;</blockquote>
+            <figcaption><strong>Дмитрий Ткаченко</strong>Сайт по&nbsp;готовому дизайну</figcaption>
+          </figure>
+        </div>
+
+        <div class="reviews-more reveal">
+          <a class="btn btn-ghost" href="https://freelance.ru/reviews/paveliskrinsky/" target="_blank" rel="noopener">Все отзывы на&nbsp;freelance.ru</a>
         </div>
       </div>
     </section>
@@ -1724,12 +2141,11 @@
               бэкендеры легко интегрируют.
             </p>
             <p>
-              В&nbsp;работе опираюсь на&nbsp;<strong>AI-ассистентов (Claude Code)</strong>: рефакторинг, тесты, рутинные правки
-              и&nbsp;автоматизация. Например, оптимизацию картинок и&nbsp;скриншоты проектов для&nbsp;этого сайта делают Python-скрипты,
-              написанные вместе с&nbsp;AI. Каждое изменение проверяю сам&nbsp;&mdash; AI ускоряет, но&nbsp;не&nbsp;решает за&nbsp;меня.
+              Рутину <strong>автоматизирую</strong>: например, оптимизацию картинок и&nbsp;скриншоты проектов для&nbsp;этого сайта
+              делают Python-скрипты. Каждое изменение проверяю сам в&nbsp;браузере на&nbsp;разных экранах.
             </p>
             <p>
-              Хочу развиваться дальше&nbsp;&mdash; в&nbsp;React и&nbsp;Vue на&nbsp;коммерческих проектах. С&nbsp;AI новый стек осваивается заметно быстрее.
+              Хочу развиваться дальше&nbsp;&mdash; в&nbsp;React и&nbsp;Vue на&nbsp;коммерческих проектах.
             </p>
           </div>
 
@@ -1750,10 +2166,10 @@
             </div>
             <div class="bento-mini card spot reveal">
               <div class="icon-box icon-box--warm" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z" /><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z" /></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5M2 12l10 5 10-5" /></svg>
               </div>
-              <h3>AI-разработка</h3>
-              <p>Claude Code в&nbsp;ежедневной работе: быстрее релизы, ревью каждого изменения.</p>
+              <h3>4 личных проекта</h3>
+              <p>Справочники и&nbsp;сервис калькуляторов&nbsp;&mdash; от&nbsp;идеи до&nbsp;запуска.</p>
             </div>
           </div>
         </div>
@@ -1786,7 +2202,6 @@
                 <li>Разрабатываю интерфейсы сайтов по&nbsp;макетам Figma: Gulp, SCSS (BEM), ванильный JavaScript (ES6+)</li>
                 <li>Веду и&nbsp;развиваю 10+ действующих проектов: правки, обновления, новые разделы</li>
                 <li>Пишу чистый и&nbsp;лёгкий код, который бэкенд-разработчикам удобно интегрировать в&nbsp;Битрикс и&nbsp;Laravel</li>
-                <li>Ускоряю разработку с&nbsp;AI-ассистентами (Claude Code): рефакторинг, тесты, рутинные правки&nbsp;&mdash; с&nbsp;обязательным ревью результата</li>
                 <li>Работа в&nbsp;команде с&nbsp;дизайнером и&nbsp;бэкендом, задачи в&nbsp;Битрикс24</li>
               </ul>
             </div>
@@ -1803,12 +2218,17 @@
               <ul>
                 <li>Заказы с&nbsp;фриланс-бирж, долгосрочная работа с&nbsp;постоянными клиентами, новые проекты по&nbsp;рекомендациям</li>
                 <li>Лендинги, интернет-магазины и&nbsp;корпоративные сайты под&nbsp;ключ: от&nbsp;обсуждения задачи и&nbsp;оценки сроков до&nbsp;сдачи и&nbsp;правок</li>
-                <li>Проекты для&nbsp;агентств и&nbsp;студий Alente, CASTCOM, АртАльт, DokinLab, MilloriDS&nbsp;&mdash; в&nbsp;том числе портал водоканала Кемерово
-                  <a href="https://kemvod.ru" target="_blank" rel="noopener" class="link-accent">kemvod.ru</a> (АртАльт)
-                </li>
-                <li>Сайты на&nbsp;Tilda для&nbsp;аутсорс-проектов: Zero Block и&nbsp;кастомные блоки с&nbsp;собственным HTML/CSS/JS</li>
-                <li>HTML-письма под&nbsp;основные почтовые клиенты, Tailwind CSS&nbsp;&mdash; по&nbsp;запросу заказчика</li>
               </ul>
+              <details class="more">
+                <summary>Ещё 3 пункта</summary>
+                <ul>
+                  <li>Проекты для&nbsp;агентств и&nbsp;студий Alente, CASTCOM, АртАльт, DokinLab, MilloriDS&nbsp;&mdash; в&nbsp;том числе портал водоканала Кемерово
+                    <a href="https://kemvod.ru" target="_blank" rel="noopener" class="link-accent">kemvod.ru</a> (АртАльт)
+                  </li>
+                  <li>Сайты на&nbsp;Tilda для&nbsp;аутсорс-проектов: Zero Block и&nbsp;кастомные блоки с&nbsp;собственным HTML/CSS/JS</li>
+                  <li>HTML-письма под&nbsp;основные почтовые клиенты, Tailwind CSS&nbsp;&mdash; по&nbsp;запросу заказчика</li>
+                </ul>
+              </details>
             </div>
           </div>
 
@@ -1824,10 +2244,15 @@
               <ul>
                 <li>Адаптивный фронтенд интернет-магазинов по&nbsp;макетам Photoshop: каталоги, карточки товаров, корзина, оформление заказа</li>
                 <li>Интерактив на&nbsp;jQuery, сетка и&nbsp;компоненты на&nbsp;Bootstrap</li>
-                <li>Шаблоны, готовые к&nbsp;интеграции с&nbsp;OpenCart: чистая структура и&nbsp;предсказуемые классы</li>
-                <li>Оптимизация скорости загрузки до&nbsp;90&ndash;95 баллов Google PageSpeed</li>
-                <li>Полный цикл в&nbsp;паре с&nbsp;бэкендом: макет &rarr; фронтенд &rarr; интеграция &rarr; запуск, задачи в&nbsp;Jira</li>
               </ul>
+              <details class="more">
+                <summary>Ещё 3 пункта</summary>
+                <ul>
+                  <li>Шаблоны, готовые к&nbsp;интеграции с&nbsp;OpenCart: чистая структура и&nbsp;предсказуемые классы</li>
+                  <li>Оптимизация скорости загрузки до&nbsp;90&ndash;95 баллов Google PageSpeed</li>
+                  <li>Полный цикл в&nbsp;паре с&nbsp;бэкендом: макет &rarr; фронтенд &rarr; интеграция &rarr; запуск, задачи в&nbsp;Jira</li>
+                </ul>
+              </details>
             </div>
           </div>
 
@@ -1890,26 +2315,11 @@
 
         <div class="skills-grid">
           <div class="skill-card skill-card--wide card spot reveal">
-            <div class="icon-box icon-box--warm" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z" /><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z" /></svg>
-            </div>
-            <h3>AI-разработка</h3>
-            <p>Пишу код в&nbsp;связке с&nbsp;AI-ассистентами: ставлю задачу, ревьюю результат, отвечаю за&nbsp;качество. Рутину и&nbsp;повторяющиеся операции выношу в&nbsp;скрипты.</p>
-            <div class="tags">
-              <span class="tag">Claude Code</span>
-              <span class="tag">Рефакторинг с&nbsp;AI</span>
-              <span class="tag">Тесты с&nbsp;AI</span>
-              <span class="tag">Ревью AI-кода</span>
-              <span class="tag">Автоматизация на&nbsp;Python</span>
-            </div>
-          </div>
-
-          <div class="skill-card card spot reveal">
             <div class="icon-box" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6" /></svg>
             </div>
             <h3>Вёрстка</h3>
-            <p>Семантический HTML и&nbsp;масштабируемая CSS-архитектура.</p>
+            <p>Фронтенд по&nbsp;макетам Figma: семантический HTML, масштабируемая CSS-архитектура и&nbsp;адаптив под&nbsp;любые экраны. Код, который бэкенд-разработчикам легко интегрировать в&nbsp;Битрикс и&nbsp;Laravel.</p>
             <div class="tags">
               <span class="tag">HTML5</span>
               <span class="tag">CSS3</span>
@@ -1987,293 +2397,44 @@
               <span class="tag">Git</span>
             </div>
           </div>
+          <div class="skill-card card spot reveal">
+            <div class="icon-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-6-6" /><path d="M12 19h8" /></svg>
+            </div>
+            <h3>Автоматизация и&nbsp;качество</h3>
+            <p>Рутину и&nbsp;повторяющиеся операции выношу в&nbsp;скрипты, каждое изменение проверяю в&nbsp;браузере на&nbsp;разных экранах. Отвечаю за&nbsp;результат от&nbsp;макета до&nbsp;продакшена.</p>
+            <div class="tags">
+              <span class="tag">Автоматизация на&nbsp;Python</span>
+              <span class="tag">Оптимизация изображений</span>
+              <span class="tag">Lighthouse</span>
+            </div>
+          </div>
         </div>
 
         <div class="subhead reveal">
-          <p class="section-tag">Как я работаю с&nbsp;AI</p>
-          <div class="ai-steps">
-            <div class="ai-step card spot">
-              <span class="ai-step-num">01</span>
+          <p class="section-tag">Как я работаю</p>
+          <div class="work-steps">
+            <div class="work-step card spot">
+              <span class="work-step-num">01</span>
               <h3>Задача и&nbsp;контекст</h3>
-              <p>Разбираю макет и&nbsp;требования, формулирую задачу для&nbsp;ассистента с&nbsp;правилами проекта.</p>
+              <p>Разбираю макет и&nbsp;требования, уточняю детали до&nbsp;начала работы.</p>
             </div>
-            <div class="ai-step card spot">
-              <span class="ai-step-num">02</span>
-              <h3>Генерация и&nbsp;рутина</h3>
-              <p>AI берёт на&nbsp;себя шаблонный код, рефакторинг и&nbsp;повторяющиеся правки.</p>
+            <div class="work-step card spot">
+              <span class="work-step-num">02</span>
+              <h3>Разработка</h3>
+              <p>Собираю интерфейс по&nbsp;макету: семантика, адаптив, интерактив на&nbsp;ванильном JS.</p>
             </div>
-            <div class="ai-step card spot">
-              <span class="ai-step-num">03</span>
-              <h3>Ревью каждой строки</h3>
-              <p>Читаю диф, правлю, проверяю в&nbsp;браузере на&nbsp;разных экранах. В&nbsp;прод уходит только то, что я&nbsp;понимаю.</p>
+            <div class="work-step card spot">
+              <span class="work-step-num">03</span>
+              <h3>Проверка</h3>
+              <p>Проверяю в&nbsp;браузере на&nbsp;разных экранах. В&nbsp;прод уходит только то, что работает.</p>
             </div>
-            <div class="ai-step card spot">
-              <span class="ai-step-num">04</span>
+            <div class="work-step card spot">
+              <span class="work-step-num">04</span>
               <h3>Автоматизация</h3>
-              <p>Повторяющееся выношу в&nbsp;скрипты.</p>
+              <p>Повторяющееся выношу в&nbsp;скрипты: оптимизация картинок, скриншоты проектов, замеры Lighthouse.</p>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <p class="section-tag">Мои работы</p>
-            <h2 class="section-title">Избранные проекты</h2>
-          </div>
-          <p class="section-desc">Живые сайты: клиентские проекты и&nbsp;мои личные проекты, сделанные в&nbsp;связке с&nbsp;AI.</p>
-        </div>
-
-        <div class="projects">
-          <article class="project card reveal" style="--p-glow: #f07c1e">
-            <a class="project-media" href="https://zelzoo.ru" target="_blank" rel="noopener" aria-label="Открыть сайт Зеленогорского зоопарка">
-              <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">zelzoo.ru</span></div>
-              <div class="project-shot">
-                <picture>
-                  <source srcset="img/projects/zelzoo-640.avif 640w, img/projects/zelzoo-1200.avif 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/avif" />
-                  <source srcset="img/projects/zelzoo-640.webp 640w, img/projects/zelzoo-1200.webp 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/webp" />
-                  <img src="img/projects/zelzoo-1200.jpg" srcset="img/projects/zelzoo-640.jpg 640w, img/projects/zelzoo-1200.jpg 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" alt="Главная страница сайта Зеленогорского зоопарка" width="1200" height="640" loading="lazy" decoding="async" />
-                </picture>
-              </div>
-            </a>
-            <div class="project-body">
-              <div class="project-top">
-                <span class="project-num">01</span>
-                <span class="project-status">Работает</span>
-              </div>
-              <h3>Зеленогорский зоопарк</h3>
-              <div class="project-type">Сайт муниципального учреждения &middot; 2026</div>
-              <p class="project-desc">
-                Новый сайт Природного зоологического парка Зеленогорска: 340 видов животных, от&nbsp;амурского тигра до&nbsp;кудрявого пеликана.
-                Посетитель с&nbsp;первого экрана видит, открыт ли&nbsp;зоопарк, сколько стоят билеты и&nbsp;как добраться.
-              </p>
-              <ul class="project-points">
-                <li><strong>Живой статус</strong> &laquo;открыто / закроемся в&nbsp;…&raquo; по&nbsp;летнему и&nbsp;зимнему расписанию</li>
-                <li><strong>Версия для&nbsp;слабовидящих</strong>: размер шрифта, цветовые схемы, интервалы, отключение картинок</li>
-                <li>Каталог животных, новости, экскурсии, гостевая книга и&nbsp;виджет оценки качества услуг Госуслуг</li>
-                <li>Адаптивные изображения AVIF/WebP, микроразметка Schema.org</li>
-              </ul>
-              <div class="tags">
-                <span class="tag">Astro</span>
-                <span class="tag">SCSS</span>
-                <span class="tag">Vanilla JS</span>
-                <span class="tag">a11y</span>
-              </div>
-              <div class="project-foot">
-                <a class="btn btn-ghost project-link" href="https://zelzoo.ru" target="_blank" rel="noopener">
-                  Открыть сайт
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9" /></svg>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article class="project project--flip card reveal" style="--p-glow: #c8f53a">
-            <a class="project-media" href="https://vvezi.ru" target="_blank" rel="noopener" aria-label="Открыть сайт Ввези.ru">
-              <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">vvezi.ru</span></div>
-              <div class="project-shot">
-                <picture>
-                  <source srcset="img/projects/vvezi-640.avif 640w, img/projects/vvezi-1200.avif 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/avif" />
-                  <source srcset="img/projects/vvezi-640.webp 640w, img/projects/vvezi-1200.webp 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/webp" />
-                  <img src="img/projects/vvezi-1200.jpg" srcset="img/projects/vvezi-640.jpg 640w, img/projects/vvezi-1200.jpg 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" alt="Главная страница сервиса Ввези.ru с калькуляторами растаможки и утильсбора" width="1200" height="640" loading="lazy" decoding="async" />
-                </picture>
-              </div>
-            </a>
-            <div class="project-body">
-              <div class="project-top">
-                <span class="project-num">02</span>
-                <span class="project-status">Работает</span>
-              </div>
-              <h3>Ввези.ru</h3>
-              <div class="project-type">Личный проект &middot; сервис авто-калькуляторов &middot; 2026</div>
-              <p class="project-desc">
-                Онлайн-калькуляторы для&nbsp;автовладельцев: сколько стоит растаможить машину, какой утильсбор заплатить и&nbsp;во&nbsp;что обойдётся поездка.
-                Ставки&nbsp;&mdash; из&nbsp;постановлений Правительства, решений ЕЭК и&nbsp;Налогового кодекса, курс&nbsp;&mdash; ЦБ на&nbsp;сегодня.
-              </p>
-              <ul class="project-points">
-                <li><strong>4 калькулятора</strong>: растаможка, утильсбор, расход топлива, смесь масла и&nbsp;бензина</li>
-                <li>Растаможка из&nbsp;<strong>11 стран</strong>, включая ЕАЭС, и&nbsp;8 разборов утильсбора: электромобили, гибриды, юрлица</li>
-                <li>Актуальные курсы валют ЦБ и&nbsp;цены на&nbsp;топливо прямо на&nbsp;главной</li>
-                <li><strong>Bento-интерфейс</strong> с&nbsp;живыми примерами расчётов, светлая и&nbsp;тёмная тема</li>
-                <li>Форма заявки, SEO-разметка и&nbsp;быстрая статическая сборка</li>
-                <li>Развиваю сам, от&nbsp;идеи до&nbsp;продакшена</li>
-              </ul>
-              <div class="tags">
-                <span class="tag">Astro</span>
-                <span class="tag">TypeScript</span>
-                <span class="tag">CSS</span>
-                <span class="tag">SEO</span>
-              </div>
-              <div class="project-foot">
-                <a class="btn btn-ghost project-link" href="https://vvezi.ru" target="_blank" rel="noopener">
-                  Открыть сайт
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9" /></svg>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article class="project card reveal" style="--p-glow: #14b8a6">
-            <a class="project-media" href="https://kodrazbor.ru" target="_blank" rel="noopener" aria-label="Открыть сайт КодРазбор">
-              <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">kodrazbor.ru</span></div>
-              <div class="project-shot">
-                <picture>
-                  <source srcset="img/projects/kodrazbor-640.avif 640w, img/projects/kodrazbor-1200.avif 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/avif" />
-                  <source srcset="img/projects/kodrazbor-640.webp 640w, img/projects/kodrazbor-1200.webp 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/webp" />
-                  <img src="img/projects/kodrazbor-1200.jpg" srcset="img/projects/kodrazbor-640.jpg 640w, img/projects/kodrazbor-1200.jpg 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" alt="Главная страница справочника кодов ошибок газовых котлов КодРазбор" width="1200" height="640" loading="lazy" decoding="async" />
-                </picture>
-              </div>
-            </a>
-            <div class="project-body">
-              <div class="project-top">
-                <span class="project-num">03</span>
-                <span class="project-status">Работает</span>
-              </div>
-              <h3>КодРазбор</h3>
-              <div class="project-type">Личный проект &middot; AI-разработка &middot; справочник &middot; 2026</div>
-              <p class="project-desc">
-                Справочник кодов ошибок газовых котлов: что значит код на&nbsp;дисплее, что проверить самому и&nbsp;когда звать мастера.
-                Расшифровки&nbsp;&mdash; по&nbsp;инструкциям производителей с&nbsp;учётом серии котла.
-              </p>
-              <ul class="project-points">
-                <li><strong>465 кодов</strong>, 10 брендов, 63 серии котлов: Baxi, Navien, Protherm, Ariston и&nbsp;другие</li>
-                <li>Поиск по&nbsp;коду прямо на&nbsp;главной</li>
-                <li>Пометки у&nbsp;каждого кода: «можно самому», «мастер» или «опасно»</li>
-                <li>Микроразметка Schema.org, светлая и&nbsp;тёмная тема</li>
-                <li>Сделан в&nbsp;связке с&nbsp;AI (Claude Code): <strong>идея, постановка задач, ревью и&nbsp;запуск&nbsp;&mdash; мои</strong></li>
-              </ul>
-              <div class="tags">
-                <span class="tag">Astro</span>
-                <span class="tag">AI-разработка</span>
-                <span class="tag">Schema.org</span>
-                <span class="tag">SEO</span>
-              </div>
-              <div class="project-foot">
-                <a class="btn btn-ghost project-link" href="https://kodrazbor.ru" target="_blank" rel="noopener">
-                  Открыть сайт
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article class="project project--flip card reveal" style="--p-glow: #2563eb">
-            <a class="project-media" href="https://autoparam.ru" target="_blank" rel="noopener" aria-label="Открыть сайт АвтоПарам">
-              <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">autoparam.ru</span></div>
-              <div class="project-shot">
-                <picture>
-                  <source srcset="img/projects/autoparam-640.avif 640w, img/projects/autoparam-1200.avif 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/avif" />
-                  <source srcset="img/projects/autoparam-640.webp 640w, img/projects/autoparam-1200.webp 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/webp" />
-                  <img src="img/projects/autoparam-1200.jpg" srcset="img/projects/autoparam-640.jpg 640w, img/projects/autoparam-1200.jpg 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" alt="Главная страница справочника автовладельца АвтоПарам" width="1200" height="640" loading="lazy" decoding="async" />
-                </picture>
-              </div>
-            </a>
-            <div class="project-body">
-              <div class="project-top">
-                <span class="project-num">04</span>
-                <span class="project-status">Работает</span>
-              </div>
-              <h3>АвтоПарам</h3>
-              <div class="project-type">Личный проект &middot; AI-разработка &middot; справочник автовладельца &middot; 2026</div>
-              <p class="project-desc">
-                Справочник по&nbsp;обслуживанию китайских автомобилей: какое масло заливать, объёмы масла в&nbsp;двигателе и&nbsp;КПП,
-                размер шин и&nbsp;дворников под&nbsp;конкретный двигатель и&nbsp;год выпуска&nbsp;&mdash; со&nbsp;ссылкой на&nbsp;руководство.
-              </p>
-              <ul class="project-points">
-                <li><strong>7 марок, 25 моделей</strong>: Changan, Chery, Exeed, Geely, Haval, Omoda, Tenet</li>
-                <li>Главное&nbsp;&mdash; масло, объём и&nbsp;шины&nbsp;&mdash; сразу на&nbsp;карточке модели, поиск по&nbsp;названию</li>
-                <li>Данные из&nbsp;официальных руководств производителей</li>
-                <li>Лёгкая статическая сборка без&nbsp;внешних CSS и&nbsp;JS, микроразметка Schema.org</li>
-                <li>Сделан в&nbsp;связке с&nbsp;AI (Claude Code): <strong>идея, постановка задач, ревью и&nbsp;запуск&nbsp;&mdash; мои</strong></li>
-              </ul>
-              <div class="tags">
-                <span class="tag">AI-разработка</span>
-                <span class="tag">Статический сайт</span>
-                <span class="tag">Schema.org</span>
-                <span class="tag">SEO</span>
-              </div>
-              <div class="project-foot">
-                <a class="btn btn-ghost project-link" href="https://autoparam.ru" target="_blank" rel="noopener">
-                  Открыть сайт
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article class="project card reveal" style="--p-glow: #3b82f6">
-            <a class="project-media" href="https://kemvod.ru" target="_blank" rel="noopener" aria-label="Открыть сайт АО «КемВод»">
-              <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">kemvod.ru</span></div>
-              <div class="project-shot">
-                <picture>
-                  <source srcset="img/projects/kemvod-640.avif 640w, img/projects/kemvod-1200.avif 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/avif" />
-                  <source srcset="img/projects/kemvod-640.webp 640w, img/projects/kemvod-1200.webp 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/webp" />
-                  <img src="img/projects/kemvod-1200.jpg" srcset="img/projects/kemvod-640.jpg 640w, img/projects/kemvod-1200.jpg 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" alt="Главная страница сайта АО «КемВод»" width="1200" height="640" loading="lazy" decoding="async" />
-                </picture>
-              </div>
-            </a>
-            <div class="project-body">
-              <div class="project-top">
-                <span class="project-num">05</span>
-                <span class="project-status">Работает</span>
-              </div>
-              <h3>АО &laquo;КемВод&raquo;</h3>
-              <div class="project-type">Корпоративный портал &middot; АртАльт &middot; 2022</div>
-              <p class="project-desc">
-                Сервисный сайт водоканала Кемерово для&nbsp;горожан и&nbsp;организаций: услуги, информация для&nbsp;потребителей, вакансии
-                и&nbsp;новости компании, которая 90&nbsp;лет обеспечивает город водой.
-              </p>
-              <ul class="project-points">
-                <li>Кроссбраузерный <strong>адаптивный фронтенд</strong> разделов портала по&nbsp;макетам агентства</li>
-                <li>Интерактивные блоки и&nbsp;анимации на&nbsp;JavaScript</li>
-                <li>Работа с&nbsp;чужой кодовой базой без&nbsp;поломок существующих страниц</li>
-              </ul>
-              <div class="tags">
-                <span class="tag">HTML5</span>
-                <span class="tag">SCSS</span>
-                <span class="tag">JavaScript</span>
-                <span class="tag">Адаптив</span>
-              </div>
-              <div class="project-foot">
-                <a class="btn btn-ghost project-link" href="https://kemvod.ru" target="_blank" rel="noopener">
-                  Открыть сайт
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9" /></svg>
-                </a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="reviews">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <p class="section-tag">Отзывы</p>
-            <h2 class="section-title">56 отзывов <span class="gradient-text">на&nbsp;freelance.ru</span></h2>
-          </div>
-          <p class="section-desc">Заказчики отмечают сроки, качество работы и&nbsp;то, что я&nbsp;всегда на&nbsp;связи.</p>
-        </div>
-
-        <div class="reviews">
-          <figure class="review card spot reveal">
-            <blockquote>&laquo;Внимательный, аккуратный, быстрый и&nbsp;высококвалифицированный. На&nbsp;все пожелания реагирует адекватно, даёт полезные рекомендации. Теперь сотрудничаю только с&nbsp;ним.&raquo;</blockquote>
-            <figcaption><strong>Дмитрий Ткаченко</strong>Вёрстка PSD для&nbsp;Joomla &middot; 2014</figcaption>
-          </figure>
-          <figure class="review card spot reveal">
-            <blockquote>&laquo;Всегда был на&nbsp;связи, грамотно и&nbsp;быстро отвечал понятным мне языком. Сайт сделали в&nbsp;срок, всё чётко так, как и&nbsp;требовалось.&raquo;</blockquote>
-            <figcaption><strong>German Burmistrov</strong>Сайт под&nbsp;ключ &middot; 2014</figcaption>
-          </figure>
-          <figure class="review card spot reveal">
-            <blockquote>&laquo;После нескольких неудачных попыток остановился на&nbsp;Павле. Заказчик я&nbsp;довольно требовательный, но&nbsp;всё было исполнено чётко в&nbsp;соответствии с&nbsp;требованиями.&raquo;</blockquote>
-            <figcaption><strong>Дмитрий Ткаченко</strong>Сайт по&nbsp;готовому дизайну &middot; 2012</figcaption>
-          </figure>
-        </div>
-
-        <div class="reviews-more reveal">
-          <a class="btn btn-ghost" href="https://freelance.ru/reviews/paveliskrinsky/" target="_blank" rel="noopener">Все отзывы на&nbsp;freelance.ru</a>
         </div>
       </div>
     </section>

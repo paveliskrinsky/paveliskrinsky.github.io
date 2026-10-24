@@ -13,10 +13,11 @@ SITES = {
     "vvezi": "https://vvezi.ru",
     "autoparam": "https://autoparam.ru",
     "kodrazbor": "https://kodrazbor.ru",
+    "kombos": "https://kombos.ru",
 }
 BROWSER = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-VIEWPORT = (1440, 900)
-CROP_HEIGHT = 768
+VIEWPORT = (1440, 2000)
+CROP_HEIGHT = 1800
 BUDGET_MS = 15000
 
 
