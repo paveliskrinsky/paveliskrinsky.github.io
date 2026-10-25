@@ -522,6 +522,47 @@
       margin: 1.5rem 0 1.5rem;
     }
 
+    .hero-proof {
+      margin: 1.25rem 0 0;
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
+    .hero-proof a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .sticky-cta {
+      display: none;
+    }
+
+    @media (max-width: 860px) {
+      .sticky-cta {
+        display: flex;
+        position: fixed;
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+        max-width: 420px;
+        margin-inline: auto;
+        z-index: 60;
+        justify-content: center;
+        transform: translateY(160%);
+        transition: transform .3s ease;
+        box-shadow: 0 8px 30px rgb(0 0 0 / .35);
+      }
+
+      #nav.scrolled ~ .sticky-cta {
+        transform: none;
+      }
+
+      body > footer {
+        padding-bottom: 6.5rem;
+      }
+    }
+
     .gradient-text {
       background: linear-gradient(110deg, var(--accent) 0%, var(--accent2) 60%, var(--accent3) 120%);
       -webkit-background-clip: text;
@@ -643,7 +684,7 @@
 
     .hero-stats {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
       margin-top: 4.5rem;
       position: relative;
@@ -1631,6 +1672,10 @@
         margin-top: 3rem;
       }
 
+      .hero-stats .stat:last-child {
+        grid-column: 1 / -1;
+      }
+
       .bento-side,
       .skills-grid,
       .work-steps,
@@ -1654,6 +1699,21 @@
 
       .btn {
         white-space: normal;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      #hero h1 {
+        font-size: 1.75rem;
+      }
+
+      .nav-logo {
+        font-size: .8rem;
+        gap: .45rem;
       }
     }
 
@@ -1703,12 +1763,13 @@
         <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" /></svg>
         <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg>
       </button>
-      <a href="#contact" class="btn btn-primary nav-cta">Связаться</a>
+      <a href="#contact" class="btn btn-primary nav-cta">Написать мне</a>
       <button class="nav-burger" id="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
+  <a href="https://t.me/paveliskrinsky" target="_blank" rel="noopener" class="btn btn-primary sticky-cta">Написать в&nbsp;Telegram</a>
 
   <main>
     <section id="hero">
@@ -1725,9 +1786,8 @@
               Быстрые сайты <span class="gradient-text">от&nbsp;макета до&nbsp;продакшена</span>
             </h1>
             <p class="hero-sub">
-              Привет, я&nbsp;Павел&nbsp;&mdash; фронтенд-разработчик с&nbsp;14-летним опытом. Разрабатываю фронтенд по&nbsp;Figma на&nbsp;HTML, SCSS
-              и&nbsp;ванильном JS&nbsp;&mdash; с&nbsp;чистым кодом, который легко интегрировать.
-            </p>
+              Фронтенд-разработчик, 14&nbsp;лет в&nbsp;профессии. Верстаю по&nbsp;Figma на&nbsp;HTML, SCSS и&nbsp;ванильном JS: чистый код, который легко интегрировать, и&nbsp;90+ баллов PageSpeed.
+          </p>
             <div class="hero-cta">
               <a href="#projects" class="btn btn-primary">
                 Смотреть работы
@@ -1735,6 +1795,7 @@
               </a>
               <a href="https://t.me/paveliskrinsky" target="_blank" rel="noopener" class="btn btn-ghost">Написать в&nbsp;Telegram</a>
             </div>
+            <p class="hero-proof">56 отзывов на&nbsp;<a href="https://freelance.ru/reviews/paveliskrinsky/" target="_blank" rel="noopener">freelance.ru</a></p>
           </div>
 
           <div class="hero-visual">
@@ -1744,12 +1805,6 @@
                 <source srcset="img/avatar-480.webp 480w, img/avatar-800.webp 800w" sizes="(max-width: 640px) 260px, (max-width: 1000px) 340px, 400px" type="image/webp" />
                 <img src="img/avatar-800.jpg" srcset="img/avatar-480.jpg 480w, img/avatar-800.jpg 800w" sizes="(max-width: 640px) 260px, (max-width: 1000px) 340px, 400px" alt="Павел Искринский" width="800" height="1067" fetchpriority="high" />
               </picture>
-            </div>
-            <div class="chip chip-1" aria-hidden="true">
-              <span class="chip-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z" /><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" /><path d="M2 2l7.586 7.586" /><circle cx="11" cy="11" r="2" /></svg>
-              </span>
-              <span>Figma → код<small>pixel-perfect</small></span>
             </div>
             <a class="chip chip-2" href="#projects">
               <span class="chip-icon" aria-hidden="true">
@@ -1762,19 +1817,15 @@
 
         <div class="hero-stats">
           <div class="stat card spot reveal">
-            <div class="stat-num gradient-text">14</div>
+            <div class="stat-num">14</div>
             <div class="stat-label">лет в&nbsp;разработке</div>
           </div>
           <div class="stat card spot reveal">
-            <div class="stat-num gradient-text">50+</div>
+            <div class="stat-num">50+</div>
             <div class="stat-label">запущенных проектов</div>
           </div>
           <div class="stat card spot reveal">
-            <div class="stat-num gradient-text">10+</div>
-            <div class="stat-label">сайтов на&nbsp;поддержке</div>
-          </div>
-          <div class="stat card spot reveal">
-            <div class="stat-num gradient-text">90+</div>
+            <div class="stat-num">90+</div>
             <div class="stat-label">баллов PageSpeed</div>
           </div>
         </div>
@@ -2091,7 +2142,7 @@
         <div class="section-head reveal">
           <div>
             <p class="section-tag">Отзывы</p>
-            <h2 class="section-title">56 отзывов <span class="gradient-text">на&nbsp;freelance.ru</span></h2>
+            <h2 class="section-title">56 отзывов на&nbsp;freelance.ru</h2>
           </div>
           <p class="section-desc">Заказчики отмечают сроки, качество работы и&nbsp;то, что я&nbsp;всегда на&nbsp;связи.</p>
         </div>
@@ -2122,7 +2173,7 @@
         <div class="section-head reveal">
           <div>
             <p class="section-tag">Обо мне</p>
-            <h2 class="section-title">Фронтенд, готовый<br><span class="gradient-text">к&nbsp;продакшену</span></h2>
+            <h2 class="section-title">Фронтенд, готовый<br>к&nbsp;продакшену</h2>
           </div>
           <p class="section-desc">От&nbsp;первых заказов на&nbsp;фрилансе до&nbsp;поддержки десятка клиентских сайтов в&nbsp;студии.</p>
         </div>
@@ -2444,7 +2495,7 @@
         <div class="contact-card card reveal">
           <div class="contact-info">
             <p class="section-tag">Связаться</p>
-            <h2 class="section-title">Давайте<br><span class="gradient-text">работать вместе</span></h2>
+            <h2 class="section-title">Давайте<br>работать вместе</h2>
             <p>Ищу удалённую позицию фронтенд-разработчика или&nbsp;разработчика сайтов. Рассматриваю полную занятость, частичную
               или&nbsp;проектную работу&nbsp;&mdash; главное, чтобы задачи были интересными.</p>
             <div class="contact-links">
@@ -2548,6 +2599,12 @@
     burger.addEventListener('click', () => setMenuOpen(!navLinks.classList.contains('open')));
     navLinks.addEventListener('click', (e) => {
       if (e.target.closest('a')) setMenuOpen(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+        setMenuOpen(false);
+        burger.focus();
+      }
     });
 
     function syncNav() {
