@@ -1489,6 +1489,127 @@
       align-self: flex-start;
     }
 
+    .select {
+      position: relative;
+    }
+
+    .select-native {
+      width: 100%;
+    }
+
+    .select.is-enhanced .select-native {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .select-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+      width: 100%;
+      min-height: 52px;
+      padding: .9rem 1.1rem;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font: inherit;
+      font-size: .95rem;
+      font-weight: 500;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .select-btn:hover {
+      border-color: var(--border-strong);
+    }
+
+    .select-btn:focus-visible,
+    .select.is-open .select-btn {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-soft);
+      outline: none;
+    }
+
+    .select-btn::after {
+      content: '';
+      flex-shrink: 0;
+      width: .5rem;
+      height: .5rem;
+      border-right: 2px solid var(--muted);
+      border-bottom: 2px solid var(--muted);
+      rotate: 45deg;
+      translate: 0 -.15rem;
+      transition: rotate .2s var(--ease), translate .2s var(--ease);
+    }
+
+    .select.is-open .select-btn::after {
+      rotate: 225deg;
+      translate: 0 .1rem;
+    }
+
+    .select-list {
+      position: absolute;
+      top: calc(100% + .4rem);
+      left: 0;
+      right: 0;
+      z-index: 10;
+      padding: .35rem;
+      background: var(--surface-strong);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      visibility: hidden;
+      translate: 0 -6px;
+      transition: opacity .15s var(--ease), translate .15s var(--ease), visibility 0s .15s;
+    }
+
+    .select.is-open .select-list {
+      opacity: 1;
+      visibility: visible;
+      translate: 0 0;
+      transition-delay: 0s;
+    }
+
+    .select-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+      min-height: 44px;
+      padding: .6rem .8rem;
+      border-radius: 10px;
+      font-size: .95rem;
+      font-weight: 500;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .select-option.is-active {
+      background: var(--accent-soft);
+    }
+
+    .select-option[aria-selected="true"] {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .select-option[aria-selected="true"]::after {
+      content: '';
+      flex-shrink: 0;
+      width: .65rem;
+      height: .35rem;
+      border-left: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      rotate: -45deg;
+      translate: 0 -.1rem;
+    }
+
     .label-note {
       font-weight: 500;
       color: var(--muted);
@@ -2358,6 +2479,7 @@
             <div class="form-row">
               <div>
                 <label for="task">Что нужно</label>
+                <div class="select" data-select>
                 <select id="task" name="task">
                   <option>Вёрстка по&nbsp;макету</option>
                   <option>Сайт под&nbsp;ключ</option>
@@ -2365,6 +2487,7 @@
                   <option>Доработка или&nbsp;поддержка</option>
                   <option>Другое</option>
                 </select>
+                </div>
               </div>
               <div>
                 <label for="link">Макет или&nbsp;сайт <span class="label-note">необязательно</span></label>
@@ -2464,6 +2587,112 @@
       card.style.setProperty('--mx', `${e.clientX - r.left}px`);
       card.style.setProperty('--my', `${e.clientY - r.top}px`);
     }, { passive: true });
+
+    document.querySelectorAll('[data-select]').forEach((box) => {
+      const native = box.querySelector('select');
+      const label = document.querySelector(`label[for="${native.id}"]`);
+      const btn = document.createElement('button');
+      const list = document.createElement('ul');
+      const options = [...native.options].map((opt, i) => {
+        const li = document.createElement('li');
+        li.className = 'select-option';
+        li.id = `${native.id}-opt-${i}`;
+        li.setAttribute('role', 'option');
+        li.textContent = opt.textContent;
+        list.append(li);
+        return li;
+      });
+      let active = native.selectedIndex;
+
+      btn.type = 'button';
+      btn.className = 'select-btn';
+      btn.id = `${native.id}-btn`;
+      btn.setAttribute('role', 'combobox');
+      btn.setAttribute('aria-haspopup', 'listbox');
+      btn.setAttribute('aria-controls', `${native.id}-list`);
+      btn.setAttribute('aria-expanded', 'false');
+      list.id = `${native.id}-list`;
+      list.className = 'select-list';
+      list.setAttribute('role', 'listbox');
+      if (label) {
+        label.htmlFor = btn.id;
+        label.id = label.id || `${native.id}-label`;
+        list.setAttribute('aria-labelledby', label.id);
+      }
+      native.classList.add('select-native');
+      native.tabIndex = -1;
+      native.setAttribute('aria-hidden', 'true');
+      box.classList.add('is-enhanced');
+      box.append(btn, list);
+
+      function sync() {
+        options.forEach((li, i) => {
+          li.setAttribute('aria-selected', i === native.selectedIndex);
+          li.classList.toggle('is-active', i === active);
+        });
+        btn.textContent = native.options[native.selectedIndex].textContent;
+        if (box.classList.contains('is-open')) btn.setAttribute('aria-activedescendant', options[active].id);
+        else btn.removeAttribute('aria-activedescendant');
+      }
+
+      function setOpen(open) {
+        box.classList.toggle('is-open', open);
+        btn.setAttribute('aria-expanded', open);
+        active = native.selectedIndex;
+        sync();
+      }
+
+      function choose(i) {
+        native.selectedIndex = i;
+        native.dispatchEvent(new Event('change', { bubbles: true }));
+        setOpen(false);
+        btn.focus();
+      }
+
+      function move(i) {
+        active = Math.max(0, Math.min(options.length - 1, i));
+        sync();
+        options[active].scrollIntoView({ block: 'nearest' });
+      }
+
+      btn.addEventListener('click', () => setOpen(!box.classList.contains('is-open')));
+      btn.addEventListener('keydown', (e) => {
+        const open = box.classList.contains('is-open');
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          if (!open) setOpen(true);
+          else move(active + (e.key === 'ArrowDown' ? 1 : -1));
+        } else if (e.key === 'Home' || e.key === 'End') {
+          if (!open) return;
+          e.preventDefault();
+          move(e.key === 'Home' ? 0 : options.length - 1);
+        } else if ((e.key === 'Enter' || e.key === ' ') && open) {
+          e.preventDefault();
+          choose(active);
+        } else if (e.key === 'Escape' && open) {
+          e.preventDefault();
+          setOpen(false);
+        } else if (e.key === 'Tab' && open) {
+          setOpen(false);
+        }
+      });
+      list.addEventListener('pointermove', (e) => {
+        const i = options.indexOf(e.target.closest('.select-option'));
+        if (i >= 0 && i !== active) {
+          active = i;
+          sync();
+        }
+      });
+      list.addEventListener('click', (e) => {
+        const i = options.indexOf(e.target.closest('.select-option'));
+        if (i >= 0) choose(i);
+      });
+      document.addEventListener('pointerdown', (e) => {
+        if (!box.contains(e.target)) setOpen(false);
+      });
+      native.form.addEventListener('reset', () => setTimeout(sync));
+      sync();
+    });
 
     const form = document.getElementById('contact-form');
     const formStatus = document.getElementById('form-status');
