@@ -11,7 +11,7 @@ SITES = {
     "kemvod": "https://kemvod.ru",
     "zelzoo": "https://zelzoo.ru",
     "vvezi": "https://vvezi.ru",
-    "autoparam": "https://autoparam.ru",
+    "zaveli": "https://zaveli.ru",
     "kodrazbor": "https://kodrazbor.ru",
     "kombos": "https://kombos.ru",
 }
