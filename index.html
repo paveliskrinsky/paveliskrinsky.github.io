@@ -860,21 +860,51 @@
       color: var(--muted);
     }
 
-    .clients-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: .6rem 2.25rem;
+    .clients-marquee {
+      overflow: hidden;
       padding: 1.1rem 0;
       border-block: 1px solid var(--border);
+      mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    }
+
+    .clients-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 45s linear infinite !important;
+    }
+
+    .clients-marquee:hover .clients-track {
+      animation-play-state: paused !important;
+    }
+
+    .clients-list {
+      display: flex;
+      flex-shrink: 0;
     }
 
     .clients-list li {
+      display: flex;
+      align-items: center;
+      gap: 2.25rem;
+      padding-right: 2.25rem;
       font-family: var(--font-head);
       font-size: .95rem;
       font-weight: 500;
       color: var(--muted);
       white-space: nowrap;
+    }
+
+    .clients-list li::after {
+      content: '✦';
+      font-size: .7rem;
+      color: var(--accent);
+    }
+
+    @keyframes marquee {
+      to {
+        transform: translateX(-50%);
+      }
     }
 
     section {
@@ -1558,7 +1588,7 @@
     }
 
     .contact-item-icon--text {
-      font-size: .82rem;
+      font-size: 1.15rem;
       font-weight: 800;
       color: var(--accent);
     }
@@ -2114,6 +2144,7 @@
       .hero-visual,
       #contact-form,
       .reviews-toggle,
+      .clients-list[aria-hidden],
       .footer-inner a {
         display: none !important;
       }
@@ -2126,6 +2157,19 @@
       .reveal {
         opacity: 1;
         transform: none;
+      }
+
+      .clients-marquee {
+        mask-image: none;
+        -webkit-mask-image: none;
+      }
+
+      .clients-track,
+      .clients-list {
+        flex-wrap: wrap;
+        justify-content: center;
+        width: auto;
+        animation: none !important;
       }
 
       .card {
@@ -2260,17 +2304,32 @@
 
       <div class="container clients">
         <h2 class="clients-label">Работал с</h2>
-        <ul class="clients-list">
-          <li>АО&nbsp;«КемВод»</li>
-          <li>Зеленогорский зоопарк</li>
-          <li>Nisanov Corp</li>
-          <li>No&nbsp;Logo Studio</li>
-          <li>АртАльт</li>
-          <li>Alente</li>
-          <li>CASTCOM</li>
-          <li>DokinLab</li>
-          <li>MilloriDS</li>
-        </ul>
+        <div class="clients-marquee">
+          <div class="clients-track">
+          <ul class="clients-list">
+            <li>АО&nbsp;«КемВод»</li>
+            <li>Зеленогорский зоопарк</li>
+            <li>Nisanov Corp</li>
+            <li>No&nbsp;Logo Studio</li>
+            <li>АртАльт</li>
+            <li>Alente</li>
+            <li>CASTCOM</li>
+            <li>DokinLab</li>
+            <li>MilloriDS</li>
+          </ul>
+          <ul class="clients-list" aria-hidden="true">
+            <li>АО&nbsp;«КемВод»</li>
+            <li>Зеленогорский зоопарк</li>
+            <li>Nisanov Corp</li>
+            <li>No&nbsp;Logo Studio</li>
+            <li>АртАльт</li>
+            <li>Alente</li>
+            <li>CASTCOM</li>
+            <li>DokinLab</li>
+            <li>MilloriDS</li>
+          </ul>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -2646,16 +2705,24 @@
           <div class="bento-text card spot reveal">
             <p>
               Меня зовут Павел. С&nbsp;2012 года делаю сайты для&nbsp;бизнеса: лендинги, корпоративные сайты и&nbsp;интернет-магазины.
-              Четыре года разрабатывал интернет-магазины в&nbsp;<strong>Nisanov Corp</strong> и&nbsp;доводил их до&nbsp;<strong>90&ndash;95 баллов Google PageSpeed</strong>,
-              потом работал с&nbsp;агентствами и&nbsp;постоянными клиентами по&nbsp;рекомендациям.
+              Начинал на&nbsp;freelance.ru с&nbsp;вёрстки и&nbsp;сайтов на&nbsp;Joomla и&nbsp;WordPress и&nbsp;собрал там 56 положительных отзывов.
+            </p>
+            <p>
+              Четыре года разрабатывал интернет-магазины на&nbsp;OpenCart в&nbsp;<strong>Nisanov Corp</strong>: каталоги, корзину, оформление заказа.
+              Там научился выжимать из&nbsp;сайта скорость и&nbsp;доводил магазины до&nbsp;<strong>90&ndash;95 баллов Google PageSpeed</strong>.
+              Потом работал с&nbsp;агентствами и&nbsp;постоянными клиентами по&nbsp;рекомендациям: делал проекты для&nbsp;Alente, CASTCOM, АртАльт, DokinLab и&nbsp;MilloriDS.
             </p>
             <p>
               Сейчас в&nbsp;<strong>No Logo Studio</strong> делаю сайты по&nbsp;макетам Figma и&nbsp;веду 10+ клиентских сайтов на&nbsp;1С-Битрикс и&nbsp;Laravel:
-              правки, обновления, новые разделы. Параллельно беру проекты напрямую.
+              правки, обновления, новые разделы. Параллельно беру проекты напрямую: делаю быстрые статические сайты на&nbsp;Astro,
+              готовлю вёрстку под&nbsp;популярные CMS и&nbsp;дорабатываю сайты на&nbsp;Tilda.
             </p>
             <p>
               Для&nbsp;заказчика главное&nbsp;&mdash; чтобы сайт быстро открывался, был удобен с&nbsp;телефона и&nbsp;его было легко дорабатывать.
-              Поэтому пишу чистый и&nbsp;лёгкий код и&nbsp;каждое изменение проверяю сам на&nbsp;разных экранах.
+              Поэтому пишу чистый и&nbsp;лёгкий код, закладываю SEO-структуру с&nbsp;самого начала и&nbsp;каждое изменение проверяю сам на&nbsp;разных экранах.
+            </p>
+            <p>
+              Работаю как самозанятый: договор, чек, срок и&nbsp;стоимость называю до&nbsp;начала работы. На&nbsp;сообщения отвечаю в&nbsp;течение дня.
             </p>
           </div>
 
@@ -2790,7 +2857,7 @@
               </div>
               <div>
                 <label for="email">Telegram или e-mail</label>
-                <input id="email" type="text" name="contact" placeholder="@username или you@example.com" autocomplete="off" required />
+                <input id="email" type="text" name="contact" placeholder="@username или name@site.ru" autocomplete="off" required />
               </div>
             </div>
             <div class="form-row">
