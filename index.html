@@ -3102,6 +3102,7 @@
       first.tabIndex = -1;
       first.focus();
       reviewsToggle.remove();
+      goal('reviews_more');
     });
 
     function goal(name) {
@@ -3109,8 +3110,16 @@
     }
 
     document.addEventListener('click', (e) => {
-      const link = e.target.closest('a[href^="https://t.me/"], a[href^="mailto:"]');
-      if (link) goal(link.protocol === 'mailto:' ? 'email' : 'telegram');
+      const link = e.target.closest('a[href]');
+      if (!link) return;
+      if (link.protocol === 'mailto:') goal('email');
+      else if (link.hostname === 't.me') goal('telegram');
+      else if (link.hostname === 'freelance.ru') goal('freelance');
+      else if (link.closest('#projects') && link.hostname !== location.hostname) goal('project');
+    });
+
+    document.querySelectorAll('#faq details').forEach((d) => {
+      d.addEventListener('toggle', () => { if (d.open) goal('faq'); });
     });
 
     addEventListener('beforeprint', () => {
@@ -3119,6 +3128,8 @@
 
     const form = document.getElementById('contact-form');
     const formStatus = document.getElementById('form-status');
+
+    form.addEventListener('input', () => goal('form_start'), { once: true });
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -3135,6 +3146,7 @@
         formStatus.textContent = 'Спасибо! Заявка отправлена, скоро отвечу.';
         goal('lead');
       } catch (err) {
+        goal('form_error');
         formStatus.classList.add('is-error');
         formStatus.innerHTML = 'Не получилось отправить. Напишите, пожалуйста, в Telegram: <a href="https://t.me/paveliskrinsky" target="_blank" rel="noopener">@paveliskrinsky</a>.';
       }
