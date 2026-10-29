@@ -35,7 +35,7 @@ def main():
     for name in names:
         for preset in PRESETS:
             try:
-                scores = run(SITES[name], preset)
+                scores = run(SITES.get(name, name), preset)
                 print(name, preset, " ".join(f"{k}={v}" for k, v in scores.items()), flush=True)
             except Exception as e:
                 print(name, preset, "error", e, flush=True)

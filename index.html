@@ -18,14 +18,14 @@
   <meta property="og:image" content="https://paveliskrinsky.github.io/img/og.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Павел Искринский — фронтенд-разработчик" />
+  <meta property="og:image:alt" content="Павел Искринский — разработка и вёрстка сайтов" />
   <meta name="twitter:card" content="summary_large_image" />
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Павел Искринский",
-      "jobTitle": "Фронтенд-разработчик",
+      "jobTitle": "Разработчик сайтов",
       "url": "https://paveliskrinsky.github.io/",
       "image": "https://paveliskrinsky.github.io/img/avatar-800.jpg",
       "email": "mailto:paveliskrinsky@ya.ru",
@@ -39,17 +39,80 @@
       ]
     }
   </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Сколько стоит сайт?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Зависит от объёма: сколько страниц, насколько сложный дизайн, нужны ли интеграции. Пришлите задачу или макет — назову стоимость и срок до начала работы."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Сколько времени займёт работа?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Срок называю вместе со стоимостью и придерживаюсь его — в отзывах заказчики чаще всего отмечают, что всё сделано в срок."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Вы работаете по готовому дизайну?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да, это моя основная работа: делаю сайты по макетам Figma, раньше — по Photoshop. Если макета пока нет, напишите, обсудим варианты."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "С какими CMS работаете?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Готовлю вёрстку под 1С-Битрикс, Laravel, OpenCart, WordPress и Joomla, делаю быстрые статические сайты на Astro и дорабатываю сайты на Tilda."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно ускорить мой текущий сайт?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да. Разбираю, что мешает загрузке, и исправляю. Интернет-магазины в Nisanov Corp доводил до 90–95 баллов Google PageSpeed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Как оформляется работа?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Работаю как самозанятый: заключаем договор, после оплаты вы получаете чек. Живу в Новосибирске и работаю удалённо с заказчиками из любого города."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Поддерживаете сайт после запуска?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да: правки, обновления и новые разделы. С частью заказчиков работаю годами."
+          }
+        }
+      ]
+    }
+  </script>
   <link rel="icon" href="favicon.ico" sizes="48x48" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="manifest" href="site.webmanifest" />
   <meta name="theme-color" content="#0f1117" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preload" href="fonts/unbounded-cyrillic.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" as="image" type="image/avif" imagesrcset="img/avatar-480.avif 480w, img/avatar-560.avif 560w, img/avatar-800.avif 800w" imagesizes="(max-width: 1000px) 300px, 400px" media="(min-width: 641px)" fetchpriority="high" />
 
   <!-- Yandex.Metrika counter -->
-  <script type="text/javascript">
+  <script>
     (function (m, e, t, r, i, k, a) {
       m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
       m[i].l = 1 * new Date();
@@ -58,12 +121,10 @@
     })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=113365152', 'ym');
     ym(113365152, 'init', { ssr: true, webvisor: true, clickmap: true, ecommerce: "dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce: true, trackLinks: true });
   </script>
-  <noscript>
-    <div><img src="https://mc.yandex.ru/watch/113365152" style="position:absolute;left:-9999px;" alt="" /></div>
-  </noscript>
   <!-- /Yandex.Metrika counter -->
 
   <script>
+    document.documentElement.classList.add('js');
     try {
       const t = localStorage.getItem('theme');
       if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
@@ -71,6 +132,60 @@
   </script>
 
   <style>
+    @font-face {
+      font-family: 'Manrope';
+      font-style: normal;
+      font-weight: 500 800;
+      font-display: swap;
+      src: url(fonts/manrope-cyrillic.woff2) format('woff2');
+      unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    }
+
+    @font-face {
+      font-family: 'Manrope';
+      font-style: normal;
+      font-weight: 500 800;
+      font-display: swap;
+      src: url(fonts/manrope-latin.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    @font-face {
+      font-family: 'Unbounded';
+      font-style: normal;
+      font-weight: 500 700;
+      font-display: swap;
+      src: url(fonts/unbounded-cyrillic.woff2) format('woff2');
+      unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    }
+
+    @font-face {
+      font-family: 'Unbounded';
+      font-style: normal;
+      font-weight: 500 700;
+      font-display: swap;
+      src: url(fonts/unbounded-latin.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    @font-face {
+      font-family: 'Manrope Fallback';
+      src: local('Arial');
+      size-adjust: 103.06%;
+      ascent-override: 103.44%;
+      descent-override: 29.11%;
+      line-gap-override: 0%;
+    }
+
+    @font-face {
+      font-family: 'Unbounded Fallback';
+      src: local('Arial');
+      size-adjust: 141.22%;
+      ascent-override: 70.46%;
+      descent-override: 17.35%;
+      line-gap-override: 0%;
+    }
+
     :root {
       color-scheme: dark;
       --bg: light-dark(#f6f6f9, #0f1117);
@@ -81,9 +196,9 @@
       --border-strong: light-dark(rgba(20, 22, 40, .16), rgba(255, 255, 255, .16));
       --text: light-dark(#14161f, #eef0f6);
       --muted: light-dark(#5b6075, #9097ab);
-      --faint: light-dark(#9a9eb0, #5d647a);
       --accent: light-dark(#5b4bf0, #8b7bff);
       --accent2: light-dark(#0aa98d, #2fe0c0);
+      --accent2-text: light-dark(#087563, #2fe0c0);
       --accent3: light-dark(#f0642f, #ff8a5c);
       --accent-soft: light-dark(rgba(91, 75, 240, .1), rgba(139, 123, 255, .14));
       --accent2-soft: light-dark(rgba(10, 169, 141, .1), rgba(47, 224, 192, .12));
@@ -92,11 +207,13 @@
       --grid-line: light-dark(rgba(20, 22, 40, .05), rgba(255, 255, 255, .045));
       --shadow: 0 30px 60px -30px light-dark(rgba(30, 30, 70, .25), rgba(0, 0, 0, .6));
       --on-accent: #ffffff;
+      --btn-from: #5b4bf0;
+      --btn-to: light-dark(#3775c4, #3556e0);
       --radius: 24px;
       --radius-sm: 14px;
       --ease: cubic-bezier(.2, .7, .2, 1);
       --max-w: 1180px;
-      --font-head: 'Unbounded', 'Manrope', system-ui, sans-serif;
+      --font-head: 'Unbounded', 'Unbounded Fallback', 'Manrope', system-ui, sans-serif;
     }
 
     @media (prefers-color-scheme: light) {
@@ -153,7 +270,7 @@
     }
 
     body {
-      font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-family: 'Manrope', 'Manrope Fallback', system-ui, -apple-system, 'Segoe UI', sans-serif;
       background: var(--bg);
       color: var(--text);
       font-weight: 500;
@@ -180,13 +297,35 @@
 
     ::selection {
       background: var(--accent);
-      color: var(--on-accent);
+      color: light-dark(#ffffff, #0f1117);
     }
 
     :focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 3px;
       border-radius: 8px;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: .75rem;
+      left: .75rem;
+      z-index: 200;
+      padding: .7rem 1.1rem;
+      border-radius: 999px;
+      background: var(--surface-strong);
+      color: var(--text);
+      font-weight: 700;
+      box-shadow: var(--shadow);
+      translate: 0 -200%;
+    }
+
+    .skip-link:focus {
+      translate: 0 0;
+    }
+
+    main:focus {
+      outline: none;
     }
 
     .page-bg {
@@ -262,12 +401,13 @@
 
     .nav-links {
       display: flex;
-      gap: .25rem;
+      gap: .1rem;
     }
 
     .nav-links a {
       display: block;
-      padding: .5rem .9rem;
+      white-space: nowrap;
+      padding: .5rem .7rem;
       border-radius: 999px;
       font-size: .88rem;
       font-weight: 600;
@@ -404,7 +544,7 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 55%, var(--accent2)));
+      background: linear-gradient(135deg, var(--btn-from), var(--btn-to));
       color: var(--on-accent);
       box-shadow: 0 10px 30px -10px var(--glow);
     }
@@ -511,7 +651,8 @@
 
     h1,
     h2,
-    h3 {
+    h3,
+    h4 {
       font-family: var(--font-head);
       letter-spacing: -0.02em;
       line-height: 1.12;
@@ -555,7 +696,7 @@
         box-shadow: 0 8px 30px rgb(0 0 0 / .35);
       }
 
-      #nav.scrolled ~ .sticky-cta {
+      .scrolled .sticky-cta {
         transform: none;
       }
 
@@ -636,7 +777,7 @@
       display: block;
       font-weight: 500;
       color: var(--muted);
-      font-size: .72rem;
+      font-size: .78rem;
     }
 
     .chip-icon {
@@ -653,11 +794,6 @@
     .chip-icon svg {
       width: 18px;
       height: 18px;
-    }
-
-    .chip-1 {
-      top: 12%;
-      left: -18%;
     }
 
     .chip-2 {
@@ -708,53 +844,37 @@
       color: var(--muted);
     }
 
-    .marquee-label {
+    .clients {
       margin-top: 3.5rem;
       text-align: center;
+    }
+
+    .clients-label {
+      margin-bottom: 1rem;
+      font-family: inherit;
       font-size: .78rem;
       font-weight: 700;
       letter-spacing: .14em;
+      line-height: 1.6;
       text-transform: uppercase;
       color: var(--muted);
     }
 
-    .marquee {
-      margin-top: 1rem;
-      overflow: hidden;
-      border-block: 1px solid var(--border);
+    .clients-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: .6rem 2.25rem;
       padding: 1.1rem 0;
-      mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-      -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+      border-block: 1px solid var(--border);
     }
 
-    .marquee-track {
-      display: flex;
-      gap: 3rem;
-      width: max-content;
-      animation: marquee 40s linear infinite;
-    }
-
-    .marquee-track span {
+    .clients-list li {
       font-family: var(--font-head);
-      font-size: 1rem;
+      font-size: .95rem;
       font-weight: 500;
-      color: var(--faint);
+      color: var(--muted);
       white-space: nowrap;
-      display: flex;
-      align-items: center;
-      gap: 3rem;
-    }
-
-    .marquee-track span::after {
-      content: '✦';
-      color: var(--accent);
-      font-size: .7rem;
-    }
-
-    @keyframes marquee {
-      to {
-        transform: translateX(-50%);
-      }
     }
 
     section {
@@ -781,6 +901,8 @@
       text-transform: uppercase;
       color: var(--accent);
       margin-bottom: 1rem;
+      font-family: inherit;
+      line-height: 1.6;
     }
 
     .section-tag::before {
@@ -927,7 +1049,7 @@
       color: var(--accent);
     }
 
-    .career-item h3 {
+    .career-item h4 {
       font-size: 1.05rem;
       font-weight: 600;
       margin: .35rem 0 .4rem;
@@ -939,7 +1061,7 @@
     }
 
     .link-accent {
-      color: var(--accent2);
+      color: var(--accent2-text);
       font-weight: 700;
       border-bottom: 1px solid color-mix(in srgb, var(--accent2) 40%, transparent);
       transition: border-color .2s;
@@ -1072,7 +1194,7 @@
       padding: .25rem .8rem;
       border-radius: 999px;
       background: var(--bg-soft);
-      font-size: .74rem;
+      font-size: .78rem;
       color: var(--muted);
       font-weight: 600;
       overflow: hidden;
@@ -1114,7 +1236,7 @@
       font-family: var(--font-head);
       font-size: .85rem;
       font-weight: 600;
-      color: var(--faint);
+      color: var(--muted);
     }
 
     .project-status {
@@ -1123,10 +1245,10 @@
       gap: .45rem;
       padding: .3rem .75rem;
       border-radius: 999px;
-      font-size: .74rem;
+      font-size: .78rem;
       font-weight: 700;
       background: var(--accent2-soft);
-      color: var(--accent2);
+      color: var(--accent2-text);
     }
 
     .project-status::before {
@@ -1211,7 +1333,7 @@
       padding: 1rem .5rem .5rem;
     }
 
-    .mini-body h3 {
+    .mini-body h4 {
       font-size: 1.05rem;
       font-weight: 600;
     }
@@ -1324,6 +1446,11 @@
       color: var(--muted);
     }
 
+    .review figcaption a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
     .review figcaption strong {
       display: block;
       color: var(--text);
@@ -1331,8 +1458,15 @@
     }
 
     .reviews-more {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: .75rem;
       margin-top: 1.5rem;
-      text-align: center;
+    }
+
+    .reviews-toggle {
+      display: none;
     }
 
     .project-foot {
@@ -1474,7 +1608,7 @@
 
     input::placeholder,
     textarea::placeholder {
-      color: var(--faint);
+      color: var(--muted);
     }
 
     input:focus,
@@ -1491,6 +1625,36 @@
 
     .form-submit {
       align-self: flex-start;
+    }
+
+    .form-trap {
+      display: none;
+    }
+
+    .form-consent {
+      display: flex;
+      align-items: flex-start;
+      gap: .65rem;
+      margin: 0;
+      font-size: .85rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .form-consent input {
+      flex-shrink: 0;
+      width: 1.15rem;
+      height: 1.15rem;
+      margin-top: .15rem;
+      padding: 0;
+      accent-color: var(--accent);
+      box-shadow: none;
+    }
+
+    .form-consent a {
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
     .select {
@@ -1621,16 +1785,25 @@
 
     .form-status {
       font-weight: 600;
-      color: var(--accent2);
+      color: var(--accent2-text);
+    }
+
+    .form-status:empty {
+      margin-top: -1rem;
     }
 
     .form-status.is-error {
       color: var(--text);
     }
 
+    .form-status a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
     footer {
       padding: 2.5rem 0 3rem;
-      color: var(--faint);
+      color: var(--muted);
       font-size: .85rem;
     }
 
@@ -1652,34 +1825,33 @@
     }
 
     .reveal {
-      opacity: 0;
-      transform: translateY(28px);
       transition: opacity .8s var(--ease), transform .8s var(--ease), translate .4s var(--ease), border-color .3s var(--ease), box-shadow .4s var(--ease);
     }
 
-    .reveal.visible {
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+
+    .js .reveal.visible {
       opacity: 1;
       transform: none;
     }
 
     @media (max-width: 1000px) {
       .hero-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 2rem;
       }
 
       .hero-visual {
-        justify-self: start;
-        max-width: 340px;
-      }
-
-      .chip-1 {
-        left: auto;
-        right: -40%;
-        top: 10%;
+        max-width: 300px;
       }
 
       .chip-2 {
-        right: -40%;
+        right: auto;
+        left: -18%;
+        bottom: 8%;
       }
 
       .bento-text,
@@ -1733,7 +1905,7 @@
       }
     }
 
-    @media (max-width: 860px) {
+    @media (max-width: 1100px) {
       .nav-links {
         display: none;
         position: absolute;
@@ -1761,7 +1933,9 @@
       .nav-burger {
         display: flex;
       }
+    }
 
+    @media (max-width: 860px) {
       .nav-cta {
         display: none;
       }
@@ -1776,8 +1950,45 @@
         padding: 2.4rem 0;
       }
 
+      .hero-grid {
+        grid-template-columns: 64px minmax(0, 1fr);
+        gap: 0 1rem;
+        align-items: center;
+      }
+
+      .hero-text {
+        display: contents;
+      }
+
+      .hero-text > :not(.badge) {
+        grid-column: 1 / -1;
+      }
+
       .hero-visual {
-        max-width: 260px;
+        grid-row: 1;
+        grid-column: 1;
+        width: 64px;
+      }
+
+      .badge {
+        grid-row: 1;
+        grid-column: 2;
+        justify-self: start;
+      }
+
+      .hero-photo {
+        aspect-ratio: 1;
+        border-radius: 50%;
+        border: 2px solid var(--accent);
+        box-shadow: 0 0 0 4px var(--accent-soft);
+      }
+
+      .hero-photo::after {
+        display: none;
+      }
+
+      #hero h1 {
+        margin-top: 1rem;
       }
 
       .chip {
@@ -1806,6 +2017,37 @@
         padding: 1.6rem;
       }
 
+      .js .reviews-toggle {
+        display: inline-flex;
+      }
+
+      .js .reviews:not(.is-expanded) .review--extra {
+        display: none;
+      }
+
+      .mini-project {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: .9rem;
+      }
+
+      .mini-project .project-media {
+        flex: 0 0 112px;
+        border-radius: 12px;
+      }
+
+      .mini-project .browser-bar {
+        display: none;
+      }
+
+      .mini-project .project-shot {
+        aspect-ratio: 4 / 5;
+      }
+
+      .mini-body {
+        padding: .1rem 0;
+      }
+
       .case div {
         grid-template-columns: 1fr;
         gap: .2rem;
@@ -1825,10 +2067,6 @@
     }
 
     @media (max-width: 380px) {
-      .hero-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
       #hero h1 {
         font-size: 1.75rem;
       }
@@ -1851,20 +2089,88 @@
         scroll-behavior: auto;
       }
 
-      .reveal {
+      .js .reveal {
         opacity: 1;
         transform: none;
         transition: translate .4s var(--ease), border-color .3s var(--ease), box-shadow .4s var(--ease);
+      }
+    }
+
+    @media print {
+      :root {
+        color-scheme: light;
+      }
+
+      body {
+        background: #fff;
+        color: #000;
+      }
+
+      nav,
+      .skip-link,
+      .sticky-cta,
+      .orb,
+      .page-bg,
+      .hero-visual,
+      #contact-form,
+      .reviews-toggle,
+      .footer-inner a {
+        display: none !important;
+      }
+
+      #hero {
+        padding-top: 0;
+      }
+
+      .js .reveal,
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+
+      .card {
+        backdrop-filter: none;
+        background: none;
+        break-inside: avoid;
+      }
+
+      .gradient-text {
+        -webkit-text-fill-color: currentColor;
+        background: none;
+      }
+
+      .project-media {
+        position: static;
+      }
+
+      .review--extra {
+        display: flex !important;
+      }
+
+      .project-link::after,
+      .contact-item[href]::after {
+        content: " (" attr(href) ")";
+        font-weight: 500;
+        font-size: .8em;
+      }
+
+      .contact-card {
+        display: block;
       }
     }
   </style>
 </head>
 
 <body>
+  <noscript>
+    <!-- [html-validate-disable-block no-inline-style] -->
+    <div><img src="https://mc.yandex.ru/watch/113365152" style="position:absolute;left:-9999px;" alt="" /></div>
+  </noscript>
+  <a class="skip-link" href="#main">К содержимому</a>
   <div class="page-bg" aria-hidden="true"></div>
 
   <nav id="nav">
-    <a href="#hero" class="nav-logo" aria-label="В начало">
+    <a href="#hero" class="nav-logo">
       <picture class="nav-logo-mark">
         <source srcset="img/logo-96.avif" type="image/avif" />
         <source srcset="img/logo-96.webp" type="image/webp" />
@@ -1874,8 +2180,9 @@
     </a>
     <ul class="nav-links" id="nav-links">
       <li><a href="#projects">Проекты</a></li>
+      <li><a href="#skills">Услуги</a></li>
       <li><a href="#reviews">Отзывы</a></li>
-      <li><a href="#process">Как работаю</a></li>
+      <li><a href="#process">Этапы</a></li>
       <li><a href="#about">Обо мне</a></li>
       <li><a href="#faq">Вопросы</a></li>
       <li><a href="#contact">Контакты</a></li>
@@ -1885,34 +2192,32 @@
         <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" /></svg>
         <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg>
       </button>
-      <a href="#contact" class="btn btn-primary nav-cta">Обсудить проект</a>
+      <a href="#contact" class="btn btn-primary nav-cta">Оставить заявку</a>
       <button class="nav-burger" id="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
-  <a href="https://t.me/paveliskrinsky" target="_blank" rel="noopener" class="btn btn-primary sticky-cta">Обсудить проект в&nbsp;Telegram</a>
-
-  <main>
+  <main id="main" tabindex="-1">
     <section id="hero">
       <div class="orb orb-1" aria-hidden="true"></div>
       <div class="orb orb-2" aria-hidden="true"></div>
       <div class="container">
         <div class="hero-grid">
-          <div>
+          <div class="hero-text">
             <div class="badge">
               <span class="dot" aria-hidden="true"></span>
               Беру новые проекты &middot; отвечаю в&nbsp;течение дня
             </div>
             <h1>
-              Быстрые сайты <span class="gradient-text">для&nbsp;вашего бизнеса</span>
+              Разработка быстрых сайтов <span class="gradient-text">для&nbsp;вашего бизнеса</span>
             </h1>
             <p class="hero-sub">
               Сверстаю сайт по&nbsp;вашему макету, сделаю под&nbsp;ключ или&nbsp;ускорю текущий. Сайты удобны с&nbsp;телефона и&nbsp;быстро грузятся&nbsp;&mdash; 90+ баллов PageSpeed.
             </p>
             <div class="hero-cta">
               <a href="https://t.me/paveliskrinsky" target="_blank" rel="noopener" class="btn btn-primary">
-                Обсудить проект
+                Написать в&nbsp;Telegram
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
               </a>
               <a href="#projects" class="btn btn-ghost">Смотреть работы</a>
@@ -1923,9 +2228,9 @@
           <div class="hero-visual">
             <div class="hero-photo">
               <picture>
-                <source srcset="img/avatar-480.avif 480w, img/avatar-800.avif 800w" sizes="(max-width: 640px) 260px, (max-width: 1000px) 340px, 400px" type="image/avif" />
-                <source srcset="img/avatar-480.webp 480w, img/avatar-800.webp 800w" sizes="(max-width: 640px) 260px, (max-width: 1000px) 340px, 400px" type="image/webp" />
-                <img src="img/avatar-800.jpg" srcset="img/avatar-480.jpg 480w, img/avatar-800.jpg 800w" sizes="(max-width: 640px) 260px, (max-width: 1000px) 340px, 400px" alt="Павел Искринский" width="800" height="1067" fetchpriority="high" />
+                <source srcset="img/avatar-160.avif 160w, img/avatar-480.avif 480w, img/avatar-560.avif 560w, img/avatar-800.avif 800w" sizes="(max-width: 640px) 72px, (max-width: 1000px) 300px, 400px" type="image/avif" />
+                <source srcset="img/avatar-160.webp 160w, img/avatar-480.webp 480w, img/avatar-560.webp 560w, img/avatar-800.webp 800w" sizes="(max-width: 640px) 72px, (max-width: 1000px) 300px, 400px" type="image/webp" />
+                <img src="img/avatar-800.jpg" srcset="img/avatar-160.jpg 160w, img/avatar-480.jpg 480w, img/avatar-560.jpg 560w, img/avatar-800.jpg 800w" sizes="(max-width: 640px) 72px, (max-width: 1000px) 300px, 400px" alt="Павел Искринский" width="800" height="1067" />
               </picture>
             </div>
             <a class="chip chip-2" href="#projects">
@@ -1953,12 +2258,19 @@
         </div>
       </div>
 
-      <p class="marquee-label">Клиенты и&nbsp;что вы получите</p>
-      <div class="marquee" aria-hidden="true">
-        <div class="marquee-track">
-          <span>АО «КемВод»</span><span>Зеленогорский зоопарк</span><span>Адаптивная вёрстка</span><span>SEO-структура</span><span>Быстрая загрузка</span><span>Договор и чек</span><span>Ответ в течение дня</span>
-          <span>АО «КемВод»</span><span>Зеленогорский зоопарк</span><span>Адаптивная вёрстка</span><span>SEO-структура</span><span>Быстрая загрузка</span><span>Договор и чек</span><span>Ответ в течение дня</span>
-        </div>
+      <div class="container clients">
+        <h2 class="clients-label">Работал с</h2>
+        <ul class="clients-list">
+          <li>АО&nbsp;«КемВод»</li>
+          <li>Зеленогорский зоопарк</li>
+          <li>Nisanov Corp</li>
+          <li>No&nbsp;Logo Studio</li>
+          <li>АртАльт</li>
+          <li>Alente</li>
+          <li>CASTCOM</li>
+          <li>DokinLab</li>
+          <li>MilloriDS</li>
+        </ul>
       </div>
     </section>
 
@@ -1978,9 +2290,9 @@
               <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">kemvod.ru</span></div>
               <div class="project-shot">
                 <picture>
-                  <source srcset="img/projects/kemvod-640.avif 640w, img/projects/kemvod-1200.avif 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/avif" />
-                  <source srcset="img/projects/kemvod-640.webp 640w, img/projects/kemvod-1200.webp 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/webp" />
-                  <img src="img/projects/kemvod-1200.jpg" srcset="img/projects/kemvod-640.jpg 640w, img/projects/kemvod-1200.jpg 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" alt="Главная страница сайта АО «КемВод»" width="1200" height="1500" loading="lazy" decoding="async" />
+                  <source srcset="img/projects/kemvod-520.avif 520w, img/projects/kemvod-640.avif 640w, img/projects/kemvod-1200.avif 1200w" sizes="(max-width: 640px) calc(100vw - 4.5rem), (max-width: 1000px) calc(100vw - 5.5rem), 563px" type="image/avif" />
+                  <source srcset="img/projects/kemvod-520.webp 520w, img/projects/kemvod-640.webp 640w, img/projects/kemvod-1200.webp 1200w" sizes="(max-width: 640px) calc(100vw - 4.5rem), (max-width: 1000px) calc(100vw - 5.5rem), 563px" type="image/webp" />
+                  <img src="img/projects/kemvod-1200.jpg" srcset="img/projects/kemvod-520.jpg 520w, img/projects/kemvod-640.jpg 640w, img/projects/kemvod-1200.jpg 1200w" sizes="(max-width: 640px) calc(100vw - 4.5rem), (max-width: 1000px) calc(100vw - 5.5rem), 563px" alt="Главная страница сайта АО «КемВод»" width="1200" height="1500" loading="lazy" decoding="async" />
                 </picture>
               </div>
             </a>
@@ -2026,9 +2338,9 @@
               <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">zelzoo.ru</span></div>
               <div class="project-shot">
                 <picture>
-                  <source srcset="img/projects/zelzoo-640.avif 640w, img/projects/zelzoo-1200.avif 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/avif" />
-                  <source srcset="img/projects/zelzoo-640.webp 640w, img/projects/zelzoo-1200.webp 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" type="image/webp" />
-                  <img src="img/projects/zelzoo-1200.jpg" srcset="img/projects/zelzoo-640.jpg 640w, img/projects/zelzoo-1200.jpg 1200w" sizes="(max-width: 1000px) calc(100vw - 3rem), 600px" alt="Главная страница сайта Зеленогорского зоопарка" width="1200" height="1500" loading="lazy" decoding="async" />
+                  <source srcset="img/projects/zelzoo-520.avif 520w, img/projects/zelzoo-640.avif 640w, img/projects/zelzoo-1200.avif 1200w" sizes="(max-width: 640px) calc(100vw - 4.5rem), (max-width: 1000px) calc(100vw - 5.5rem), 563px" type="image/avif" />
+                  <source srcset="img/projects/zelzoo-520.webp 520w, img/projects/zelzoo-640.webp 640w, img/projects/zelzoo-1200.webp 1200w" sizes="(max-width: 640px) calc(100vw - 4.5rem), (max-width: 1000px) calc(100vw - 5.5rem), 563px" type="image/webp" />
+                  <img src="img/projects/zelzoo-1200.jpg" srcset="img/projects/zelzoo-520.jpg 520w, img/projects/zelzoo-640.jpg 640w, img/projects/zelzoo-1200.jpg 1200w" sizes="(max-width: 640px) calc(100vw - 4.5rem), (max-width: 1000px) calc(100vw - 5.5rem), 563px" alt="Главная страница сайта Зеленогорского зоопарка" width="1200" height="1500" loading="lazy" decoding="async" />
                 </picture>
               </div>
             </a>
@@ -2071,7 +2383,7 @@
         </div>
 
         <div class="subhead reveal">
-          <p class="section-tag">Мои собственные проекты</p>
+          <h3 class="section-tag">Мои собственные проекты</h3>
           <p class="subhead-desc">Справочники и&nbsp;сервис калькуляторов&nbsp;&mdash; от&nbsp;идеи до&nbsp;запуска.</p>
         </div>
 
@@ -2081,14 +2393,14 @@
               <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">kombos.ru</span></div>
               <div class="project-shot">
                 <picture>
-                  <source srcset="img/projects/kombos-640.avif 640w, img/projects/kombos-1200.avif 1200w" sizes="(max-width: 640px) calc(100vw - 3rem), 520px" type="image/avif" />
-                  <source srcset="img/projects/kombos-640.webp 640w, img/projects/kombos-1200.webp 1200w" sizes="(max-width: 640px) calc(100vw - 3rem), 520px" type="image/webp" />
-                  <img src="img/projects/kombos-640.jpg" srcset="img/projects/kombos-640.jpg 640w, img/projects/kombos-1200.jpg 1200w" sizes="(max-width: 640px) calc(100vw - 3rem), 520px" alt="Главная страница сайта KOMBOS.RU" width="1200" height="1500" loading="lazy" decoding="async" />
+                  <source srcset="img/projects/kombos-520.avif 520w, img/projects/kombos-640.avif 640w, img/projects/kombos-1200.avif 1200w" sizes="(max-width: 640px) 112px, (max-width: 1180px) calc(50vw - 3.5rem), 534px" type="image/avif" />
+                  <source srcset="img/projects/kombos-520.webp 520w, img/projects/kombos-640.webp 640w, img/projects/kombos-1200.webp 1200w" sizes="(max-width: 640px) 112px, (max-width: 1180px) calc(50vw - 3.5rem), 534px" type="image/webp" />
+                  <img src="img/projects/kombos-640.jpg" srcset="img/projects/kombos-520.jpg 520w, img/projects/kombos-640.jpg 640w, img/projects/kombos-1200.jpg 1200w" sizes="(max-width: 640px) 112px, (max-width: 1180px) calc(50vw - 3.5rem), 534px" alt="Главная страница сайта KOMBOS.RU" width="1200" height="1500" loading="lazy" decoding="async" />
                 </picture>
               </div>
             </a>
             <div class="mini-body">
-              <h3>KOMBOS.RU</h3>
+              <h4>KOMBOS.RU</h4>
               <p>Справочник по&nbsp;Mortal Kombat: 10&nbsp;763 приёма и&nbsp;81 персонаж. Комбо показаны кнопками выбранного геймпада.</p>
               <a class="link-accent" href="https://kombos.ru" target="_blank" rel="noopener">kombos.ru&nbsp;&#8599;</a>
             </div>
@@ -2099,14 +2411,14 @@
               <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">vvezi.ru</span></div>
               <div class="project-shot">
                 <picture>
-                  <source srcset="img/projects/vvezi-640.avif 640w, img/projects/vvezi-1200.avif 1200w" sizes="(max-width: 640px) calc(100vw - 3rem), 520px" type="image/avif" />
-                  <source srcset="img/projects/vvezi-640.webp 640w, img/projects/vvezi-1200.webp 1200w" sizes="(max-width: 640px) calc(100vw - 3rem), 520px" type="image/webp" />
-                  <img src="img/projects/vvezi-640.jpg" srcset="img/projects/vvezi-640.jpg 640w, img/projects/vvezi-1200.jpg 1200w" sizes="(max-width: 640px) calc(100vw - 3rem), 520px" alt="Главная страница сайта Ввези.ru" width="1200" height="1500" loading="lazy" decoding="async" />
+                  <source srcset="img/projects/vvezi-520.avif 520w, img/projects/vvezi-640.avif 640w, img/projects/vvezi-1200.avif 1200w" sizes="(max-width: 640px) 112px, (max-width: 1180px) calc(50vw - 3.5rem), 534px" type="image/avif" />
+                  <source srcset="img/projects/vvezi-520.webp 520w, img/projects/vvezi-640.webp 640w, img/projects/vvezi-1200.webp 1200w" sizes="(max-width: 640px) 112px, (max-width: 1180px) calc(50vw - 3.5rem), 534px" type="image/webp" />
+                  <img src="img/projects/vvezi-640.jpg" srcset="img/projects/vvezi-520.jpg 520w, img/projects/vvezi-640.jpg 640w, img/projects/vvezi-1200.jpg 1200w" sizes="(max-width: 640px) 112px, (max-width: 1180px) calc(50vw - 3.5rem), 534px" alt="Главная страница сайта Ввези.ru" width="1200" height="1500" loading="lazy" decoding="async" />
                 </picture>
               </div>
             </a>
             <div class="mini-body">
-              <h3>Ввези.ru</h3>
+              <h4>Ввези.ru</h4>
               <p>Калькуляторы растаможки и&nbsp;утильсбора по&nbsp;ставкам из&nbsp;постановлений Правительства и&nbsp;курсу ЦБ на&nbsp;сегодня.</p>
               <a class="link-accent" href="https://vvezi.ru" target="_blank" rel="noopener">vvezi.ru&nbsp;&#8599;</a>
             </div>
@@ -2117,14 +2429,14 @@
               <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">zaveli.ru</span></div>
               <div class="project-shot">
                 <picture>
-                  <source srcset="img/projects/zaveli-640.avif 640w, img/projects/zaveli-1200.avif 1200w" sizes="(max-width: 640px) calc(100vw - 3rem), 520px" type="image/avif" />
-                  <source srcset="img/projects/zaveli-640.webp 640w, img/projects/zaveli-1200.webp 1200w" sizes="(max-width: 640px) calc(100vw - 3rem), 520px" type="image/webp" />
-                  <img src="img/projects/zaveli-640.jpg" srcset="img/projects/zaveli-640.jpg 640w, img/projects/zaveli-1200.jpg 1200w" sizes="(max-width: 640px) calc(100vw - 3rem), 520px" alt="Главная страница сайта Завели.ru" width="1200" height="1500" loading="lazy" decoding="async" />
+                  <source srcset="img/projects/zaveli-520.avif 520w, img/projects/zaveli-640.avif 640w, img/projects/zaveli-1200.avif 1200w" sizes="(max-width: 640px) 112px, (max-width: 1180px) calc(50vw - 3.5rem), 534px" type="image/avif" />
+                  <source srcset="img/projects/zaveli-520.webp 520w, img/projects/zaveli-640.webp 640w, img/projects/zaveli-1200.webp 1200w" sizes="(max-width: 640px) 112px, (max-width: 1180px) calc(50vw - 3.5rem), 534px" type="image/webp" />
+                  <img src="img/projects/zaveli-640.jpg" srcset="img/projects/zaveli-520.jpg 520w, img/projects/zaveli-640.jpg 640w, img/projects/zaveli-1200.jpg 1200w" sizes="(max-width: 640px) 112px, (max-width: 1180px) calc(50vw - 3.5rem), 534px" alt="Главная страница сайта Завели.ru" width="1200" height="1500" loading="lazy" decoding="async" />
                 </picture>
               </div>
             </a>
             <div class="mini-body">
-              <h3>Завели.ru</h3>
+              <h4>Завели.ru</h4>
               <p>Какие кнопки нажать для автозапуска, привязки брелка и&nbsp;сервисного режима: 15 моделей StarLine и&nbsp;120 инструкций по&nbsp;руководствам производителей.</p>
               <a class="link-accent" href="https://zaveli.ru" target="_blank" rel="noopener">zaveli.ru&nbsp;&#8599;</a>
             </div>
@@ -2135,176 +2447,18 @@
               <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">kodrazbor.ru</span></div>
               <div class="project-shot">
                 <picture>
-                  <source srcset="img/projects/kodrazbor-640.avif 640w, img/projects/kodrazbor-1200.avif 1200w" sizes="(max-width: 640px) calc(100vw - 3rem), 520px" type="image/avif" />
-                  <source srcset="img/projects/kodrazbor-640.webp 640w, img/projects/kodrazbor-1200.webp 1200w" sizes="(max-width: 640px) calc(100vw - 3rem), 520px" type="image/webp" />
-                  <img src="img/projects/kodrazbor-640.jpg" srcset="img/projects/kodrazbor-640.jpg 640w, img/projects/kodrazbor-1200.jpg 1200w" sizes="(max-width: 640px) calc(100vw - 3rem), 520px" alt="Главная страница сайта КодРазбор" width="1200" height="1500" loading="lazy" decoding="async" />
+                  <source srcset="img/projects/kodrazbor-520.avif 520w, img/projects/kodrazbor-640.avif 640w, img/projects/kodrazbor-1200.avif 1200w" sizes="(max-width: 640px) 112px, (max-width: 1180px) calc(50vw - 3.5rem), 534px" type="image/avif" />
+                  <source srcset="img/projects/kodrazbor-520.webp 520w, img/projects/kodrazbor-640.webp 640w, img/projects/kodrazbor-1200.webp 1200w" sizes="(max-width: 640px) 112px, (max-width: 1180px) calc(50vw - 3.5rem), 534px" type="image/webp" />
+                  <img src="img/projects/kodrazbor-640.jpg" srcset="img/projects/kodrazbor-520.jpg 520w, img/projects/kodrazbor-640.jpg 640w, img/projects/kodrazbor-1200.jpg 1200w" sizes="(max-width: 640px) 112px, (max-width: 1180px) calc(50vw - 3.5rem), 534px" alt="Главная страница сайта КодРазбор" width="1200" height="1500" loading="lazy" decoding="async" />
                 </picture>
               </div>
             </a>
             <div class="mini-body">
-              <h3>КодРазбор</h3>
+              <h4>КодРазбор</h4>
               <p>465 кодов ошибок газовых котлов 10 брендов: что значит код, что проверить самому и&nbsp;когда звать мастера.</p>
               <a class="link-accent" href="https://kodrazbor.ru" target="_blank" rel="noopener">kodrazbor.ru&nbsp;&#8599;</a>
             </div>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="reviews">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <p class="section-tag">Отзывы</p>
-            <h2 class="section-title">Что говорят заказчики</h2>
-          </div>
-          <p class="section-desc">56 отзывов на&nbsp;freelance.ru, все положительные. Чаще всего хвалят сроки, качество и&nbsp;то, что я&nbsp;всегда на&nbsp;связи.</p>
-        </div>
-
-        <div class="reviews">
-          <figure class="review card spot reveal">
-            <blockquote>&laquo;Внимательный, аккуратный, быстрый и&nbsp;высококвалифицированный. На&nbsp;все пожелания реагирует адекватно, даёт полезные рекомендации. Теперь сотрудничаю только с&nbsp;ним.&raquo;</blockquote>
-            <figcaption><strong>Иван Шарыпов</strong>Вёрстка PSD для&nbsp;Joomla</figcaption>
-          </figure>
-          <figure class="review card spot reveal">
-            <blockquote>&laquo;Павел был всегда на&nbsp;связи, очень грамотно и&nbsp;быстро отвечал на&nbsp;вопросы понятным мне языком. Сайт сделали в&nbsp;срок, всё чётко так, как и&nbsp;требовалось.&raquo;</blockquote>
-            <figcaption><strong>Кристина Давыдова</strong>Сайт под&nbsp;ключ</figcaption>
-          </figure>
-          <figure class="review card spot reveal">
-            <blockquote>&laquo;Сделал даже больше, чем изначально было прописано в&nbsp;ТЗ. В&nbsp;дальнейшем работу по&nbsp;разработке и&nbsp;поддержанию сайта буду доверять только ему.&raquo;</blockquote>
-            <figcaption><strong>Татьяна Завьялова</strong>Сайт под&nbsp;ключ</figcaption>
-          </figure>
-          <figure class="review card spot reveal">
-            <blockquote>&laquo;Результат даже лучше, чем ожидал изначально. Павел всегда на&nbsp;связи, всегда готов подсказать, дать совет при&nbsp;необходимости.&raquo;</blockquote>
-            <figcaption><strong>Антон Иванов</strong>Вёрстка лендинга по&nbsp;макету</figcaption>
-          </figure>
-          <figure class="review card spot reveal">
-            <blockquote>&laquo;Работа была завершена быстро, раньше срока. Все доработки были выполнены также очень быстро и&nbsp;качественно! Отдельное спасибо за&nbsp;курирование уже после окончания работы.&raquo;</blockquote>
-            <figcaption><strong>Мария Печёрских</strong>Вёрстка сайта</figcaption>
-          </figure>
-          <figure class="review card spot reveal">
-            <blockquote>&laquo;После нескольких неудачных попыток остановился на&nbsp;Павле. Заказчик я&nbsp;довольно требовательный, но&nbsp;всё было исполнено чётко в&nbsp;соответствии с&nbsp;требованиями.&raquo;</blockquote>
-            <figcaption><strong>Дмитрий Ткаченко</strong>Сайт по&nbsp;готовому дизайну</figcaption>
-          </figure>
-        </div>
-
-        <div class="reviews-more reveal">
-          <a class="btn btn-ghost" href="https://freelance.ru/reviews/paveliskrinsky/" target="_blank" rel="noopener">Все 56 отзывов на&nbsp;freelance.ru</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="process">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <p class="section-tag">Как я работаю</p>
-            <h2 class="section-title">От&nbsp;заявки до&nbsp;запуска</h2>
-          </div>
-          <p class="section-desc">Стоимость и&nbsp;срок вы&nbsp;знаете до&nbsp;начала работы, а&nbsp;по&nbsp;ходу&nbsp;&mdash; видите, как она идёт.</p>
-        </div>
-
-        <ol class="work-steps">
-          <li class="work-step card spot reveal">
-            <span class="work-step-num" aria-hidden="true">01</span>
-            <h3>Заявка</h3>
-            <p>Напишите в&nbsp;Telegram или&nbsp;через форму: что нужно сделать, есть ли&nbsp;макет, к&nbsp;какому сроку. Отвечаю в&nbsp;течение дня.</p>
-          </li>
-          <li class="work-step card spot reveal">
-            <span class="work-step-num" aria-hidden="true">02</span>
-            <h3>Оценка и&nbsp;договор</h3>
-            <p>Уточняю детали, называю стоимость и&nbsp;срок. Работаю как самозанятый: договор и&nbsp;чек.</p>
-          </li>
-          <li class="work-step card spot reveal">
-            <span class="work-step-num" aria-hidden="true">03</span>
-            <h3>Разработка</h3>
-            <p>Делаю сайт и&nbsp;держу вас в&nbsp;курсе. Правки по&nbsp;ходу работы вношу быстро.</p>
-          </li>
-          <li class="work-step card spot reveal">
-            <span class="work-step-num" aria-hidden="true">04</span>
-            <h3>Проверка и&nbsp;запуск</h3>
-            <p>Проверяю сайт на&nbsp;телефонах, планшетах и&nbsp;компьютерах в&nbsp;разных браузерах и&nbsp;запускаю.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <section id="about">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <p class="section-tag">Обо мне</p>
-            <h2 class="section-title">14&nbsp;лет делаю сайты</h2>
-          </div>
-          <p class="section-desc">От&nbsp;первых заказов на&nbsp;фрилансе до&nbsp;поддержки десятка клиентских сайтов в&nbsp;студии.</p>
-        </div>
-
-        <div class="bento">
-          <div class="bento-text card spot reveal">
-            <p>
-              Меня зовут Павел. С&nbsp;2012 года делаю сайты для&nbsp;бизнеса: лендинги, корпоративные сайты и&nbsp;интернет-магазины.
-              Четыре года разрабатывал интернет-магазины в&nbsp;<strong>Nisanov Corp</strong> и&nbsp;доводил их до&nbsp;<strong>90&ndash;95 баллов Google PageSpeed</strong>,
-              потом работал с&nbsp;агентствами и&nbsp;постоянными клиентами по&nbsp;рекомендациям.
-            </p>
-            <p>
-              Сейчас в&nbsp;<strong>No Logo Studio</strong> делаю сайты по&nbsp;макетам Figma и&nbsp;веду 10+ клиентских сайтов на&nbsp;1С-Битрикс и&nbsp;Laravel:
-              правки, обновления, новые разделы. Параллельно беру проекты напрямую.
-            </p>
-            <p>
-              Для&nbsp;заказчика главное&nbsp;&mdash; чтобы сайт быстро открывался, был удобен с&nbsp;телефона и&nbsp;его было легко дорабатывать.
-              Поэтому пишу чистый и&nbsp;лёгкий код и&nbsp;каждое изменение проверяю сам на&nbsp;разных экранах.
-            </p>
-          </div>
-
-          <div class="bento-side">
-            <div class="bento-mini card spot reveal">
-              <div class="icon-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><path d="M14 2v6h6M9 15l2 2 4-4" /></svg>
-              </div>
-              <h3>Договор и&nbsp;чек</h3>
-              <p>Работаю как самозанятый, паспорт верифицирован на&nbsp;freelance.ru.</p>
-            </div>
-            <div class="bento-mini card spot reveal">
-              <div class="icon-box icon-box--teal" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z" /><path d="M6 12v5c3 2 9 2 12 0v-5" /></svg>
-              </div>
-              <h3>Наставник</h3>
-              <p>Прошёл отбор в&nbsp;наставники HTML Academy.</p>
-            </div>
-            <div class="bento-mini card spot reveal">
-              <div class="icon-box icon-box--warm" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5M2 12l10 5 10-5" /></svg>
-              </div>
-              <h3>4 собственных проекта</h3>
-              <p>Справочники и&nbsp;сервис калькуляторов&nbsp;&mdash; от&nbsp;идеи до&nbsp;запуска.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="subhead reveal">
-          <p class="section-tag">Опыт</p>
-          <ol class="career">
-            <li class="career-item">
-              <span class="career-date">2023&nbsp;&mdash; сейчас</span>
-              <h3>No Logo Studio</h3>
-              <p>Сайты по&nbsp;макетам Figma для&nbsp;клиентов студии, поддержка 10+ сайтов на&nbsp;1С-Битрикс и&nbsp;Laravel.</p>
-            </li>
-            <li class="career-item">
-              <span class="career-date">2020&nbsp;&mdash; 2023</span>
-              <h3>Фриланс и&nbsp;агентства</h3>
-              <p>Лендинги, интернет-магазины и&nbsp;корпоративные сайты под&nbsp;ключ; проекты для&nbsp;Alente, CASTCOM, АртАльт, DokinLab, MilloriDS.</p>
-            </li>
-            <li class="career-item">
-              <span class="career-date">2016&nbsp;&mdash; 2020</span>
-              <h3>Nisanov Corp</h3>
-              <p>Интернет-магазины на&nbsp;OpenCart: каталоги, корзина, оформление заказа, ускорение до&nbsp;90&ndash;95 баллов PageSpeed.</p>
-            </li>
-            <li class="career-item">
-              <span class="career-date">2012&nbsp;&mdash; 2016</span>
-              <h3>freelance.ru</h3>
-              <p>Первые заказы: вёрстка и&nbsp;сайты на&nbsp;Joomla и&nbsp;WordPress, 56 положительных отзывов.</p>
-            </li>
-          </ol>
         </div>
       </div>
     </section>
@@ -2399,6 +2553,165 @@
       </div>
     </section>
 
+    <section id="reviews">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="section-tag">Отзывы</p>
+            <h2 class="section-title">Что говорят заказчики</h2>
+          </div>
+          <p class="section-desc">56 отзывов на&nbsp;freelance.ru, все положительные. Чаще всего хвалят сроки, качество и&nbsp;то, что я&nbsp;всегда на&nbsp;связи.</p>
+        </div>
+
+        <div class="reviews" id="reviews-list">
+          <figure class="review card spot reveal">
+            <blockquote>&laquo;Внимательный, аккуратный, быстрый и&nbsp;высококвалифицированный. На&nbsp;все пожелания реагирует адекватно, даёт полезные рекомендации. Теперь сотрудничаю только с&nbsp;ним.&raquo;</blockquote>
+            <figcaption><strong>Иван Шарыпов</strong>Вёрстка PSD для&nbsp;Joomla &middot; <a href="https://freelance.ru/reviews/paveliskrinsky/" target="_blank" rel="noopener">freelance.ru, 2014</a></figcaption>
+          </figure>
+          <figure class="review card spot reveal">
+            <blockquote>&laquo;Павел был всегда на&nbsp;связи, очень грамотно и&nbsp;быстро отвечал на&nbsp;вопросы понятным мне языком. Сайт сделали в&nbsp;срок, всё чётко так, как и&nbsp;требовалось.&raquo;</blockquote>
+            <figcaption><strong>Кристина Давыдова</strong>Сайт под&nbsp;ключ &middot; <a href="https://freelance.ru/reviews/paveliskrinsky/" target="_blank" rel="noopener">freelance.ru, 2014</a></figcaption>
+          </figure>
+          <figure class="review card spot reveal">
+            <blockquote>&laquo;Сделал даже больше, чем изначально было прописано в&nbsp;ТЗ. В&nbsp;дальнейшем работу по&nbsp;разработке и&nbsp;поддержанию сайта буду доверять только ему.&raquo;</blockquote>
+            <figcaption><strong>Татьяна Завьялова</strong>Сайт под&nbsp;ключ &middot; <a href="https://freelance.ru/reviews/paveliskrinsky/" target="_blank" rel="noopener">freelance.ru, 2012</a></figcaption>
+          </figure>
+          <figure class="review card spot reveal review--extra">
+            <blockquote>&laquo;Результат даже лучше, чем ожидал изначально. Павел всегда на&nbsp;связи, всегда готов подсказать, дать совет при&nbsp;необходимости.&raquo;</blockquote>
+            <figcaption><strong>Антон Иванов</strong>Вёрстка лендинга по&nbsp;макету &middot; <a href="https://freelance.ru/reviews/paveliskrinsky/" target="_blank" rel="noopener">freelance.ru, 2016</a></figcaption>
+          </figure>
+          <figure class="review card spot reveal review--extra">
+            <blockquote>&laquo;Работа была завершена быстро, раньше срока. Все доработки были выполнены также очень быстро и&nbsp;качественно! Отдельное спасибо за&nbsp;курирование уже после окончания работы.&raquo;</blockquote>
+            <figcaption><strong>Мария Печёрских</strong>Вёрстка сайта &middot; <a href="https://freelance.ru/reviews/paveliskrinsky/" target="_blank" rel="noopener">freelance.ru, 2014</a></figcaption>
+          </figure>
+          <figure class="review card spot reveal review--extra">
+            <blockquote>&laquo;После нескольких неудачных попыток остановился на&nbsp;Павле. Заказчик я&nbsp;довольно требовательный, но&nbsp;всё было исполнено чётко в&nbsp;соответствии с&nbsp;требованиями.&raquo;</blockquote>
+            <figcaption><strong>Дмитрий Ткаченко</strong>Сайт по&nbsp;готовому дизайну &middot; <a href="https://freelance.ru/reviews/paveliskrinsky/" target="_blank" rel="noopener">freelance.ru, 2012</a></figcaption>
+          </figure>
+        </div>
+
+        <div class="reviews-more reveal">
+          <button type="button" class="btn btn-ghost reviews-toggle">Показать ещё 3&nbsp;отзыва</button>
+          <a class="btn btn-ghost" href="https://freelance.ru/reviews/paveliskrinsky/" target="_blank" rel="noopener">Все 56 отзывов на&nbsp;freelance.ru</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="section-tag">Как я работаю</p>
+            <h2 class="section-title">От&nbsp;заявки до&nbsp;запуска</h2>
+          </div>
+          <p class="section-desc">Стоимость и&nbsp;срок вы&nbsp;знаете до&nbsp;начала работы, а&nbsp;по&nbsp;ходу&nbsp;&mdash; видите, как она идёт.</p>
+        </div>
+
+        <ol class="work-steps">
+          <li class="work-step card spot reveal">
+            <span class="work-step-num" aria-hidden="true">01</span>
+            <h3>Заявка</h3>
+            <p>Напишите в&nbsp;Telegram или&nbsp;через форму: что нужно сделать, есть ли&nbsp;макет, к&nbsp;какому сроку.</p>
+          </li>
+          <li class="work-step card spot reveal">
+            <span class="work-step-num" aria-hidden="true">02</span>
+            <h3>Оценка и&nbsp;договор</h3>
+            <p>Уточняю детали, называю стоимость и&nbsp;срок. Работаю как самозанятый: договор и&nbsp;чек.</p>
+          </li>
+          <li class="work-step card spot reveal">
+            <span class="work-step-num" aria-hidden="true">03</span>
+            <h3>Разработка</h3>
+            <p>Делаю сайт и&nbsp;держу вас в&nbsp;курсе. Правки по&nbsp;ходу работы вношу быстро.</p>
+          </li>
+          <li class="work-step card spot reveal">
+            <span class="work-step-num" aria-hidden="true">04</span>
+            <h3>Проверка и&nbsp;запуск</h3>
+            <p>Проверяю сайт на&nbsp;телефонах, планшетах и&nbsp;компьютерах в&nbsp;разных браузерах и&nbsp;запускаю.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="section-tag">Обо мне</p>
+            <h2 class="section-title">14&nbsp;лет делаю сайты</h2>
+          </div>
+          <p class="section-desc">От&nbsp;первых заказов на&nbsp;фрилансе до&nbsp;поддержки десятка клиентских сайтов в&nbsp;студии.</p>
+        </div>
+
+        <div class="bento">
+          <div class="bento-text card spot reveal">
+            <p>
+              Меня зовут Павел. С&nbsp;2012 года делаю сайты для&nbsp;бизнеса: лендинги, корпоративные сайты и&nbsp;интернет-магазины.
+              Четыре года разрабатывал интернет-магазины в&nbsp;<strong>Nisanov Corp</strong> и&nbsp;доводил их до&nbsp;<strong>90&ndash;95 баллов Google PageSpeed</strong>,
+              потом работал с&nbsp;агентствами и&nbsp;постоянными клиентами по&nbsp;рекомендациям.
+            </p>
+            <p>
+              Сейчас в&nbsp;<strong>No Logo Studio</strong> делаю сайты по&nbsp;макетам Figma и&nbsp;веду 10+ клиентских сайтов на&nbsp;1С-Битрикс и&nbsp;Laravel:
+              правки, обновления, новые разделы. Параллельно беру проекты напрямую.
+            </p>
+            <p>
+              Для&nbsp;заказчика главное&nbsp;&mdash; чтобы сайт быстро открывался, был удобен с&nbsp;телефона и&nbsp;его было легко дорабатывать.
+              Поэтому пишу чистый и&nbsp;лёгкий код и&nbsp;каждое изменение проверяю сам на&nbsp;разных экранах.
+            </p>
+          </div>
+
+          <div class="bento-side">
+            <div class="bento-mini card spot reveal">
+              <div class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><path d="M14 2v6h6M9 15l2 2 4-4" /></svg>
+              </div>
+              <h3>Договор и&nbsp;чек</h3>
+              <p>Работаю как самозанятый, паспорт верифицирован на&nbsp;freelance.ru.</p>
+            </div>
+            <div class="bento-mini card spot reveal">
+              <div class="icon-box icon-box--teal" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z" /><path d="M6 12v5c3 2 9 2 12 0v-5" /></svg>
+              </div>
+              <h3>Наставник</h3>
+              <p>Прошёл отбор в&nbsp;наставники HTML Academy.</p>
+            </div>
+            <div class="bento-mini card spot reveal">
+              <div class="icon-box icon-box--warm" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5M2 12l10 5 10-5" /></svg>
+              </div>
+              <h3>4 собственных проекта</h3>
+              <p>KOMBOS.RU, Ввези.ru, Завели.ru и&nbsp;КодРазбор работают, ссылки&nbsp;&mdash; в&nbsp;разделе «Проекты».</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="subhead reveal">
+          <h3 class="section-tag">Опыт</h3>
+          <ol class="career">
+            <li class="career-item">
+              <span class="career-date">2023&nbsp;&mdash; сейчас</span>
+              <h4>No Logo Studio</h4>
+              <p>Сайты по&nbsp;макетам Figma для&nbsp;клиентов студии, поддержка 10+ сайтов на&nbsp;1С-Битрикс и&nbsp;Laravel.</p>
+            </li>
+            <li class="career-item">
+              <span class="career-date">2020&nbsp;&mdash; 2023</span>
+              <h4>Фриланс и&nbsp;агентства</h4>
+              <p>Лендинги, интернет-магазины и&nbsp;корпоративные сайты под&nbsp;ключ; проекты для&nbsp;Alente, CASTCOM, АртАльт, DokinLab, MilloriDS.</p>
+            </li>
+            <li class="career-item">
+              <span class="career-date">2016&nbsp;&mdash; 2020</span>
+              <h4>Nisanov Corp</h4>
+              <p>Интернет-магазины на&nbsp;OpenCart: каталоги, корзина, оформление заказа, ускорение до&nbsp;90&ndash;95 баллов PageSpeed.</p>
+            </li>
+            <li class="career-item">
+              <span class="career-date">2012&nbsp;&mdash; 2016</span>
+              <h4>freelance.ru</h4>
+              <p>Первые заказы: вёрстка и&nbsp;сайты на&nbsp;Joomla и&nbsp;WordPress, 56 положительных отзывов.</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
     <section id="faq">
       <div class="container">
         <div class="section-head reveal">
@@ -2406,7 +2719,7 @@
             <p class="section-tag">Вопросы</p>
             <h2 class="section-title">Частые вопросы</h2>
           </div>
-          <p class="section-desc">Не&nbsp;нашли ответа&nbsp;&mdash; напишите, отвечу в&nbsp;течение дня.</p>
+          <p class="section-desc">Не&nbsp;нашли ответа&nbsp;&mdash; напишите, разберёмся.</p>
         </div>
 
         <div class="faq reveal">
@@ -2432,7 +2745,7 @@
           </details>
           <details class="faq-item card">
             <summary>Как оформляется работа?</summary>
-            <p>Работаю как самозанятый: заключаем договор, после оплаты вы&nbsp;получаете чек. Работаю удалённо с&nbsp;заказчиками из&nbsp;любого города.</p>
+            <p>Работаю как самозанятый: заключаем договор, после оплаты вы&nbsp;получаете чек. Живу в&nbsp;Новосибирске и&nbsp;работаю удалённо с&nbsp;заказчиками из&nbsp;любого города.</p>
           </details>
           <details class="faq-item card">
             <summary>Поддерживаете сайт после запуска?</summary>
@@ -2447,7 +2760,7 @@
         <div class="contact-card card reveal">
           <div class="contact-info">
             <p class="section-tag">Связаться</p>
-            <h2 class="section-title">Есть проект?<br>Обсудим</h2>
+            <h2 class="section-title">Есть проект?<br />Обсудим</h2>
             <p>Расскажите, что нужно сделать. Отвечу в&nbsp;течение дня: задам вопросы или&nbsp;сразу назову стоимость и&nbsp;срок. Быстрее всего&nbsp;&mdash; в&nbsp;Telegram.</p>
             <div class="contact-links">
               <a href="https://t.me/paveliskrinsky" target="_blank" rel="noopener" class="contact-item">
@@ -2477,7 +2790,7 @@
               </div>
               <div>
                 <label for="email">Telegram или e-mail</label>
-                <input id="email" type="text" name="contact" placeholder="@username или you@example.com" autocomplete="email" required />
+                <input id="email" type="text" name="contact" placeholder="@username или you@example.com" autocomplete="off" required />
               </div>
             </div>
             <div class="form-row">
@@ -2503,21 +2816,28 @@
               <textarea id="message" name="message" placeholder="Что нужно сделать и к какому сроку" required></textarea>
             </div>
             <input type="hidden" name="_subject" value="Заявка с сайта paveliskrinsky.github.io" />
+            <input type="text" name="_gotcha" class="form-trap" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <label class="form-consent">
+              <input type="checkbox" name="consent" value="да" required />
+              <span>Согласен на&nbsp;обработку персональных данных по&nbsp;<a href="privacy.html" target="_blank">политике конфиденциальности</a></span>
+            </label>
             <button type="submit" class="btn btn-primary form-submit">
               Отправить заявку
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" /></svg>
             </button>
-            <p class="form-status" id="form-status" role="status" hidden></p>
+            <p class="form-status" id="form-status" role="status"></p>
           </form>
         </div>
       </div>
     </section>
+    <a href="https://t.me/paveliskrinsky" target="_blank" rel="noopener" class="btn btn-primary sticky-cta">Написать в&nbsp;Telegram</a>
   </main>
 
   <footer>
     <div class="container">
       <div class="footer-inner">
         <p>Павел Искринский &middot; Разработка сайтов &middot; Самозанятый &copy; 2026</p>
+        <a href="privacy.html">Политика конфиденциальности</a>
         <a href="#hero">Наверх &uarr;</a>
       </div>
     </div>
@@ -2569,7 +2889,9 @@
     });
 
     function syncNav() {
-      nav.classList.toggle('scrolled', scrollY > 60);
+      const scrolled = scrollY > 60;
+      nav.classList.toggle('scrolled', scrolled);
+      document.body.classList.toggle('scrolled', scrolled);
     }
 
     addEventListener('scroll', syncNav, { passive: true });
@@ -2584,13 +2906,21 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    document.addEventListener('pointermove', (e) => {
-      const card = e.target.closest('.spot');
-      if (!card) return;
-      const r = card.getBoundingClientRect();
-      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
-      card.style.setProperty('--my', `${e.clientY - r.top}px`);
-    }, { passive: true });
+    let spotRect = null;
+    let spotFrame = 0;
+    document.querySelectorAll('.spot').forEach((card) => {
+      card.addEventListener('pointerenter', () => { spotRect = null; });
+      card.addEventListener('pointermove', (e) => {
+        const { clientX, clientY } = e;
+        cancelAnimationFrame(spotFrame);
+        spotFrame = requestAnimationFrame(() => {
+          spotRect ||= card.getBoundingClientRect();
+          card.style.setProperty('--mx', `${clientX - spotRect.left}px`);
+          card.style.setProperty('--my', `${clientY - spotRect.top}px`);
+        });
+      }, { passive: true });
+    });
+    addEventListener('scroll', () => { spotRect = null; }, { passive: true });
 
     document.querySelectorAll('[data-select]').forEach((box) => {
       const native = box.querySelector('select');
@@ -2698,6 +3028,28 @@
       sync();
     });
 
+    const reviewsToggle = document.querySelector('.reviews-toggle');
+    reviewsToggle.addEventListener('click', () => {
+      document.getElementById('reviews-list').classList.add('is-expanded');
+      const first = document.querySelector('.review--extra');
+      first.tabIndex = -1;
+      first.focus();
+      reviewsToggle.remove();
+    });
+
+    function goal(name) {
+      if (typeof ym === 'function') ym(113365152, 'reachGoal', name);
+    }
+
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href^="https://t.me/"], a[href^="mailto:"]');
+      if (link) goal(link.protocol === 'mailto:' ? 'email' : 'telegram');
+    });
+
+    addEventListener('beforeprint', () => {
+      document.querySelectorAll('details').forEach((d) => { d.open = true; });
+    });
+
     const form = document.getElementById('contact-form');
     const formStatus = document.getElementById('form-status');
 
@@ -2707,18 +3059,18 @@
       const label = btn.innerHTML;
       btn.textContent = 'Отправляю…';
       btn.disabled = true;
-      formStatus.hidden = true;
+      formStatus.textContent = '';
       formStatus.classList.remove('is-error');
       try {
         const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
         if (!res.ok) throw new Error(res.status);
         form.reset();
-        formStatus.textContent = 'Спасибо! Заявка отправлена, отвечу в течение дня.';
+        formStatus.textContent = 'Спасибо! Заявка отправлена, скоро отвечу.';
+        goal('lead');
       } catch (err) {
         formStatus.classList.add('is-error');
-        formStatus.textContent = 'Не получилось отправить. Напишите, пожалуйста, в Telegram: @paveliskrinsky.';
+        formStatus.innerHTML = 'Не получилось отправить. Напишите, пожалуйста, в Telegram: <a href="https://t.me/paveliskrinsky" target="_blank" rel="noopener">@paveliskrinsky</a>.';
       }
-      formStatus.hidden = false;
       btn.innerHTML = label;
       btn.disabled = false;
     });
