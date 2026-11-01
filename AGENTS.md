@@ -77,3 +77,11 @@ python tools/previews.py [--changed] [name ...]
 - `AGENTS.md` and `.claude/` are listed in `.gitignore`, so they are local only.
 - `_PLAN.md` (in Russian) is the improvement plan from the 2026-10-29 page audit, with finished items checked off. The leading underscore keeps it out of the Jekyll build.
 - `README.md` (in Russian) summarizes the site's sections. Update it when you add or remove sections or projects.
+
+## История работы
+
+### 2026-11-01
+
+- В «Мои собственные проекты» добавлены OZEK и АвтоПарам; подготовлены исходники и оптимизированные скриншоты. Для обновления скриншота АвтоПарам использовать `python tools/previews.py autoparam`; рекламное наполнение динамическое.
+- Счётчики проектов обновлены до 6 собственных и 8 всего. Описание АвтоПарам в портфолио оставлено без числа моделей.
+- В контактном блоке липкое позиционирование перенесено на `.contact-info` для широкого экрана; до 1180 px блок статичный.
