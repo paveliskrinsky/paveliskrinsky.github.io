@@ -14,6 +14,8 @@ SITES = {
     "zaveli": "https://zaveli.ru",
     "kodrazbor": "https://kodrazbor.ru",
     "kombos": "https://kombos.ru",
+    "ozek": "https://ozek.ru",
+    "autoparam": "https://autoparam.ru",
 }
 BROWSER = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 VIEWPORT = (1440, 2000)
