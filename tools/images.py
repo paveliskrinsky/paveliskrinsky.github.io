@@ -17,7 +17,8 @@ PROJECT_WIDTHS = [520, 640, 1200]
 def jobs():
     yield from JOBS
     for png in sorted((SRC / "projects").glob("*.png")):
-        yield f"projects/{png.name}", f"projects/{png.stem}", None, PROJECT_WIDTHS, 55
+        widths = [320] if png.stem.endswith("-mobile") else PROJECT_WIDTHS
+        yield f"projects/{png.name}", f"projects/{png.stem}", None, widths, 55
 
 
 def crop_to(img, ratio):

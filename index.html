@@ -7,14 +7,14 @@
   <meta name="yandex-verification" content="9e1ea6bf9543cc54" />
   <title>Павел Искринский — разработка и вёрстка сайтов</title>
   <meta name="description"
-    content="Разработка быстрых сайтов: вёрстка по макету Figma, сайты под ключ, ускорение до 90+ баллов PageSpeed, доработка и поддержка. 14 лет опыта, 56 положительных отзывов. Самозанятый, договор и чек." />
+    content="Сайты для бизнеса и вёрстка по Figma для студий и дизайнеров. Разработка под ключ, ускорение, доработка и поддержка. 14 лет опыта. Самозанятый, договор и чек." />
   <link rel="canonical" href="https://paveliskrinsky.github.io/" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="ru_RU" />
   <meta property="og:site_name" content="Павел Искринский" />
   <meta property="og:url" content="https://paveliskrinsky.github.io/" />
   <meta property="og:title" content="Павел Искринский — разработка и вёрстка сайтов" />
-  <meta property="og:description" content="Быстрые сайты для бизнеса: вёрстка по макету, сайты под ключ, ускорение. 14 лет опыта, живые проекты и 56 отзывов заказчиков." />
+  <meta property="og:description" content="Сайты для бизнеса. Вёрстка для студий и дизайнеров. От запуска нового проекта до доработки действующего сайта. 14 лет опыта, договор и чек." />
   <meta property="og:image" content="https://paveliskrinsky.github.io/img/og.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -719,10 +719,29 @@
       margin-bottom: 2.25rem;
     }
 
-    .hero-cta {
-      display: flex;
-      gap: .75rem;
-      flex-wrap: wrap;
+    .hero-paths {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .hero-path p {
+      margin-bottom: .6rem;
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .hero-path .btn {
+      width: 100%;
+    }
+
+    .hero-work-link {
+      display: inline-block;
+      margin-top: 1.25rem;
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 4px;
     }
 
     .hero-visual {
@@ -871,11 +890,11 @@
     .clients-track {
       display: flex;
       width: max-content;
-      animation: marquee 45s linear infinite !important;
+      animation: marquee 45s linear infinite;
     }
 
     .clients-marquee:hover .clients-track {
-      animation-play-state: paused !important;
+      animation-play-state: paused;
     }
 
     .clients-list {
@@ -1118,6 +1137,19 @@
 
     .skill-card {
       padding: 1.9rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .skill-card .tags {
+      margin-bottom: 1.5rem;
+    }
+
+    .skill-card .btn {
+      margin-top: auto;
+      width: 100%;
+      padding-inline: .75rem;
     }
 
     .skill-card:hover,
@@ -1330,6 +1362,53 @@
 
     .case dd {
       color: var(--muted);
+    }
+
+    .case-preview {
+      margin-top: 1.25rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+    }
+
+    .case-preview summary {
+      cursor: pointer;
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .case-preview figure {
+      max-width: 260px;
+      margin: 1rem auto 0;
+    }
+
+    .case-preview picture {
+      display: block;
+    }
+
+    .case-preview img {
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+    }
+
+    .case-preview figcaption {
+      margin-top: .6rem;
+      color: var(--muted);
+      font-size: .8rem;
+      text-align: center;
+    }
+
+    @media (min-width: 1001px) {
+      .project > .project-media {
+        align-self: start;
+      }
+
+      .project > .project-media .project-shot {
+        aspect-ratio: 4 / 5;
+        flex: none;
+      }
     }
 
     .mini-projects {
@@ -1661,6 +1740,12 @@
       display: none;
     }
 
+    .form-hint {
+      margin-top: .45rem;
+      color: var(--muted);
+      font-size: .75rem;
+    }
+
     .form-consent {
       display: flex;
       align-items: flex-start;
@@ -1943,6 +2028,10 @@
         left: 0;
         right: 0;
         flex-direction: column;
+        max-height: calc(100vh - 7rem);
+        max-height: calc(100dvh - 7rem - env(safe-area-inset-bottom));
+        overflow-y: auto;
+        overscroll-behavior: contain;
         gap: .25rem;
         padding: .75rem;
         background: var(--surface-strong);
@@ -2021,6 +2110,10 @@
         margin-top: 1rem;
       }
 
+      .hero-sub {
+        margin-bottom: 1.25rem;
+      }
+
       .chip {
         display: none;
       }
@@ -2035,6 +2128,7 @@
       }
 
       .bento-side,
+      .hero-paths,
       .skills-grid,
       .work-steps,
       .mini-projects,
@@ -2254,18 +2348,22 @@
               Беру новые проекты &middot; отвечаю в&nbsp;течение дня
             </div>
             <h1>
-              Разработка быстрых сайтов <span class="gradient-text">для&nbsp;вашего бизнеса</span>
+              Сайты для&nbsp;бизнеса. <span class="gradient-text">Вёрстка для&nbsp;студий.</span>
             </h1>
             <p class="hero-sub">
-              Сверстаю сайт по&nbsp;вашему макету, сделаю под&nbsp;ключ или&nbsp;ускорю текущий. Сайты удобны с&nbsp;телефона и&nbsp;быстро грузятся&nbsp;&mdash; 90+ баллов PageSpeed.
+              Бизнесу&nbsp;&mdash; сайт под&nbsp;ключ и&nbsp;поддержка. Студиям и&nbsp;дизайнерам&nbsp;&mdash; адаптивная вёрстка по&nbsp;Figma для&nbsp;подключения к&nbsp;CMS.
             </p>
-            <div class="hero-cta">
-              <a href="https://t.me/paveliskrinsky" target="_blank" rel="noopener" class="btn btn-primary">
-                Написать в&nbsp;Telegram
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-              </a>
-              <a href="#projects" class="btn btn-ghost">Смотреть работы</a>
+            <div class="hero-paths">
+              <div class="hero-path">
+                <p>Бизнесу</p>
+                <a href="#contact-form" class="btn btn-primary" data-task="Сайт под ключ">Обсудить сайт</a>
+              </div>
+              <div class="hero-path">
+                <p>Студиям и&nbsp;дизайнерам</p>
+                <a href="#contact-form" class="btn btn-primary" data-task="Вёрстка по макету">Оценить макет</a>
+              </div>
             </div>
+            <a href="#projects" class="hero-work-link">Смотреть клиентские кейсы &darr;</a>
             <p class="hero-proof"><a href="https://freelance.ru/reviews/paveliskrinsky/" target="_blank" rel="noopener">56 положительных отзывов</a> &middot; самозанятый, договор и&nbsp;чек</p>
           </div>
 
@@ -2362,15 +2460,19 @@
               </div>
               <h3>АО &laquo;КемВод&raquo;</h3>
               <div class="project-type">Корпоративный портал &middot; для&nbsp;агентства АртАльт &middot; 2022</div>
-              <p class="project-desc">Сервисный сайт водоканала Кемерово для&nbsp;горожан и&nbsp;организаций.</p>
+              <p class="project-desc">Пример работы со&nbsp;студией: вёрстка разделов сервисного портала по&nbsp;дизайну агентства.</p>
               <dl class="case">
                 <div>
                   <dt>Задача</dt>
-                  <dd>Сверстать разделы большого портала по&nbsp;макетам агентства и&nbsp;встроить их в&nbsp;действующий сайт, не&nbsp;сломав существующие страницы.</dd>
+                  <dd>Перенести макеты агентства в&nbsp;действующий портал водоканала, сохранив работу существующих страниц.</dd>
                 </div>
                 <div>
-                  <dt>Что сделал</dt>
+                  <dt>Моя роль</dt>
                   <dd>Адаптивные разделы: услуги, информация для&nbsp;потребителей, вакансии, новости. Интерактивные блоки и&nbsp;анимации на&nbsp;JavaScript.</dd>
+                </div>
+                <div>
+                  <dt>Решение</dt>
+                  <dd>Разделы по&nbsp;макетам агентства с&nbsp;адаптацией под&nbsp;разные экраны: информацией портала можно пользоваться и&nbsp;с&nbsp;компьютера, и&nbsp;с&nbsp;телефона.</dd>
                 </div>
                 <div>
                   <dt>Результат</dt>
@@ -2384,11 +2486,23 @@
                 <span class="tag">Адаптив</span>
               </div>
               <div class="project-foot">
+                <a class="btn btn-primary" href="#contact-form" data-task="Вёрстка по макету">Оценить похожий макет</a>
                 <a class="btn btn-ghost project-link" href="https://kemvod.ru" target="_blank" rel="noopener">
                   Открыть сайт
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9" /></svg>
                 </a>
               </div>
+              <details class="case-preview">
+                <summary>Посмотреть мобильную версию</summary>
+                <figure>
+                  <picture>
+                    <source srcset="img/projects/kemvod-mobile-320.avif" type="image/avif" />
+                    <source srcset="img/projects/kemvod-mobile-320.webp" type="image/webp" />
+                    <img src="img/projects/kemvod-mobile-320.jpg" alt="Мобильная страница КемВод: вакансии, ссылки для отклика и контакты отдела кадров" width="320" height="693" loading="lazy" decoding="async" />
+                  </picture>
+                  <figcaption>Раздел «Вакансии» на&nbsp;телефоне</figcaption>
+                </figure>
+              </details>
             </div>
           </article>
 
@@ -2410,19 +2524,23 @@
               </div>
               <h3>Зеленогорский зоопарк</h3>
               <div class="project-type">Сайт муниципального учреждения &middot; 2026</div>
-              <p class="project-desc">Новый сайт Природного зоологического парка Зеленогорска: 340 видов животных, от&nbsp;амурского тигра до&nbsp;кудрявого пеликана.</p>
+              <p class="project-desc">Пример сайта для&nbsp;организации: помочь посетителю спланировать визит в&nbsp;Природный зоологический парк Зеленогорска.</p>
               <dl class="case">
                 <div>
                   <dt>Задача</dt>
-                  <dd>Сайт, на&nbsp;котором посетитель сразу находит главное, с&nbsp;обязательными для&nbsp;госучреждений версией для&nbsp;слабовидящих и&nbsp;виджетом Госуслуг.</dd>
+                  <dd>Собрать информацию о&nbsp;посещении, животных и&nbsp;событиях; добавить версию для&nbsp;слабовидящих и&nbsp;виджет Госуслуг.</dd>
                 </div>
                 <div>
-                  <dt>Что сделал</dt>
-                  <dd>Живой статус &laquo;открыто / закроемся в&nbsp;…&raquo; по&nbsp;сезонному расписанию, каталог животных, новости, экскурсии, гостевую книгу и&nbsp;версию для&nbsp;слабовидящих.</dd>
+                  <dt>Моя роль</dt>
+                  <dd>Разработка сайта: каталог животных, новости, экскурсии, гостевая книга, версия для&nbsp;слабовидящих и&nbsp;статус работы по&nbsp;сезонному расписанию.</dd>
+                </div>
+                <div>
+                  <dt>Решение</dt>
+                  <dd>Вынес статус &laquo;открыто / закроемся в&nbsp;…&raquo;, билеты и&nbsp;маршрут на&nbsp;первый экран, чтобы посетителю было проще подготовиться к&nbsp;поездке.</dd>
                 </div>
                 <div>
                   <dt>Результат</dt>
-                  <dd>С&nbsp;первого экрана видно, открыт ли&nbsp;зоопарк, сколько стоят билеты и&nbsp;как добраться.</dd>
+                  <dd>На&nbsp;сайте можно проверить время посещения, узнать цены, выбрать экскурсию и&nbsp;познакомиться с&nbsp;животными.</dd>
                 </div>
               </dl>
               <div class="tags">
@@ -2432,11 +2550,23 @@
                 <span class="tag">Доступность</span>
               </div>
               <div class="project-foot">
+                <a class="btn btn-primary" href="#contact-form" data-task="Сайт под ключ">Обсудить похожий сайт</a>
                 <a class="btn btn-ghost project-link" href="https://zelzoo.ru" target="_blank" rel="noopener">
                   Открыть сайт
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9" /></svg>
                 </a>
               </div>
+              <details class="case-preview">
+                <summary>Посмотреть мобильную версию</summary>
+                <figure>
+                  <picture>
+                    <source srcset="img/projects/zelzoo-mobile-320.avif" type="image/avif" />
+                    <source srcset="img/projects/zelzoo-mobile-320.webp" type="image/webp" />
+                    <img src="img/projects/zelzoo-mobile-320.jpg" alt="Мобильная главная зоопарка: статус работы, стоимость билетов и ссылка на маршрут" width="320" height="693" loading="lazy" decoding="async" />
+                  </picture>
+                  <figcaption>Главная страница на&nbsp;телефоне</figcaption>
+                </figure>
+              </details>
             </div>
           </article>
         </div>
@@ -2581,6 +2711,7 @@
               <span class="tag">SCSS</span>
               <span class="tag">JavaScript</span>
             </div>
+            <a class="btn btn-ghost" href="#contact-form" data-task="Вёрстка по макету">Оценить макет</a>
           </div>
 
           <div class="skill-card card spot reveal">
@@ -2594,6 +2725,7 @@
               <span class="tag">Tilda</span>
               <span class="tag">WordPress</span>
             </div>
+            <a class="btn btn-ghost" href="#contact-form" data-task="Сайт под ключ">Обсудить сайт</a>
           </div>
 
           <div class="skill-card card spot reveal">
@@ -2606,6 +2738,7 @@
               <span class="tag">PageSpeed 90+</span>
               <span class="tag">AVIF / WebP</span>
             </div>
+            <a class="btn btn-ghost" href="#contact-form" data-task="Ускорение сайта">Обсудить ускорение</a>
           </div>
 
           <div class="skill-card card spot reveal">
@@ -2619,6 +2752,7 @@
               <span class="tag">OpenCart</span>
               <span class="tag">Joomla</span>
             </div>
+            <a class="btn btn-ghost" href="#contact-form" data-task="Доработка или поддержка">Обсудить поддержку</a>
           </div>
 
           <div class="skill-card card spot reveal">
@@ -2631,6 +2765,7 @@
               <span class="tag">Доступность</span>
               <span class="tag">Адаптив</span>
             </div>
+            <a class="btn btn-ghost" href="#contact-form" data-task="Доступность сайта">Обсудить доступность</a>
           </div>
 
           <div class="skill-card card spot reveal">
@@ -2643,6 +2778,7 @@
               <span class="tag">OpenCart</span>
               <span class="tag">1С-Битрикс</span>
             </div>
+            <a class="btn btn-ghost" href="#contact-form" data-task="Интернет-магазин">Обсудить магазин</a>
           </div>
         </div>
       </div>
@@ -2893,7 +3029,8 @@
               </div>
               <div>
                 <label for="email">Telegram или e-mail</label>
-                <input id="email" type="text" name="contact" placeholder="@username или name@site.ru" autocomplete="off" required />
+                <input id="email" type="text" name="contact" placeholder="@username или name@site.ru" autocomplete="off" autocapitalize="none" spellcheck="false" pattern="\s*(@[A-Za-z0-9_]+|(https://)?t\.me/[A-Za-z0-9_]+/?|[^\s@]+@[^\s@.]+(\.[^\s@.]+)+)\s*" title="Укажите e-mail, @username или ссылку t.me/username" aria-describedby="contact-hint" required />
+                <p class="form-hint" id="contact-hint">E-mail, @username или ссылка t.me/username.</p>
               </div>
             </div>
             <div class="form-row">
@@ -2901,11 +3038,13 @@
                 <label for="task">Что нужно</label>
                 <div class="select" data-select>
                 <select id="task" name="task">
-                  <option>Вёрстка по&nbsp;макету</option>
-                  <option>Сайт под&nbsp;ключ</option>
-                  <option>Ускорение сайта</option>
-                  <option>Доработка или&nbsp;поддержка</option>
-                  <option>Другое</option>
+                  <option value="Вёрстка по макету">Вёрстка по&nbsp;макету</option>
+                  <option value="Сайт под ключ">Сайт под&nbsp;ключ</option>
+                  <option value="Ускорение сайта">Ускорение сайта</option>
+                  <option value="Доработка или поддержка">Доработка или&nbsp;поддержка</option>
+                  <option value="Доступность сайта">Доступность сайта</option>
+                  <option value="Интернет-магазин">Интернет-магазин</option>
+                  <option value="Другое">Другое</option>
                 </select>
                 </div>
               </div>
@@ -2978,12 +3117,23 @@
       navLinks.classList.toggle('open', open);
       burger.classList.toggle('open', open);
       burger.setAttribute('aria-expanded', open);
+      if (open) {
+        navLinks.scrollTop = 0;
+        navLinks.querySelector('a').focus({ preventScroll: true });
+      }
     }
 
     burger.addEventListener('click', () => setMenuOpen(!navLinks.classList.contains('open')));
     navLinks.addEventListener('click', (e) => {
       if (e.target.closest('a')) setMenuOpen(false);
     });
+    nav.addEventListener('focusout', (e) => {
+      if (e.relatedTarget && !nav.contains(e.relatedTarget)) setMenuOpen(false);
+    });
+    document.addEventListener('pointerdown', (e) => {
+      if (!nav.contains(e.target)) setMenuOpen(false);
+    });
+    matchMedia('(max-width: 1100px)').addEventListener('change', () => setMenuOpen(false));
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && navLinks.classList.contains('open')) {
         setMenuOpen(false);
@@ -3127,7 +3277,14 @@
       document.addEventListener('pointerdown', (e) => {
         if (!box.contains(e.target)) setOpen(false);
       });
-      native.form.addEventListener('reset', () => setTimeout(sync));
+      native.addEventListener('change', () => {
+        active = native.selectedIndex;
+        sync();
+      });
+      native.form.addEventListener('reset', () => setTimeout(() => {
+        active = native.selectedIndex;
+        sync();
+      }));
       sync();
     });
 
@@ -3164,11 +3321,32 @@
 
     const form = document.getElementById('contact-form');
     const formStatus = document.getElementById('form-status');
+    const contactInput = form.elements.contact;
+
+    document.querySelectorAll('a[data-task]').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+        const task = form.elements.task;
+        if (![...task.options].some((option) => option.value === link.dataset.task)) return;
+        e.preventDefault();
+        task.value = link.dataset.task;
+        task.dispatchEvent(new Event('change', { bubbles: true }));
+        form.elements.name.focus({ preventScroll: true });
+        form.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+      });
+    });
+
+    contactInput.addEventListener('invalid', () => {
+      contactInput.setCustomValidity('Укажите e-mail, @username или ссылку t.me/username.');
+    });
+    contactInput.addEventListener('input', () => contactInput.setCustomValidity(''));
+    form.addEventListener('reset', () => contactInput.setCustomValidity(''));
 
     form.addEventListener('input', () => goal('form_start'), { once: true });
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      contactInput.value = contactInput.value.trim();
       const btn = form.querySelector('button[type=submit]');
       const label = btn.innerHTML;
       btn.textContent = 'Отправляю…';

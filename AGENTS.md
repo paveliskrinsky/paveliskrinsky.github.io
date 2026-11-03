@@ -1,87 +1,119 @@
-# AGENTS.md
+# Правила работы с проектом
 
-Instructions for Codex when working with code in this repository.
+Портфолио Павла Искринского для заказчиков. Сайт и документация — на русском языке. Актуальные команды и состав проекта находятся в [README.md](README.md), открытые задачи и результаты аудитов — в [_PLAN.md](_PLAN.md).
 
-## Overview
+## Рабочие правила
 
-Personal portfolio site for Pavel Iskrinsky (frontend developer), hosted on GitHub Pages at https://paveliskrinsky.github.io. All site content is in Russian.
+- Не коммитить и не отправлять изменения без просьбы пользователя. Сообщения коммитов — на английском, без упоминания ИИ.
+- Команда `00` означает сохранить важный контекст в этом файле без секретов. Команда `11` — коммит и push в основную ветку `main`, без создания новой ветки.
+- Команда `22` предполагает сборку и архив `public_html.zip`, но здесь нет сборки и каталога `public_html`: этот сценарий не настроен.
+- Для просмотра и ручной проверки использовать встроенный браузер Codex.
+- Искать нужный участок через `rg` по селектору, идентификатору или функции. Не привязывать инструкции к номерам строк.
+- Не добавлять комментарии в новый код и библиотеки ради одной функции. Повторяющиеся операции оформлять скриптами в `tools/`.
+- Секреты хранить только в `.env`, не включать их в документацию, ответы и логи. На 04.11.2026 `.env` отсутствует, а правила исключения `.env` и `.env.local` в Git ещё не добавлены; задача есть в плане.
+- Не отключать CORS, авторизацию или TLS без явной просьбы. Клиентская валидация служит UX; серверная проверка данных обязательна на стороне принимающего сервиса.
+- Перед завершением сверить результат с задачей, перечислить изменённые файлы и явно назвать непроведённые проверки.
 
-There is no build step, package manager, or test suite. The main page is a single `index.html` containing the HTML, an inline `<style>` block, and an inline `<script>` block with vanilla JS. `privacy.html` (privacy policy, linked from the form's consent checkbox and the footer) and `404.html` share `page.css`; `404.html` uses root-absolute paths because GitHub Pages serves it at any URL. `robots.txt` and `sitemap.xml` (update `lastmod` when content changes) sit at the root. Pushing to `main` deploys via GitHub Pages.
+## Архитектура и публикация
 
-The only linter is html-validate, configured in `.htmlvalidate.json` (recommended rules, self-closing void elements):
+- `index.html` содержит метаданные, встроенные CSS, разметку и основной JavaScript в конце страницы. Фреймворка, сборки, менеджера пакетов и тестового набора нет.
+- `privacy.html` и `404.html` используют `page.css`. В `404.html` и путях к шрифтам в `page.css` сохранять адреса от корня сайта.
+- Push в `main` публикует сайт на GitHub Pages. `_src/` и `_PLAN.md` исключены из обычной публикации Jekyll благодаря подчёркиванию в начале имени.
+- `AGENTS.md` указан в `.gitignore`, но уже отслеживается Git. Не считать его локальным или защищённым от публикации. `.claude/` игнорируется и на момент проверки не отслеживается.
+- В корне сохранять `robots.txt`, `sitemap.xml`, `site.webmanifest` и иконки. При изменении содержания страниц обновлять соответствующий `lastmod`; команды ресурсов и проверки HTML приведены в README.
 
-```bash
-npx html-validate index.html privacy.html 404.html
-```
+## Содержание и структура
 
-## Local preview
+Сайт обращается к заказчикам, не к работодателям. Бизнес и студии/дизайнеры одинаково важны: на первом экране два равнозначных пути «Обсудить сайт» и «Оценить макет». Описывать пользу для клиента; сохранять сведения о самозанятости, договоре, чеке и ответе в течение дня. Цены, условия оплаты и гарантии намеренно не указаны — не придумывать их, как и результаты работы или отзывы.
 
-```bash
-python -m http.server 8000
-```
+Порядок секций: `#hero`, `#projects`, `#skills`, `#reviews`, `#process`, `#about`, `#faq`, `#contact`. Работы идут перед услугами. Основное меню ведёт во все секции после первого экрана; логотип возвращает к `#hero`.
 
-This is also configured as the `site` entry in `.claude/launch.json` for the preview tools.
+- «Работал с» находится в конце `#hero`. Сейчас это анимированная `.clients-track` с двумя одинаковыми списками; копия скрыта от скринридеров через `aria-hidden="true"`. При `prefers-reduced-motion: reduce` анимация отключается; не возвращать `!important` в её объявление. Описание статичного списка в старой документации больше не актуально.
+- Клиентские кейсы — `article.project` со скриншотом и `dl.case` («Задача / Моя роль / Решение / Результат»). КемВод показывает работу по макетам агентства, зоопарк — решение задачи организации. `project--flip` меняет сторону изображения, `--p-glow` задаёт декоративное свечение. В каждом кейсе есть кнопка заявки и нативный `details.case-preview` с мобильным скриншотом.
+- На ширине от 1001 px основное изображение клиентского кейса сохраняет пропорции 4:5 и выравнивается по началу строки: раскрытие `case-preview` не растягивает его и не обрезает по бокам. На меньших экранах остаётся компактный кадр 4:3.
+- Собственные проекты — `article.mini-project` в `.mini-projects`. Подзаголовки «Мои собственные проекты» и «Опыт» используют `h3`, вложенные карточки — `h4`.
+- Сейчас два клиентских и шесть собственных проектов. При добавлении или удалении проекта синхронизировать карточки, счётчики, текст «Обо мне» и README.
+- Отзывы цитируются с freelance.ru. На странице источника имя автора стоит перед отзывом; учитывать это при сопоставлении цитат. Все ссылки сейчас ведут на общую страницу отзывов профиля.
+- 04.11.2026 владелец подтвердил, что свежих отзывов нет. Сохранять даты старых цитат, не приписывать их современным кейсам.
+- Число моделей АвтоПарам в описании намеренно не указано. Скриншот этого сайта содержит динамическую рекламу.
+- Не возвращать оценки PageSpeed и ссылки на отчёты в карточки проектов: они удалены по просьбе владельца.
 
-## Architecture of `index.html`
+## Адаптивность и доступность
 
-The file is about 3,000 lines: the head scripts come first, then the `<style>` block (about 2,000 lines), the markup, and the main `<script>` at the end. Find the part you need with grep (by section id or class) instead of reading the whole file.
+| Условие | Поведение |
+| --- | --- |
+| Ширина ≤1100 px | Основное меню заменяется кнопкой меню |
+| Ширина ≤1000 px | Клиентские проекты и контакты в одну колонку; `.contact-info` становится статичным |
+| Ширина ≤860 px | Верхняя кнопка заявки скрыта; после прокрутки появляется `.sticky-cta` |
+| Ширина ≤640 px | Аватар 64 px рядом с бейджем, компактные собственные проекты, первые три отзыва |
 
-- **Head:** meta and SEO tags (Open Graph tags pointing to `img/og.jpg`; a schema.org `Person` JSON-LD block, so update it when the name, role or contacts change; a `FAQPage` JSON-LD block that must mirror the `#faq` questions and answers), favicons and the web manifest, a preload of the hero avatar for ≥641px only, and the Yandex.Metrika counter (id `113365152`; its `<noscript>` pixel sits at the start of `<body>`). Yandex Webmaster ownership is verified by the `<meta name="yandex-verification">` tag, not by an HTML file at the root, so keep the tag.
-- **Fonts:** self-hosted in `fonts/` (Manrope for body text, Unbounded for headings via `--font-head`; variable woff2, cyrillic and latin subsets, `unbounded-cyrillic` preloaded for the h1). The `@font-face` rules open the `<style>` block, followed by `Manrope Fallback` and `Unbounded Fallback` faces on local Arial with metric overrides that keep the layout from shifting when the fonts swap in. `python tools/fonts.py` downloads the files from Google Fonts and prints all these rules. `page.css` and `_src/og.html` use the same files.
-- **Theming:** CSS custom properties on `:root`. Every color token is written as `light-dark(<light>, <dark>)`, so add new colors as tokens there rather than hard-coding them. The tokens meet WCAG AA in both themes (axe reports 0 violations): body-size text uses `--text` or `--muted`, never the decorative accents; `--accent2-text` is the readable variant of `--accent2`; `.btn-primary` uses the `--btn-from`/`--btn-to` gradient, which keeps white text at 4.5:1 or higher. `:root` has `color-scheme: dark` by default; `@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) }` and `:root[data-theme="light"]` switch it to `light`. The `#theme-toggle` button in the nav sets `data-theme` on `<html>` and saves it to `localStorage` (`theme`); an inline script in the head applies it before paint. Without a saved choice the OS theme is used. The dark `--bg` value (`#0f1117`) is also used in `<meta name="theme-color">` (JS swaps it to `#f6f6f9` in light mode) and in `site.webmanifest`, so keep them in sync.
-- **Audience:** the site is aimed at clients ordering websites, not employers (reworked 2026-10-27). Copy talks about client benefits, the user works as самозанятый (договор и чек) and replies within a day. Prices, payment terms and warranty are deliberately not stated. Every claim and review must be real: reviews are quoted from freelance.ru, where the author name comes before each review.
-- **Sections:** `#hero` (ends with the static `.clients` list «Работал с»), `#projects`, `#skills` («Чем могу помочь», «Услуги» in the nav), `#reviews`, `#process`, `#about` (includes a short `.career` list instead of a full experience section), `#faq` (`details.faq-item`), `#contact`, in that order on purpose (work first, then services). The nav links to every section except the hero. It switches to the burger at ≤1100px because seven links barely fit the 1060px nav. On ≤640px the hero photo becomes a 64px round avatar next to the badge (the `.hero-text` wrapper is `display: contents` there), own-project cards turn into rows with a small thumbnail, and only three reviews show until «Показать ещё» (`.review--extra`). Own projects and «Опыт» are `h3.section-tag` subheadings, and their cards use `h4`.
-- **JS behaviors:**
-  - the inline head script adds the `js` class to `<html>`. Styles that hide content until JS runs (`.reveal`, the collapsed reviews) are scoped to `.js`, so the page stays complete without JS and in print. `@media print` hides the nav, form and decor and prints link URLs, and a `beforeprint` handler opens every `details`.
-  - the theme toggle, which also follows OS theme changes (`matchMedia` listener) when no `data-theme` is set
-  - the mobile burger menu (`#burger` / `#nav-links`, with `aria-expanded`)
-  - an `IntersectionObserver` that adds `.visible` to `.reveal` elements, so new content that should animate in needs the `reveal` class
-  - the `.scrolled` class on `#nav` and `<body>` after 60px of scroll. The body class shows `.sticky-cta`, the fixed Telegram button on ≤860px, which sits inside `<main>` so that it is inside a landmark.
-  - the cursor spotlight on `.card.spot` elements, through the `--mx` and `--my` custom properties, with the card's rect cached per hover and updates batched in `requestAnimationFrame`
-  - the custom select (`.select[data-select]`): a styled listbox built over a native `<select>` that stays in the form and is kept in sync, including on form reset
-  - the reviews «Показать ещё» button
-  - Metrika goals through `goal()`: `lead` after a successful form submit, `form_error` on a failed one, `form_start` on the first input in the form, `telegram`, `email` and `freelance` on clicks of `t.me`, `mailto:` and freelance.ru links, `project` on clicks of external links in `#projects`, `faq` when a FAQ item opens, `reviews_more` on «Показать ещё». The goals must also exist in the Metrika UI as «Целевое событие» goals with the same identifiers.
-  - the AJAX submit and status message for the contact form
-- **Projects:** client work is a large `<article class="project">` with a browser-frame screenshot and a `dl.case` (Задача / Что сделал / Результат). `project--flip` alternates the side the image sits on, and the inline `--p-glow` sets the glow color. The user's own projects go below in the `.mini-projects` grid of `article.mini-project` cards.
-- **Contact form:** posts to Formspree (`https://formspree.io/f/mqparwza`) with `fetch` and shows a Russian status message in `#form-status`, which stays in the DOM and only changes its text so screen readers announce it. Without JS it falls back to a plain POST. It has a hidden `_gotcha` honeypot and a required consent checkbox for personal data. It has no backend in this repo.
+На широком экране липкое позиционирование принадлежит `.contact-info`, а не всей карточке контактов.
 
-## Files that must stay at the repo root
+- Использовать семантическую разметку, доступные имена и управление клавиатурой. Декоративные SVG скрывать через `aria-hidden="true"`.
+- Контентные `img` оборачивать в `picture`, задавать `alt`, `width`, `height`; ниже первого экрана — `loading="lazy"`. Декоративному логотипу рядом с именем оставлять пустой `alt`.
+- Исключение — пиксель Метрики в `noscript` в начале `body`: сохранять предоставленную Яндексом разметку и существующее разрешение html-validate на inline-стиль.
+- Сохранять skip-ссылку, видимый фокус, `aria-expanded` меню и доступность собственного select.
+- Скрытие `.reveal` и дополнительных отзывов привязано к классу `.js`. Без JavaScript основной контент остаётся видимым. Не обещать работу интерактивных элементов без JS.
+- Сохранять режим уменьшенного движения и стили печати: без меню, формы и декора, с видимым содержимым и адресами ссылок. `beforeprint` раскрывает `details`.
+- Проверять изменения интерфейса на 375 и 1440 px в обеих темах. Для меню дополнительно проверять клавиатуру и низкий экран 812×375; результаты записывать в план.
 
-- The icons (`favicon.ico`, `favicon.svg`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`, `icon-maskable-512.png`) and `site.webmanifest` are referenced by relative paths from the root. They are generated from `_src/logo.jpg` by `python tools/icons.py`: the photo in a circle with a gradient ring for `favicon.svg` (photo embedded as base64), `favicon.ico` and `icon-192/512`, and the plain square photo for `apple-touch-icon.png` and `icon-maskable-512.png`. Never edit them by hand.
+## Темы, шрифты и метаданные
 
-## Images
+- Цвета задаются CSS-переменными на `:root`; для различий тем используется `light-dark()`. Общие для тем значения, например `--btn-from`, могут быть одинаковыми.
+- Для обычного текста использовать `--text` или `--muted`; читаемый вариант бирюзового — `--accent2-text`. Градиент кнопок — `--btn-from` / `--btn-to`. Контраст проверять после изменений, не считать старый аудит постоянной гарантией.
+- `color-scheme` по умолчанию тёмный. Системная светлая тема действует без явного выбора; переключатель сохраняет `data-theme` на `html` и `theme` в `localStorage`. Скрипт в `head` применяет выбор до отрисовки.
+- Фон `#0f1117` для тёмной и `#f6f6f9` для светлой темы синхронизировать с `theme-color`. В `site.webmanifest` используются тёмные `theme_color` и `background_color`.
+- Manrope и Unbounded размещены в `fonts/`. В `index.html` есть запасные шрифты на Arial с подогнанными метриками; не терять их при правках. `page.css` и `_src/og.html` используют те же локальные файлы шрифтов.
+- Для `h1` предзагружается `unbounded-cyrillic.woff2`; предзагрузка аватара действует только от 641 px. `sizes` должны соответствовать реальным размерам изображений.
+- При изменении имени, роли или контактов обновлять JSON-LD `Person`. JSON-LD `FAQPage` должен совпадать с семью вопросами и ответами в `#faq`.
+- Open Graph использует `img/og.jpg`. Сохранять метатег `yandex-verification`: владение сайтом подтверждено им, а не отдельным HTML-файлом.
 
-Source images live in `_src/`, which GitHub Pages' Jekyll build does not publish. Optimized copies go to `img/`, and only `img/` is referenced from the page. Never edit the files in `img/` by hand.
+## JavaScript и форма
 
-- `_src/avatar.jpg` produces `img/avatar-{160,480,560,800}`, cropped to 3:4, with AVIF quality 45 because of the grainy background.
-- `_src/logo.jpg` produces `img/logo-96` for the nav logo.
-- `_src/projects/<name>.png` produces `img/projects/<name>-{520,640,1200}`.
+- `IntersectionObserver` добавляет `.visible` к `.reveal`; новые анимируемые блоки должны участвовать в этом механизме.
+- `syncNav()` после 60 px прокрутки добавляет `.scrolled` к меню и `body`. Кнопка `.sticky-cta` находится внутри `main`.
+- Открытие меню сбрасывает его прокрутку и фокусирует первый пункт. Escape закрывает меню и возвращает фокус на кнопку; уход фокуса за пределы навигации, нажатие снаружи и смена порога 1100 px закрывают меню. Высота списка ограничена экраном, внутри доступна прокрутка.
+- Подсветка `.card.spot` использует `--mx` / `--my`, кэш прямоугольника карточки и `requestAnimationFrame`.
+- `.select[data-select]` дополняет нативный `select`. Сохранять синхронизацию значения, клавиатуры и сброса формы.
+- Десять ссылок `a[data-task]` на первом экране, в кейсах и услугах ведут к `#contact-form`. Значение `data-task` должно точно совпадать с `option[value]`. При обычном клике выбирается услуга, обновляется собственный select, прокручивается форма и фокусируется имя; введённые данные сохраняются. Без JS остаётся якорь к форме и ручной выбор услуги. Учитывать `prefers-reduced-motion` и не перехватывать клики с клавишами-модификаторами.
+- Переключатель темы реагирует на системную тему через `matchMedia`, если пользователь не выбрал тему явно.
+- Кнопка отзывов раскрывает `.review--extra` и переносит фокус на первый из них.
+- Форма отправляется на `https://formspree.io/f/mqparwza` через `fetch`, без JS — обычным POST. Сохранять `_gotcha`, обязательное согласие и ссылку на политику.
+- Форматы контакта перечислены в README. Проверка через `pattern` работает без скриптов; подсказка связана с полем через `aria-describedby`. Пользовательская ошибка сбрасывается при вводе и сбросе формы; проверка принимающего сервиса остаётся отдельной задачей.
+- `#form-status` с `role="status"` постоянно находится в DOM. При успехе меняется текст, при ошибке добавляется сообщение со ссылкой на Telegram; не заменять сам элемент.
+- Счётчик Метрики — `113365152`; полный список идентификаторов целей находится в README. Сохранять `goal()` и проверять настройки кабинета отдельно от вызовов в коде.
 
-Every size is written in `.avif`, `.webp` and `.jpg`. The page serves them through `<picture>` with an AVIF source, a WebP source and a JPG fallback, each with a `srcset`. Keep the `sizes` attributes in line with the real card widths when the layout changes.
+## Ресурсы
 
-```bash
-python tools/images.py [avatar|logo|projects/<name> ...]
-python tools/previews.py [--changed] [name ...]
-```
+Исходники изменяются в `_src/`, опубликованные копии создаются в `img/`. Готовые изображения и иконки вручную не править.
 
-`tools/images.py` rebuilds the optimized copies from `_src/` (requires Pillow with AVIF support). `tools/previews.py` takes new screenshots with local headless Edge (hard-coded path in `BROWSER`, 1440×2000 viewport cropped to 1800px height so the sites' cookie banners stay out of frame; the 4:5 ratio must stay taller than the card frame, which `object-fit: cover` fills from the top, otherwise the sides get cropped) into `_src/projects/` and then rebuilds them. To add a site, add it to `SITES` in that script. With no arguments, these scripts process everything. `--changed` reshoots every site first and rebuilds only those whose pixels differ from the saved screenshot (the comparison is exact, so sites with animations or rotating content always count as changed).
+| Исходник | Результат |
+| --- | --- |
+| `_src/avatar.jpg` | Аватар 3:4, ширины 160/480/560/800, AVIF quality 45 |
+| `_src/logo.jpg` | Логотип шириной 96 и отдельный комплект иконок в корне |
+| `_src/projects/<name>.png` | Скриншоты шириной 520/640/1200 |
+| `_src/projects/<name>-mobile.png` | Дополнительные мобильные экраны шириной 320 |
+| `_src/og.html` | `_src/og.png` и `img/og.jpg`, 1200×630 |
 
-`python tools/og.py` renders `_src/og.html` (1200×630, uses `img/avatar-800.jpg` and the fonts in `fonts/`) with the same Edge into `_src/og.png` and `img/og.jpg`, the Open Graph image.
+Все варианты аватара, логотипа и проектов создаются в AVIF, WebP и JPG. В `picture` порядок источников: AVIF, WebP, затем JPG с `srcset`.
 
-`python tools/pagespeed.py [name|url ...]` runs local Lighthouse (via `npx lighthouse@12` with the same Edge) on the `SITES` (imported together with `BROWSER` from `tools/previews.py`, and it needs Node.js) or on any URL such as `http://localhost:8000/`, and prints mobile/desktop scores. Locally the Metrika script dominates TBT, so for numbers comparable to the audit run `npx lighthouse@12` directly with `--blocked-url-patterns=*mc.yandex.ru*`. The PageSpeed Insights API is not used because it returns 429 without a key. Project cards show no scores or report links; they were removed at the owner's request.
+Мобильные экраны сняты 04.11.2026 во встроенном браузере при размере окна 375×812: КемВод — `https://kemvod.ru/jobs/`, зоопарк — `https://zelzoo.ru/`. Они обновляются вручную через встроенный браузер, затем `python tools/images.py projects/kemvod-mobile projects/zelzoo-mobile`; `tools/previews.py` эти два исходника не переснимает. Для единственного размера 320 достаточно `srcset` без списка ширин и `img src` без `srcset`.
 
-## Conventions
+- `tools/previews.py` хранит словарь `SITES` и путь `BROWSER`. Для нового проекта добавить запись в `SITES`. Снимок 1440×2000 обрезается до 1440×1800; сохранять пропорцию 4:5, чтобы `object-fit: cover` не обрезал боковые части вместо низа.
+- `--changed` сравнивает пиксели точно: анимация и реклама могут приводить к постоянной перегенерации.
+- `favicon.svg`, `favicon.ico`, `icon-192.png` и `icon-512.png` используют круглое фото с градиентным кольцом. `apple-touch-icon.png` и `icon-maskable-512.png` — квадратное фото. Все шесть создаются `tools/icons.py` и остаются в корне.
+- `site.webmanifest` редактируется отдельно: генератор иконок его не обновляет.
+- Скрипты генерации используют локальный Edge; это техническая зависимость существующих инструментов. Ручные браузерные проверки выполняются во встроенном браузере Codex.
+- Результаты Lighthouse сравнивать только с указанием версии, URL, профиля и блокировки сторонних скриптов. Исторический локальный замер 29.10.2026 выполнялся с заблокированной Метрикой; свежий PageSpeed Insights — без её ручного отключения.
 
-- Decorative icons are hidden from screen readers with `aria-hidden="true"`. Keep doing this.
-- Wrap every content `<img>` in `<picture>`. The one exception is the Yandex.Metrika tracking pixel inside `<noscript>` at the start of `<body>`. Leave it as a bare `<img>` exactly as Yandex provides it (an html-validate comment above it allows its inline style).
-- `AGENTS.md` and `.claude/` are listed in `.gitignore`, so they are local only.
-- `_PLAN.md` (in Russian) is the improvement plan from the 2026-10-29 page audit, with finished items checked off. The leading underscore keeps it out of the Jekyll build.
-- `README.md` (in Russian) summarizes the site's sections. Update it when you add or remove sections or projects.
+## Контекст для продолжения — 04.11.2026
 
-## История работы
-
-### 2026-11-01
-
-- В «Мои собственные проекты» добавлены OZEK и АвтоПарам; подготовлены исходники и оптимизированные скриншоты. Для обновления скриншота АвтоПарам использовать `python tools/previews.py autoparam`; рекламное наполнение динамическое.
-- Счётчики проектов обновлены до 6 собственных и 8 всего. Описание АвтоПарам в портфолио оставлено без числа моделей.
-- В контактном блоке липкое позиционирование перенесено на `.contact-info` для широкого экрана; до 1180 px блок статичный.
+- Проведены аудит сайта и рефакторинг трёх Markdown-файлов. README хранит команды и состав проекта, этот файл — правила и архитектуру, `_PLAN.md` — открытые задачи и результаты проверок. Подробную историю аудитов сохранять в плане, не дублировать здесь.
+- Выполнены первые четыре технических исправления аудита: фокус и закрытие мобильного меню, прокрутка меню на низком экране, проверка формата контакта, отключение анимации списка клиентов при уменьшенном движении. Поле контакта принимает e-mail, `@username` и `t.me/username` с необязательным `https://`.
+- Затем пользователь одобрил пункты 1–4 отдельного предложения по привлечению клиентов. Выполнены пункты 1, 2 и 4: два равнозначных предложения бизнесу и студиям, расширенные клиентские кейсы с мобильными экранами, кнопки услуг с выбором задачи в форме. Пункт 3 отложен: пользователь сообщил, что свежих отзывов нет. Старые цитаты 2012–2016 годов сохранены с датами.
+- Отдельные страницы услуг и оценка качества заявок через аналитику обсуждались как следующий этап; в согласованный объём 1–4 не входили и не реализованы.
+- Проверки последних изменений прошли: html-validate для `index.html`, `privacy.html`, `404.html`; синтаксис встроенного JS; 375 и 1440 px в обеих темах; клавиатура и меню 812×375. Проверены все десять кнопок заявки, сохранение введённых данных, ручной выбор и сброс услуги, раскрытие мобильных экранов. Без JS проверены якорь к форме, нативный select и `details` на временной копии без скриптов.
+- Временные проверочные HTML-файлы удалены, локальный HTTP-сервер остановлен. Для повторного просмотра можно использовать `python -m http.server 8000 --bind 127.0.0.1` и открыть `http://127.0.0.1:8000/` во встроенном браузере Codex.
+- Реальные заявки не отправлялись; доставка и серверная валидация Formspree, настройки целей Метрики не проверены. После последних правок не повторялись PageSpeed и автоматический аудит доступности. Результаты опубликованной версии из плана не считать замером изменённой локальной версии.
+- На момент сохранения контекста изменения не закоммичены и не опубликованы. Изменены `AGENTS.md`, `README.md`, `_PLAN.md`, `index.html`, `sitemap.xml`, `tools/images.py`. Добавлены два исходника `_src/projects/{kemvod,zelzoo}-mobile.png` и шесть версий `img/projects/{kemvod,zelzoo}-mobile-320.{avif,webp,jpg}`. Сохранить эти изменения при продолжении; команду `00` не считать разрешением на коммит или push.
+- Открытые задачи: исключения `.env` и `.env.local` в Git, решение о хранении отслеживаемого `AGENTS.md`, внешние проверки формы и Метрики, правовая проверка обработки данных. Свой домен и новые отзывы — после решения или предоставления данных владельцем. Полные критерии находятся в `_PLAN.md`.
