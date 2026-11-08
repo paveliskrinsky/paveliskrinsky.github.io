@@ -1,0 +1,169 @@
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500 800;
+  font-display: swap;
+  src: url(/fonts/manrope-cyrillic.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500 800;
+  font-display: swap;
+  src: url(/fonts/manrope-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 500 700;
+  font-display: swap;
+  src: url(/fonts/unbounded-cyrillic.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Unbounded';
+  font-style: normal;
+  font-weight: 500 700;
+  font-display: swap;
+  src: url(/fonts/unbounded-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: dark;
+  --bg: light-dark(#f6f6f9, #0f1117);
+  --surface: light-dark(#ffffff, #171b26);
+  --border: light-dark(rgba(20, 22, 40, .12), rgba(255, 255, 255, .12));
+  --text: light-dark(#14161f, #eef0f6);
+  --muted: light-dark(#5b6075, #9097ab);
+  --accent: light-dark(#5b4bf0, #8b7bff);
+  --btn-from: #5b4bf0;
+  --btn-to: light-dark(#3775c4, #3556e0);
+  --font-head: 'Unbounded', 'Manrope', system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    color-scheme: light;
+  }
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-weight: 500;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 3rem 1rem 4rem;
+}
+
+.page-back {
+  display: inline-block;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+h1,
+h2 {
+  font-family: var(--font-head);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+h1 {
+  font-size: clamp(1.45rem, 6vw, 2.6rem);
+  margin-bottom: 1rem;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+h2 {
+  font-size: 1.15rem;
+  margin: 2.25rem 0 .75rem;
+}
+
+p,
+li {
+  color: var(--muted);
+}
+
+p + p,
+ul + p {
+  margin-top: .75rem;
+}
+
+ul {
+  padding-left: 1.25rem;
+  display: grid;
+  gap: .35rem;
+}
+
+strong {
+  color: var(--text);
+}
+
+.page-note {
+  font-size: .9rem;
+}
+
+.page-center {
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.page-code {
+  font-family: var(--font-head);
+  font-size: clamp(4rem, 18vw, 8rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  margin-top: 2rem;
+  padding: .9rem 1.6rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--btn-from), var(--btn-to));
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
