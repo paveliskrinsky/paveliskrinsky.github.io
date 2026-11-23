@@ -1,2 +1,4 @@
 *.md
 __pycache__/
+/public_html/
+/public_html.zip

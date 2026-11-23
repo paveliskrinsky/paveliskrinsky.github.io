@@ -1,0 +1,46 @@
+.service-page {
+  width: min(100% - 2.5rem, 66rem);
+  margin: auto;
+  padding-bottom: 4rem;
+}
+.service-page nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.service-page nav a, .service-page header a { font-weight: 800; }
+.service-page header { padding: clamp(3rem, 8vw, 7rem) 0 1rem; }
+.service-page h1 { font-size: clamp(2rem, 6vw, 4.6rem); }
+.service-page header p, .pilot p { max-width: 58ch; }
+.service-page header a { display: inline-block; margin-top: 1.2rem; }
+.service-page section { margin-top: clamp(2.5rem, 6vw, 5rem); }
+.service-page h2 { font-size: clamp(1.4rem, 3vw, 2.1rem); }
+.service-list { margin-top: 1.5rem; }
+.service-list div {
+  display: grid;
+  grid-template-columns: minmax(12rem, 1fr) 2fr;
+  gap: 2rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--border);
+}
+.service-list dt, .demo h3 { font-weight: 800; font-size: 1.16rem; }
+.service-list dd { color: var(--muted); }
+.demo-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; margin-top: 1.4rem; }
+.demo { min-width: 0; padding: clamp(1.15rem, 3vw, 2rem); background: var(--surface); border: 1px solid var(--border); border-radius: 1.25rem; scroll-margin-top: 1rem; }
+.demo h3 { font-family: var(--font-head); margin-bottom: .65rem; }
+.demo label, .demo-body { display: block; margin-top: 1.2rem; }
+.demo select { display: block; margin-top: .4rem; width: 100%; }
+.demo select, .demo button { padding: .65rem .85rem; border: 1px solid var(--border); border-radius: .65rem; font: inherit; background: var(--bg); color: var(--text); }
+.demo button { cursor: pointer; font-weight: 700; }
+.demo button:hover { border-color: var(--accent); }
+.demo blockquote, .demo .result:not(:empty) { margin: 1rem 0; border-left: 3px solid var(--accent); padding-left: .85rem; }
+.demo .result p { margin-top: .45rem; }
+.demo .result dt { font-weight: 800; margin-top: .45rem; }
+.demo .result dd { color: var(--muted); }
+.demo .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+@media (max-width: 700px) {
+  .service-list div, .demo-grid { grid-template-columns: 1fr; gap: .65rem; }
+  .service-page nav { font-size: .88rem; }
+}
