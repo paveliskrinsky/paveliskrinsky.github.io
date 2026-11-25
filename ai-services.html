@@ -6,7 +6,9 @@
   <title>ИИ-услуги для бизнеса — Павел Искринский</title>
   <meta name="description" content="Чат-боты, обработка заявок и помощники для сотрудников. Два интерактивных примера и консультация по внедрению." />
   <link rel="canonical" href="https://paveliskrinsky.github.io/ai-services.html" />
+  <link rel="icon" href="favicon.ico" sizes="48x48" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <meta name="theme-color" content="#07080b" />
   <script>
     try {
       const theme = localStorage.getItem('theme');
@@ -21,11 +23,13 @@
   <main class="service-page">
     <nav aria-label="Навигация"><a href="./">← Павел Искринский</a><a href="./?service=ai#contact-form">Обсудить задачу</a></nav>
     <header>
-      <h1>ИИ-инструменты<br />для работы бизнеса</h1>
+      <p class="kicker">ИИ-демо</p>
+      <h1>ИИ-инструменты<br />для&nbsp;<span class="grad">работы бизнеса</span></h1>
       <p>Начинаем с того, на что у команды уходит время каждый день. Это могут быть вопросы клиентов, разбор заявок или подготовка писем.</p>
       <a href="#demos">Посмотреть два демо ↓</a>
     </header>
     <section aria-labelledby="services">
+      <p class="kicker">Услуги</p>
       <h2 id="services">С чем помогу</h2>
       <dl class="service-list">
         <div><dt>Чат-бот для сайта</dt><dd>Отвечает на вопросы об услугах по вашим материалам. Когда нужна помощь сотрудника, собирает вопрос и контакт для обратной связи.</dd></div>
@@ -35,16 +39,22 @@
       </dl>
     </section>
     <section id="demos" aria-labelledby="demos-title">
+      <p class="kicker">Демо</p>
       <h2 id="demos-title">Попробуйте на примере</h2>
       <p>Два сценария на вымышленных данных. В браузере используются готовые примеры. Сообщения остаются на странице.</p>
       <div class="demo-grid">
         <article id="booking" class="demo">
+          <div class="demo-bar" aria-hidden="true"><i></i><i></i><i></i><span>demo · booking-bot</span></div>
+          <div class="demo-inner">
           <h3>Запись на консультацию</h3>
           <p>Пройдите путь клиента и посмотрите, какие сведения получит менеджер.</p>
           <div class="demo-body" id="booking-body"></div>
           <noscript><p>Пример заявки: автоматизация заявок, в пятницу после 14:00, контакт @demo_client. Для выбора вариантов включите JavaScript.</p></noscript>
+          </div>
         </article>
         <article id="brief" class="demo">
+          <div class="demo-bar" aria-hidden="true"><i></i><i></i><i></i><span>demo · inbox-parser</span></div>
+          <div class="demo-inner">
           <h3>Разбор письма студии</h3>
           <p>Выберите письмо. Сравните его с карточкой задачи и черновиком ответа.</p>
           <label for="brief-example">Входящее письмо</label>
@@ -57,10 +67,12 @@
           <button id="parse-brief" type="button">Показать разбор</button>
           <div class="result" id="brief-result" aria-live="polite"></div>
           <noscript><p>Пример разбора: лендинг по готовому макету, бюджет до 80 000 ₽. Нужно согласовать дату запуска перед выставкой.</p></noscript>
+          </div>
         </article>
       </div>
     </section>
     <section class="pilot">
+      <p class="kicker">Пилот</p>
       <h2>Как проверим пользу</h2>
       <p>Выберем одну операцию и замерим, сколько времени она занимает сейчас. Соберём пилот на ваших примерах. Затем сравним время с учётом проверки сотрудником и посчитаем, сколько ответов пришлось исправить.</p>
       <a class="btn" href="./?service=ai#contact-form">Обсудить пилот</a>

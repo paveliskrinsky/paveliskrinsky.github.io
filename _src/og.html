@@ -41,8 +41,8 @@
       width: 1200px;
       height: 630px;
       overflow: hidden;
-      background: radial-gradient(circle at 0% 0%, rgba(139, 123, 255, .35), transparent 45%), radial-gradient(circle at 100% 100%, rgba(47, 224, 192, .18), transparent 45%), #0f1117;
-      color: #eef0f6;
+      background: radial-gradient(circle at 100% 0%, rgba(122, 104, 255, .32), transparent 45%), radial-gradient(circle at 0% 100%, rgba(198, 244, 50, .16), transparent 45%), linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px) 0 0 / 60px 60px, linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px) 0 0 / 60px 60px, #07080b;
+      color: #f1f2f4;
       font-family: 'Manrope', sans-serif;
       display: flex;
       align-items: center;
@@ -64,32 +64,37 @@
       border: 1px solid rgba(255, 255, 255, .16);
       font-size: 22px;
       font-weight: 700;
-      color: #9097ab;
+      color: #c6f432;
     }
 
     h1 {
       font-family: 'Unbounded', sans-serif;
-      font-size: 54px;
+      font-size: 46px;
       line-height: 1.08;
       font-weight: 600;
     }
 
+    h1 b {
+      font-weight: inherit;
+      white-space: nowrap;
+    }
+
     h1 span {
-      background: linear-gradient(110deg, #8b7bff 0%, #2fe0c0 60%, #ff8a5c 120%);
+      background: linear-gradient(100deg, #c6f432 10%, #5ee0ff 55%, #9b8dff 95%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
 
     p {
-      font-size: 28px;
+      font-size: 25px;
       font-weight: 500;
-      color: #9097ab;
+      color: #8f94a3;
     }
 
     img {
-      width: 340px;
-      height: 454px;
+      width: 380px;
+      height: 380px;
       object-fit: cover;
       object-position: center top;
       border-radius: 32px;
@@ -100,12 +105,12 @@
 
 <body>
   <main>
-    <div class="badge">paveliskrinsky.github.io</div>
-    <h1>Павел Искринский<br><span>Дизайн и код</span></h1>
-    <p>Сайты и веб-сервисы с помощью ИИ</p>
+    <div class="badge">AI-first разработчик</div>
+    <h1>Запускаю <b>веб-продукты</b><br>вместе с <span><b>ИИ-агентами</b></span></h1>
+    <p>Павел Искринский · 7 продуктов за 2 месяца</p>
   </main>
   <picture>
-    <img src="../img/avatar-800.jpg" alt="" />
+    <img src="../img/me-800.jpg" alt="" />
   </picture>
 </body>
 
