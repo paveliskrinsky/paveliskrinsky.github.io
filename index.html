@@ -581,20 +581,13 @@
       align-items: center;
       gap: 12px;
       margin-bottom: 28px;
-      padding: 6px 16px 6px 6px;
+      padding: 10px 18px;
       border: 1px solid var(--line);
       border-radius: 999px;
       background: var(--surface);
       backdrop-filter: blur(8px);
       font-weight: 600;
       font-size: .92rem;
-    }
-
-    .hero-badge img {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      object-fit: cover;
     }
 
     .hero-badge b { font-weight: 800; }
@@ -956,6 +949,7 @@
     .product--xl { grid-column: span 7; }
     .product--lg { grid-column: span 5; }
     .product--wide { grid-column: span 7; }
+    .product--half { grid-column: span 6; }
 
     .product-media {
       position: relative;
@@ -1646,11 +1640,27 @@
     .select-btn {
       text-align: left;
       cursor: pointer;
-      padding-right: 44px;
-      background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
-      background-position: calc(100% - 22px) 50%, calc(100% - 17px) 50%;
-      background-size: 5px 5px;
-      background-repeat: no-repeat;
+      padding-right: 48px;
+    }
+
+    .select.is-enhanced::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 22px;
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid var(--muted);
+      border-bottom: 2px solid var(--muted);
+      border-radius: 1px;
+      pointer-events: none;
+      transform: translateY(-70%) rotate(45deg);
+      transition: transform .25s var(--ease), border-color .2s;
+    }
+
+    .select.is-open::after {
+      border-color: var(--acid-text);
+      transform: translateY(-25%) rotate(-135deg);
     }
 
     .select-list {
@@ -1783,8 +1793,7 @@
       .hero-grid { grid-template-columns: 1fr; }
       .hero { min-height: 0; padding-top: 128px; }
       .hero-scroll { display: none; }
-      .bento .product, .bento .product--xl, .bento .product--lg, .bento .product--wide { grid-column: span 6; }
-      .bento .product--sm:last-child { grid-column: 1 / -1; }
+      .bento .product, .bento .product--xl, .bento .product--lg, .bento .product--wide, .bento .product--half { grid-column: span 6; }
       .services { grid-template-columns: 1fr; }
       .service { min-height: 0; }
       .about-grid { grid-template-columns: 1fr; }
@@ -1799,7 +1808,7 @@
       .stats li:nth-child(3) { border-left: 0; }
       .stats li:nth-child(n + 3) { border-top: 1px solid var(--line); }
       .bento { grid-template-columns: 1fr; }
-      .bento .product, .bento .product--xl, .bento .product--lg, .bento .product--wide, .bento .product--sm:last-child { grid-column: auto; }
+      .bento .product, .bento .product--xl, .bento .product--lg, .bento .product--wide, .bento .product--half { grid-column: auto; }
       .flow::before, .flow::after { left: 21px; }
       .flow-step { grid-template-columns: 44px 1fr; gap: 14px 16px; }
       .flow-node { width: 44px; height: 44px; font-size: .8rem; }
@@ -1858,14 +1867,14 @@
   <nav id="nav" aria-label="Основная навигация">
     <a href="#hero" class="nav-logo">
       <picture>
-        <source srcset="img/logo-96.avif" type="image/avif" />
-        <source srcset="img/logo-96.webp" type="image/webp" />
-        <img src="img/logo-96.jpg" alt="" width="96" height="96" />
+        <source srcset="img/me-160.avif" type="image/avif" />
+        <source srcset="img/me-160.webp" type="image/webp" />
+        <img src="img/me-160.jpg" alt="" width="160" height="160" fetchpriority="high" />
       </picture>
       <span>Павел Искринский</span>
     </a>
     <ul class="nav-links" id="nav-links">
-      <li><a href="#projects">Продукты</a></li>
+      <li><a href="#projects">Работы</a></li>
       <li><a href="#how">Подход</a></li>
       <li><a href="#services">Услуги</a></li>
       <li><a href="#about">Обо мне</a></li>
@@ -1889,11 +1898,6 @@
       <div class="container hero-grid">
         <div class="hero-text">
           <p class="hero-badge hero-fade">
-            <picture>
-              <source srcset="img/me-160.avif" type="image/avif" />
-              <source srcset="img/me-160.webp" type="image/webp" />
-              <img src="img/me-160.jpg" alt="" width="160" height="160" fetchpriority="high" />
-            </picture>
             <b>Павел Искринский</b>
             <span class="live-dot" aria-hidden="true"></span>
             AI-first разработчик
@@ -1910,7 +1914,7 @@
               Обсудить проект
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
             </a>
-            <a href="#projects" class="btn btn-line magnetic">Смотреть продукты</a>
+            <a href="#projects" class="btn btn-line magnetic">Смотреть работы</a>
           </div>
         </div>
 
@@ -1973,56 +1977,40 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <p class="kicker">Продукты · октябрь–ноябрь 2026</p>
-            <h2 class="section-title split">Что я&nbsp;запустил вместе с&nbsp;агентами</h2>
+            <p class="kicker">Работы</p>
+            <h2 class="section-title split">Сайты и&nbsp;сервисы в&nbsp;продакшене</h2>
           </div>
-          <p class="section-desc reveal">Шесть собственных сервисов и&nbsp;сайт для&nbsp;организации. Каждый работает в&nbsp;продакшене&nbsp;— откройте и&nbsp;проверьте.</p>
+          <p class="section-desc reveal">Проекты для&nbsp;клиентов и&nbsp;шесть собственных сервисов, запущенных за&nbsp;последние 2&nbsp;месяца. Всё работает&nbsp;— откройте и&nbsp;проверьте.</p>
         </div>
 
         <div class="bento">
-          <article class="product product--xl tilt reveal" id="vvezi">
-            <a class="product-media" href="https://vvezi.ru" target="_blank" rel="noopener" aria-label="Открыть сайт Ввези.ru">
+          <article class="product product--xl tilt reveal" id="kemvod">
+            <a class="product-media" href="https://kemvod.ru" target="_blank" rel="noopener" aria-label="Открыть сайт АО «КемВод»">
               <span class="frame">
-                <span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>vvezi.ru</span></span>
+                <span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>kemvod.ru</span></span>
                 <span class="frame-shot">
                   <picture>
-                    <source srcset="img/projects/vvezi-640.avif 640w, img/projects/vvezi-1200.avif 1200w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 690px" type="image/avif" />
-                    <source srcset="img/projects/vvezi-640.webp 640w, img/projects/vvezi-1200.webp 1200w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 690px" type="image/webp" />
-                    <img src="img/projects/vvezi-1200.jpg" srcset="img/projects/vvezi-640.jpg 640w, img/projects/vvezi-1200.jpg 1200w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 690px" alt="Главная страница сайта Ввези.ru" width="1200" height="1500" loading="lazy" decoding="async" />
+                    <source srcset="img/projects/kemvod-640.avif 640w, img/projects/kemvod-1200.avif 1200w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 690px" type="image/avif" />
+                    <source srcset="img/projects/kemvod-640.webp 640w, img/projects/kemvod-1200.webp 1200w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 690px" type="image/webp" />
+                    <img src="img/projects/kemvod-1200.jpg" srcset="img/projects/kemvod-640.jpg 640w, img/projects/kemvod-1200.jpg 1200w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 690px" alt="Главная страница сайта АО «КемВод»" width="1200" height="1500" loading="lazy" decoding="async" />
                   </picture>
                 </span>
               </span>
-            </a>
-            <div class="product-body">
-              <p class="product-meta"><span>Собственный сервис</span><span>Калькуляторы</span></p>
-              <h3>Ввези.ru</h3>
-              <p class="product-num"><b>Пошлина + утильсбор</b> за&nbsp;пару секунд</p>
-              <p class="product-desc">Сколько обойдётся ввоз автомобиля? Спроектировал интерфейс, написал серверную часть для&nbsp;расчётов и&nbsp;подключил данные: характеристики машины, ставки платежей и&nbsp;курс валют.</p>
-              <ul class="tags"><li>Astro</li><li>TypeScript</li><li>PHP API</li><li>курсы валют</li></ul>
-              <a class="product-link" href="https://vvezi.ru" target="_blank" rel="noopener">Открыть калькуляторы <span aria-hidden="true">↗</span></a>
-            </div>
-          </article>
-
-          <article class="product product--lg tilt reveal">
-            <a class="product-media" href="https://kombos.ru" target="_blank" rel="noopener" aria-label="Открыть сайт KOMBOS.RU">
-              <span class="frame">
-                <span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>kombos.ru</span></span>
-                <span class="frame-shot">
-                  <picture>
-                    <source srcset="img/projects/kombos-520.avif 520w, img/projects/kombos-640.avif 640w, img/projects/kombos-1200.avif 1200w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 490px" type="image/avif" />
-                    <source srcset="img/projects/kombos-520.webp 520w, img/projects/kombos-640.webp 640w, img/projects/kombos-1200.webp 1200w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 490px" type="image/webp" />
-                    <img src="img/projects/kombos-640.jpg" srcset="img/projects/kombos-520.jpg 520w, img/projects/kombos-640.jpg 640w, img/projects/kombos-1200.jpg 1200w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 490px" alt="Главная страница сайта KOMBOS.RU" width="1200" height="1500" loading="lazy" decoding="async" />
-                  </picture>
-                </span>
+              <span class="phone">
+                <picture>
+                  <source srcset="img/projects/kemvod-mobile-320.avif" type="image/avif" />
+                  <source srcset="img/projects/kemvod-mobile-320.webp" type="image/webp" />
+                  <img src="img/projects/kemvod-mobile-320.jpg" alt="Мобильная страница КемВод: вакансии, ссылки для отклика и контакты отдела кадров" width="320" height="693" loading="lazy" decoding="async" />
+                </picture>
               </span>
             </a>
             <div class="product-body">
-              <p class="product-meta"><span>Собственный сервис</span><span>Справочник</span></p>
-              <h3>KOMBOS.RU</h3>
-              <p class="product-num"><b data-count="10763">10&nbsp;763</b> приёма · 81 персонаж</p>
-              <p class="product-desc">Справочник по&nbsp;Mortal Kombat. Комбо показаны кнопками выбранного геймпада.</p>
-              <ul class="tags"><li>Astro</li><li>TypeScript</li><li>Python</li></ul>
-              <a class="product-link" href="https://kombos.ru" target="_blank" rel="noopener">kombos.ru <span aria-hidden="true">↗</span></a>
+              <p class="product-meta"><span>Работа по макету</span><span>Агентство АртАльт</span><span>2022</span></p>
+              <h3>Портал «КемВод»</h3>
+              <p class="product-num"><b>4 раздела</b> в&nbsp;действующем портале водоканала</p>
+              <p class="product-desc">По&nbsp;макетам агентства сверстал новые разделы: услуги, вакансии, новости и&nbsp;информацию для&nbsp;потребителей. Адаптировал страницы для&nbsp;телефона и&nbsp;добавил интерактивные элементы на&nbsp;JavaScript.</p>
+              <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>адаптив</li></ul>
+              <a class="product-link" href="https://kemvod.ru" target="_blank" rel="noopener">Открыть портал <span aria-hidden="true">↗</span></a>
             </div>
           </article>
 
@@ -2056,6 +2044,52 @@
             </div>
           </article>
 
+          <article class="product product--lg tilt reveal" id="vvezi">
+            <a class="product-media" href="https://vvezi.ru" target="_blank" rel="noopener" aria-label="Открыть сайт Ввези.ru">
+              <span class="frame">
+                <span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>vvezi.ru</span></span>
+                <span class="frame-shot">
+                  <picture>
+                    <source srcset="img/projects/vvezi-640.avif 640w, img/projects/vvezi-1200.avif 1200w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 490px" type="image/avif" />
+                    <source srcset="img/projects/vvezi-640.webp 640w, img/projects/vvezi-1200.webp 1200w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 490px" type="image/webp" />
+                    <img src="img/projects/vvezi-1200.jpg" srcset="img/projects/vvezi-640.jpg 640w, img/projects/vvezi-1200.jpg 1200w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 490px" alt="Главная страница сайта Ввези.ru" width="1200" height="1500" loading="lazy" decoding="async" />
+                  </picture>
+                </span>
+              </span>
+            </a>
+            <div class="product-body">
+              <p class="product-meta"><span>Собственный сервис</span><span>Калькуляторы</span></p>
+              <h3>Ввези.ru</h3>
+              <p class="product-num"><b>Пошлина + утильсбор</b> за&nbsp;пару секунд</p>
+              <p class="product-desc">Сколько обойдётся ввоз автомобиля? Спроектировал интерфейс, написал серверную часть для&nbsp;расчётов и&nbsp;подключил данные: характеристики машины, ставки платежей и&nbsp;курс валют.</p>
+              <ul class="tags"><li>Astro</li><li>TypeScript</li><li>PHP API</li><li>курсы валют</li></ul>
+              <a class="product-link" href="https://vvezi.ru" target="_blank" rel="noopener">Открыть калькуляторы <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+
+          <article class="product product--wide tilt reveal">
+            <a class="product-media" href="https://kombos.ru" target="_blank" rel="noopener" aria-label="Открыть сайт KOMBOS.RU">
+              <span class="frame">
+                <span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>kombos.ru</span></span>
+                <span class="frame-shot">
+                  <picture>
+                    <source srcset="img/projects/kombos-520.avif 520w, img/projects/kombos-640.avif 640w, img/projects/kombos-1200.avif 1200w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 690px" type="image/avif" />
+                    <source srcset="img/projects/kombos-520.webp 520w, img/projects/kombos-640.webp 640w, img/projects/kombos-1200.webp 1200w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 690px" type="image/webp" />
+                    <img src="img/projects/kombos-640.jpg" srcset="img/projects/kombos-520.jpg 520w, img/projects/kombos-640.jpg 640w, img/projects/kombos-1200.jpg 1200w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 690px" alt="Главная страница сайта KOMBOS.RU" width="1200" height="1500" loading="lazy" decoding="async" />
+                  </picture>
+                </span>
+              </span>
+            </a>
+            <div class="product-body">
+              <p class="product-meta"><span>Собственный сервис</span><span>Справочник</span></p>
+              <h3>KOMBOS.RU</h3>
+              <p class="product-num"><b data-count="10763">10&nbsp;763</b> приёма · 81 персонаж</p>
+              <p class="product-desc">Справочник по&nbsp;Mortal Kombat. Комбо показаны кнопками выбранного геймпада.</p>
+              <ul class="tags"><li>Astro</li><li>TypeScript</li><li>Python</li></ul>
+              <a class="product-link" href="https://kombos.ru" target="_blank" rel="noopener">kombos.ru <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+
           <article class="product product--wide tilt reveal">
             <a class="product-media" href="https://kodrazbor.ru" target="_blank" rel="noopener" aria-label="Открыть сайт КодРазбор">
               <span class="frame">
@@ -2079,15 +2113,15 @@
             </div>
           </article>
 
-          <article class="product product--sm tilt reveal">
+          <article class="product product--sm product--lg tilt reveal">
             <a class="product-media" href="https://zaveli.ru" target="_blank" rel="noopener" aria-label="Открыть сайт Завели.ru">
               <span class="frame">
                 <span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>zaveli.ru</span></span>
                 <span class="frame-shot">
                   <picture>
-                    <source srcset="img/projects/zaveli-520.avif 520w, img/projects/zaveli-640.avif 640w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 380px" type="image/avif" />
-                    <source srcset="img/projects/zaveli-520.webp 520w, img/projects/zaveli-640.webp 640w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 380px" type="image/webp" />
-                    <img src="img/projects/zaveli-640.jpg" srcset="img/projects/zaveli-520.jpg 520w, img/projects/zaveli-640.jpg 640w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 380px" alt="Главная страница сайта Завели.ru" width="1200" height="1500" loading="lazy" decoding="async" />
+                    <source srcset="img/projects/zaveli-520.avif 520w, img/projects/zaveli-640.avif 640w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 490px" type="image/avif" />
+                    <source srcset="img/projects/zaveli-520.webp 520w, img/projects/zaveli-640.webp 640w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 490px" type="image/webp" />
+                    <img src="img/projects/zaveli-640.jpg" srcset="img/projects/zaveli-520.jpg 520w, img/projects/zaveli-640.jpg 640w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 490px" alt="Главная страница сайта Завели.ru" width="1200" height="1500" loading="lazy" decoding="async" />
                   </picture>
                 </span>
               </span>
@@ -2101,15 +2135,15 @@
             </div>
           </article>
 
-          <article class="product product--sm tilt reveal">
+          <article class="product product--sm product--half tilt reveal">
             <a class="product-media" href="https://ozek.ru" target="_blank" rel="noopener" aria-label="Открыть сайт OZEK">
               <span class="frame">
                 <span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>ozek.ru</span></span>
                 <span class="frame-shot">
                   <picture>
-                    <source srcset="img/projects/ozek-520.avif 520w, img/projects/ozek-640.avif 640w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 380px" type="image/avif" />
-                    <source srcset="img/projects/ozek-520.webp 520w, img/projects/ozek-640.webp 640w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 380px" type="image/webp" />
-                    <img src="img/projects/ozek-640.jpg" srcset="img/projects/ozek-520.jpg 520w, img/projects/ozek-640.jpg 640w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 380px" alt="Главная страница сайта OZEK" width="1200" height="1500" loading="lazy" decoding="async" />
+                    <source srcset="img/projects/ozek-520.avif 520w, img/projects/ozek-640.avif 640w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 590px" type="image/avif" />
+                    <source srcset="img/projects/ozek-520.webp 520w, img/projects/ozek-640.webp 640w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 590px" type="image/webp" />
+                    <img src="img/projects/ozek-640.jpg" srcset="img/projects/ozek-520.jpg 520w, img/projects/ozek-640.jpg 640w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 590px" alt="Главная страница сайта OZEK" width="1200" height="1500" loading="lazy" decoding="async" />
                   </picture>
                 </span>
               </span>
@@ -2123,15 +2157,15 @@
             </div>
           </article>
 
-          <article class="product product--sm tilt reveal">
+          <article class="product product--sm product--half tilt reveal">
             <a class="product-media" href="https://autoparam.ru" target="_blank" rel="noopener" aria-label="Открыть сайт АвтоПарам">
               <span class="frame">
                 <span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>autoparam.ru</span></span>
                 <span class="frame-shot">
                   <picture>
-                    <source srcset="img/projects/autoparam-520.avif 520w, img/projects/autoparam-640.avif 640w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(100vw - 64px), 380px" type="image/avif" />
-                    <source srcset="img/projects/autoparam-520.webp 520w, img/projects/autoparam-640.webp 640w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(100vw - 64px), 380px" type="image/webp" />
-                    <img src="img/projects/autoparam-640.jpg" srcset="img/projects/autoparam-520.jpg 520w, img/projects/autoparam-640.jpg 640w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(100vw - 64px), 380px" alt="Главная страница сайта АвтоПарам" width="1200" height="1500" loading="lazy" decoding="async" />
+                    <source srcset="img/projects/autoparam-520.avif 520w, img/projects/autoparam-640.avif 640w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 590px" type="image/avif" />
+                    <source srcset="img/projects/autoparam-520.webp 520w, img/projects/autoparam-640.webp 640w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 590px" type="image/webp" />
+                    <img src="img/projects/autoparam-640.jpg" srcset="img/projects/autoparam-520.jpg 520w, img/projects/autoparam-640.jpg 640w" sizes="(max-width: 760px) calc(100vw - 64px), (max-width: 1000px) calc(50vw - 64px), 590px" alt="Главная страница сайта АвтоПарам" width="1200" height="1500" loading="lazy" decoding="async" />
                   </picture>
                 </span>
               </span>

@@ -58,11 +58,13 @@
           <h3>Разбор письма студии</h3>
           <p>Выберите письмо. Сравните его с карточкой задачи и черновиком ответа.</p>
           <label for="brief-example">Входящее письмо</label>
-          <select id="brief-example">
-            <option value="landing">Лендинг к выставке</option>
-            <option value="shop">Доработка магазина</option>
-            <option value="bot">Бот для мастерской</option>
-          </select>
+          <div class="select" data-select>
+            <select id="brief-example">
+              <option value="landing">Лендинг к выставке</option>
+              <option value="shop">Доработка магазина</option>
+              <option value="bot">Бот для мастерской</option>
+            </select>
+          </div>
           <blockquote id="brief-letter">Нужен лендинг к выставке 18 мая. Макет в Figma готов, бюджет до 80 000 ₽. Успеете?</blockquote>
           <button id="parse-brief" type="button">Показать разбор</button>
           <div class="result" id="brief-result" aria-live="polite"></div>
