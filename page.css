@@ -36,20 +36,21 @@
 
 :root {
   color-scheme: dark;
-  --bg: light-dark(#f3f3ee, #07080b);
+  --bg: light-dark(#fff4ec, #0e0716);
   --surface: light-dark(rgba(255, 255, 255, .72), rgba(255, 255, 255, .035));
-  --surface-2: light-dark(#ffffff, #11141b);
-  --border: light-dark(rgba(16, 17, 20, .1), rgba(255, 255, 255, .08));
-  --border-2: light-dark(rgba(16, 17, 20, .2), rgba(255, 255, 255, .16));
-  --text: light-dark(#101114, #f1f2f4);
-  --muted: light-dark(#575b68, #8f94a3);
-  --acid: #c6f432;
-  --accent: light-dark(#476500, #c6f432);
-  --violet: light-dark(#5a46f2, #9b8dff);
-  --cyan: light-dark(#087f9e, #5ee0ff);
-  --ink: #0a0b0d;
-  --glow-a: light-dark(rgba(140, 190, 0, .2), rgba(198, 244, 50, .13));
-  --glow-b: light-dark(rgba(90, 70, 242, .16), rgba(122, 104, 255, .2));
+  --surface-2: light-dark(#ffffff, #1c1029);
+  --border: light-dark(rgba(34, 16, 42, .1), rgba(255, 255, 255, .08));
+  --border-2: light-dark(rgba(34, 16, 42, .2), rgba(255, 255, 255, .16));
+  --text: light-dark(#22102a, #fff4fb);
+  --muted: light-dark(#6e5872, #b39bc4);
+  --acid: #ff4fa3;
+  --accent: light-dark(#c4146e, #ff4fa3);
+  --violet: light-dark(#7a2fd6, #b685ff);
+  --cyan: light-dark(#0a8f86, #2ee6d6);
+  --sun: light-dark(#d9621a, #ffa94d);
+  --ink: #1a0820;
+  --glow-a: light-dark(rgba(255, 140, 60, .22), rgba(255, 79, 163, .13));
+  --glow-b: light-dark(rgba(122, 47, 214, .14), rgba(150, 90, 255, .24));
   --font-head: 'Unbounded', 'Manrope', system-ui, sans-serif;
   --mono: ui-monospace, 'Cascadia Code', 'JetBrains Mono', Consolas, 'Courier New', monospace;
   --ease: cubic-bezier(.2, .8, .2, 1);
@@ -126,7 +127,7 @@ a {
 }
 
 .grad {
-  background: linear-gradient(100deg, var(--accent) 10%, var(--cyan) 55%, var(--violet) 95%);
+  background: linear-gradient(100deg, var(--sun) 0%, var(--accent) 48%, var(--violet) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -273,7 +274,7 @@ strong {
   line-height: .9;
   letter-spacing: -.06em;
   margin-bottom: 1.5rem;
-  background: linear-gradient(100deg, var(--accent) 10%, var(--cyan) 55%, var(--violet) 95%);
+  background: linear-gradient(100deg, var(--sun) 0%, var(--accent) 48%, var(--violet) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -304,7 +305,7 @@ strong {
 }
 
 .btn:hover {
-  box-shadow: 0 10px 40px -8px rgba(198, 244, 50, .55);
+  box-shadow: 0 10px 40px -8px rgba(255, 79, 163, .55);
   transform: translateY(-2px);
 }
 

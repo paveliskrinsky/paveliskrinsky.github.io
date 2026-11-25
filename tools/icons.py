@@ -5,8 +5,9 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 
 ROOT = Path(__file__).resolve().parent.parent
-SOURCE = ROOT / "_src" / "logo.jpg"
-GRADIENT = ((0x6d, 0x5d, 0xfc), (0x14, 0xc4, 0xa2))
+SOURCE = ROOT / "_src" / "me.jpg"
+FACE = (0.15, 0.05, 0.8, 0.7)
+GRADIENT = ((0xff, 0xa9, 0x4d), (0xff, 0x4f, 0xa3))
 RING = 0.07
 SUPERSAMPLE = 4
 SVG_PHOTO = 160
@@ -67,16 +68,17 @@ def svg(photo):
 
 
 def main():
-    photo = Image.open(SOURCE).convert("RGB")
-    side = min(photo.size)
-    photo = photo.crop(((photo.width - side) // 2, (photo.height - side) // 2,
-                        (photo.width + side) // 2, (photo.height + side) // 2))
+    full = Image.open(SOURCE).convert("RGB")
+    side = min(full.size)
+    full = full.crop(((full.width - side) // 2, (full.height - side) // 2,
+                      (full.width + side) // 2, (full.height + side) // 2))
+    photo = full.crop(tuple(round(v * side) for v in FACE))
 
     for name, size in (("icon-192.png", 192), ("icon-512.png", 512)):
         save_png(ringed(photo, size), ROOT / name)
         print(name, size)
     for name, size in (("apple-touch-icon.png", 180), ("icon-maskable-512.png", 512)):
-        save_png(photo.resize((size, size), Image.LANCZOS).convert("RGBA"), ROOT / name)
+        save_png(full.resize((size, size), Image.LANCZOS).convert("RGBA"), ROOT / name)
         print(name, size)
     ringed(photo, 256).save(ROOT / "favicon.ico", sizes=ICO_SIZES)
     print("favicon.ico", ICO_SIZES)
