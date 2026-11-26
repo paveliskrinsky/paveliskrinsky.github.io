@@ -15,7 +15,7 @@ PUBLIC_FILES = (
 )
 ASSET_TYPES = {
     "fonts": {".woff2"},
-    "img": {".jpg", ".webp", ".avif", ".png", ".svg"},
+    "img": {".jpg", ".webp", ".avif", ".png", ".svg", ".mp4"},
 }
 
 
